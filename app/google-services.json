@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "547827016377",
+    "firebase_url": "https://guswns-d847a.firebaseio.com",
+    "project_id": "guswns-d847a",
+    "storage_bucket": "guswns-d847a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547827016377:android:5759e6428e81a423",
+        "android_client_info": {
+          "package_name": "com.example.guswn.allthatlyrics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547827016377-d3oerepttica7h3qcst2b3rcq85deb8q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.guswn.allthatlyrics",
+            "certificate_hash": "b8580f62a2a0093584c8b703178f789d7f0c7913"
+          }
+        },
+        {
+          "client_id": "547827016377-fcivnekopmkc7khan1e2a7hq2f3p39do.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvLGOAYl86ZKIdCaNa9fdsqEHp4hLtXRk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547827016377-fcivnekopmkc7khan1e2a7hq2f3p39do.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

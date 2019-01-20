@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">AllThatLyrics</string>
+    <string name="title_activity_follow__info__tab">Follow_Info_Tab</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_follow_info_tab">FollowInfoTab</string>
+    <string name="title_activity_othet_follow_account">OthetFollowAccount</string>
+    <string name="title_activity_show_gallery">ShowGalleryActivity</string>
+
+
+    <string name="Photo_Sepia">Sepia</string>
+    <string name="Photo_Sketch">Sketch</string>
+    <string name="Photo_Invert">Invert</string>
+    <string name="Photo_Pixel">Pixel</string>
+    <string name="Photo_Contrast">Contrast</string>
+    <string name="Photo_Brightness">Brightness</string>
+    <string name="Photo_Kuwahara">Kuwahara</string>
+    <string name="Photo_Vignette">Vignette</string>
+    <string name="Photo_Gray">Gray</string>
+    <string name="Photo_Cartoon">Cartoon</string>
+    <string name="Photo_Blur">Blur</string>
+    <string name="Photo_Normal">Normal</string>
+</resources>

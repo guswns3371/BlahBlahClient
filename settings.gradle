@@ -1,0 +1,3 @@
+include ':app', ':mail', ':additionnal', ':activation', ':activation_'
+
+include ':aFileChooser'
