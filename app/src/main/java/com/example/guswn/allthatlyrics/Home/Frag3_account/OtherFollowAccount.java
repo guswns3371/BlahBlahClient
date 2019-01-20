@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,6 +69,30 @@ public class OtherFollowAccount extends AppCompatActivity {
     @BindView(R.id.following_cnt_txt)
     TextView following_cnt_txt;
 
+    @BindView(R.id.account_myhistory_imgbtn)
+    ImageButton account_myhistory_imgbtn;
+    @OnClick(R.id.account_myhistory_imgbtn)
+    public void historybtn (){
+        Home_frag3_history home_frag3_history = new Home_frag3_history().newInstance(useridx);
+        getSupportFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_history).commit();
+    }
+
+    @BindView(R.id.account_bookmark_imgbtn)
+    ImageButton account_bookmark_imgbtn;
+    @OnClick(R.id.account_bookmark_imgbtn)
+    public void bookmark (){
+        Home_frag3_bookmark home_frag3_bookmark = new Home_frag3_bookmark().newInstance(useridx);
+        getSupportFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_bookmark).commit();
+    }
+
+    @BindView(R.id.account_liked_imgbtn)
+    ImageButton account_liked_imgbtn;
+    @OnClick(R.id.account_liked_imgbtn)
+    public void liked (){
+        Home_frag3_like home_frag3_like = new Home_frag3_like().newInstance(useridx);
+        getSupportFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_like).commit();
+    }
+
     @OnClick(R.id.account_edit_btn)
     public void edit(){
         if (account_edit_btn.getText().equals("Edit")){
@@ -108,7 +133,7 @@ public class OtherFollowAccount extends AppCompatActivity {
     ChatAPI api_chat;
     ArrayList<String> follower_List = new ArrayList<>();
     ArrayList<String> followed_List = new ArrayList<>();
-    String username;
+    String username,useridx;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +141,7 @@ public class OtherFollowAccount extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String useridx = intent.getStringExtra("useridx");
+        useridx = intent.getStringExtra("useridx");
         username = intent.getStringExtra("username");
         String userimg = intent.getStringExtra("userimg");
 
@@ -136,7 +161,6 @@ public class OtherFollowAccount extends AppCompatActivity {
             account_edit_btn.setText("Edit");
         }
 
-
         //레트로핏
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -155,6 +179,8 @@ public class OtherFollowAccount extends AppCompatActivity {
         api = retrofit.create(EditAPI.class);
         api_chat = retrofit.create(ChatAPI.class);
         //레트로핏
+        Home_frag3_history home_frag3_history = new Home_frag3_history().newInstance(useridx);
+        getSupportFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_history).commit();
 
         loadFollowinfo(useridx);
     }

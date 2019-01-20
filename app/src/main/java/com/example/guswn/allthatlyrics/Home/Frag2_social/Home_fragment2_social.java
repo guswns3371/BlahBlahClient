@@ -426,6 +426,8 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
                 switch (menuItem.getTitle().toString()){
                     case "삭제하기" :
                        // Toast.makeText(getActivity(),"삭제하기",Toast.LENGTH_SHORT).show();
+                        liked_or_unliked("no",MY_IDX,ClickModel.getSocial_idx());
+                        marked_or_unmarked("no",MY_IDX,ClickModel.getSocial_idx());
                         delete_history(MY_IDX,ClickModel.getSocial_idx());
                         socialInfos.remove(position);
                         myAdapter.notifyItemRemoved(position);

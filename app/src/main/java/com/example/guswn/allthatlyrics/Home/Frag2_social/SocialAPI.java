@@ -35,6 +35,15 @@ public interface SocialAPI {
     @GET("Social/getjson_socialhistory.php")
     Call<SocialUploadResponse> getSocialHistoryList();
 
+    @GET("Social/getjson_socialhistory_oneidx_like_bookmark.php")
+    Call<SocialUploadResponse> getSocialHistoryList_like_or_bookmark(
+            @Query("idx") String socialidx,
+            @Query("like_or_bookmark") String like_or_bookmark
+    );
+
+    @GET("Social/getjson_socialhistory_onesocial_idx.php")
+    Call<SocialUploadResponse> getSocialHistoryList_onesocialidx(@Query("idx") String socialidx);
+
     @GET("Social/getjson_socialhistory_oneidx.php")
     Call<SocialUploadResponse> getSocialHistoryList_oneidx(@Query("idx") String useridx);
 

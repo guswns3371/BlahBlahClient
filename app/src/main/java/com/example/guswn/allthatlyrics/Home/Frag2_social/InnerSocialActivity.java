@@ -1,8 +1,10 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -16,17 +18,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
 import com.example.guswn.allthatlyrics.Main.Logo;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -46,6 +52,7 @@ import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
+import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 
 public class InnerSocialActivity extends AppCompatActivity {
 
@@ -86,11 +93,14 @@ public class InnerSocialActivity extends AppCompatActivity {
     @BindView(R.id.inner_social_tb)
     Toolbar inner_social_tb;
 
+//    @BindView(R.id.SwipeInner)
+//    SwipeRefreshLayout swipeRefreshLayout;
+
     Intent intent;
     SocialInfoModel object;
     ArrayList<SocialImageModel> imageModels;
      SocialAPI api;
-
+    private static String social_idx;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,86 +129,24 @@ public class InnerSocialActivity extends AppCompatActivity {
         intent = getIntent();
         object = intent.getParcelableExtra("Clikedmodel");
         imageModels = intent.getParcelableArrayListExtra("Clikedmodel_SocialImageModelList");
+        social_idx = object.getSocial_idx();
 
         //툴바
         setSupportActionBar(inner_social_tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_black);// 뒤로가기 버튼, 내가 지정할수 있다
-        getSupportActionBar().setTitle(object.getSocial_username());
+        getSupportActionBar().setTitle("게시물");
         //툴바
 
         /**test success*/
         object.setSocialImageModelList(imageModels);
+        /**test success*/
+
+        /**test*/
+        loadSocialHistory(social_idx);
         /**test*/
 
-        social_username.setText(object.getSocial_username());
-        if (object.getSocial_location()!=null){
-            social_location.setVisibility(View.VISIBLE);
-            social_location.setText(object.getSocial_location());
-        }else {
-            social_location.setVisibility(View.GONE);
-        }
-
-        if (object.getSocial_content_txt()!=null){
-            social_content_txt.setVisibility(View.VISIBLE);
-            social_content_txt.setText(object.getSocial_content_txt());
-        }else {
-            social_content_txt.setVisibility(View.GONE);
-        }
-
-        if (object.getLiked()){
-            social_like_btn.setImageResource(R.drawable.heart_filled_ios);
-        }else {
-            social_like_btn.setImageResource(R.drawable.heart_blank_ios);
-        }
-
-        if (object.getBookMarked()){
-            social_bookmark_btn.setImageResource(R.drawable.bookmark_filled_ios);
-        }else {
-            social_bookmark_btn.setImageResource(R.drawable.bookmark_blank_ios);
-        }
-
-        String likedcnt = "좋아요 "+object.getSocial_like_cnt()+"개";
-        social_like_ctn.setText(likedcnt);
-        social_time.setText(object.getSocial_time());
-        social_more_reply_txt_btn.setText("댓글 더보기");
-
-        Picasso.with(this)
-                .load(URL+object.getSocial_userimg())
-                .transform(new CircleTransform())
-                .placeholder(R.drawable.load)
-                .into(social_user_img);
-
-        if (object.getSocialImageModelList().size()>1){
-            String count = 1+"/"+object.getSocialImageModelList().size();
-            social_content_img_cnt.setText(count);
-            social_content_img_cnt.setVisibility(View.VISIBLE);
-        }else {
-            social_content_img_cnt.setVisibility(View.INVISIBLE);
-        }
-        SlideAdapter slideAdapter = new SlideAdapter(this,object.getSocialImageModelList());
-        social_content_img_viewpager.setAdapter(slideAdapter);
-        social_content_img_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-            }
-            @Override
-            public void onPageSelected(int i) {
-                String count = (i+1)+"/"+object.getSocialImageModelList().size();
-                social_content_img_cnt.setText(count);
-            }
-            @Override
-            public void onPageScrollStateChanged(int i) {
-                switch (i){
-                    case SCROLL_STATE_DRAGGING:
-                        break;
-                    case SCROLL_STATE_IDLE:
-                        break;
-                    case SCROLL_STATE_SETTLING:
-                        break;
-                }
-            }
-        });
+        //swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     /**좋아요*/
@@ -362,6 +310,8 @@ public class InnerSocialActivity extends AppCompatActivity {
                 switch (menuItem.getTitle().toString()){
                     case "삭제하기" :
                         // Toast.makeText(getActivity(),"삭제하기",Toast.LENGTH_SHORT).show();
+                        liked_or_unliked("no",MY_IDX,ClickModel.getSocial_idx());
+                        marked_or_unmarked("no",MY_IDX,ClickModel.getSocial_idx());
                         delete_history(MY_IDX,ClickModel.getSocial_idx());
                         finish();
                         break;
@@ -422,5 +372,186 @@ public class InnerSocialActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    //툴바
+
+
+
+    /**load*/
+    public void loadSocialHistory(String social_idx){
+        Call<SocialUploadResponse> call = api.getSocialHistoryList_onesocialidx(social_idx);
+
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(InnerSocialActivity.this);
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Please Wait");
+        progressDoalog.setTitle("Socia Information Loading...");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        // show it
+        progressDoalog.show();
+        call.enqueue(new Callback<SocialUploadResponse>() {
+            @Override
+            public void onResponse(Call<SocialUploadResponse> call, Response<SocialUploadResponse> response) {
+                if(!response.isSuccessful()){
+                    Log.e("loadSocialHistory_code",""+response.code());
+                    return;
+                }
+                progressDoalog.dismiss();
+
+                SocialUploadResponse res2 = response.body();
+                List<SocialUploadResponse> list = res2.getSocialHistoryList();
+
+                for (SocialUploadResponse res : list){
+                    ArrayList<SocialImageModel> socialImageModels = new ArrayList<>() ;
+
+                    String content = res.getSocial_content();
+                    String idx = res.getIdx();
+                    String useridx = res.getSocial_useridx();
+                    String username = res.getSocial_username();
+                    String time = res.getSocial_time();
+                    String location = res.getSocial_location();
+                    String imgpath = res.getSocial_imagepath_list();
+                    Log.e("loadSocialHistory ",content+"/"+useridx+"/"+
+                            username+"/"+time+"/"+location+"/"+imgpath);
+
+                    /**imgpath는 string이다*/
+                    try {
+                        JSONArray jsonArray = new JSONArray(imgpath);
+                        /**스트링을 제이슨어레이로 [ {" 파일URL":" 필터종류"},{" 파일URL":" 필터종류"},{" 파일URL":" 필터종류"}...]*/
+                        JSONObject explrObject;
+                        for (int a=0;a<jsonArray.length();a++){
+                            explrObject = jsonArray.getJSONObject(a);
+                            //Log.e("1_explrObject key "+a, String.valueOf(explrObject));
+                            for (Iterator<String> it = explrObject.keys(); it.hasNext(); ) {
+                                String key = it.next(); /**제이슨 오브젝트의 키*/
+                                String value2 = explrObject.getString(key); /** 제이슨오브젝트의 밸류*/
+                                Log.e("2_explrObject key/value"+a,URL_withoutslash+key+" ____ "+value2); /** 성공*/
+                                socialImageModels.add(new SocialImageModel(key,value2));
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    /**userinfo*/
+                    List<Value_3> list2 = res.getSocialUserInfoList();
+                    String photo = list2.get(0).getPhoto();
+                    String name = list2.get(0).getUsername();
+
+                    /**liked_list*/
+                    List<SocialLikedMarkedResponse> likedlist = res.getSocial_Liked_List();
+                    int likedcnt = 0;
+                    boolean isLiked = false;
+                    boolean isMarked = false;
+                    for (SocialLikedMarkedResponse one : likedlist){
+
+                        String myidx = one.getSocial_Liked_myidx();
+                        if (!myidx.equals("null")){
+                            likedcnt++;
+                        }
+                        if (myidx.equals(MY_IDX)){
+                            isLiked=true;
+                            // model.setLiked(true);
+                        }
+                    }
+
+                    /**marked_list*/
+                    List<SocialLikedMarkedResponse> markedlist = res.getSocial_Marked_List();
+                    for (SocialLikedMarkedResponse one : markedlist){
+                        String myidx = one.getSocial_Marked_myidx();
+                        if (myidx.equals(MY_IDX)){
+                            isMarked = true;
+                            // model.setBookMarked(true);
+                        }
+                    }
+
+                    /**setting*/
+                    final SocialInfoModel object2 = new SocialInfoModel(idx,useridx,photo,name,location,likedcnt+"",content,time,socialImageModels);
+                    if (isLiked){
+                        object2.setLiked(true);
+                    }
+                    if (isMarked){
+                        object2.setBookMarked(true);
+                    }
+
+                    object = object2;
+
+                    social_username.setText(object2.getSocial_username());
+                    if (object2.getSocial_location()!=null){
+                        social_location.setVisibility(View.VISIBLE);
+                        social_location.setText(object2.getSocial_location());
+                    }else {
+                        social_location.setVisibility(View.GONE);
+                    }
+
+                    if (object2.getSocial_content_txt()!=null){
+                        social_content_txt.setVisibility(View.VISIBLE);
+                        social_content_txt.setText(object2.getSocial_content_txt());
+                    }else {
+                        social_content_txt.setVisibility(View.GONE);
+                    }
+
+                    if (object2.getLiked()){
+                        social_like_btn.setImageResource(R.drawable.heart_filled_ios);
+                    }else {
+                        social_like_btn.setImageResource(R.drawable.heart_blank_ios);
+                    }
+
+                    if (object2.getBookMarked()){
+                        social_bookmark_btn.setImageResource(R.drawable.bookmark_filled_ios);
+                    }else {
+                        social_bookmark_btn.setImageResource(R.drawable.bookmark_blank_ios);
+                    }
+
+                    String likedcnt2 = "좋아요 "+object2.getSocial_like_cnt()+"개";
+                    social_like_ctn.setText(likedcnt2);
+                    social_time.setText(object2.getSocial_time());
+                    social_more_reply_txt_btn.setText("댓글 더보기");
+
+                    Picasso.with(InnerSocialActivity.this)
+                            .load(URL+object2.getSocial_userimg())
+                            .transform(new CircleTransform())
+                            .placeholder(R.drawable.load)
+                            .into(social_user_img);
+
+                    if (object2.getSocialImageModelList().size()>1){
+                        String count = 1+"/"+object2.getSocialImageModelList().size();
+                        social_content_img_cnt.setText(count);
+                        social_content_img_cnt.setVisibility(View.VISIBLE);
+                    }else {
+                        social_content_img_cnt.setVisibility(View.INVISIBLE);
+                    }
+                    SlideAdapter slideAdapter = new SlideAdapter(InnerSocialActivity.this,object2.getSocialImageModelList());
+                    social_content_img_viewpager.setAdapter(slideAdapter);
+                    social_content_img_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int i, float v, int i1) {
+                        }
+                        @Override
+                        public void onPageSelected(int i) {
+                            String count = (i+1)+"/"+object2.getSocialImageModelList().size();
+                            social_content_img_cnt.setText(count);
+                        }
+                        @Override
+                        public void onPageScrollStateChanged(int i) {
+                            switch (i){
+                                case SCROLL_STATE_DRAGGING:
+                                    break;
+                                case SCROLL_STATE_IDLE:
+                                    break;
+                                case SCROLL_STATE_SETTLING:
+                                    break;
+                            }
+                        }
+                    });
+
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(Call<SocialUploadResponse> call, Throwable t) {
+                Log.e("loadSocialHistory_fail","Error : "+t.getMessage());
+                progressDoalog.dismiss();
+            }
+        });
+    }
 }

@@ -83,7 +83,7 @@ public class Home_fragment3 extends Fragment {
     ImageButton account_myhistory_imgbtn;
     @OnClick(R.id.account_myhistory_imgbtn)
     public void historybtn (){
-        Home_frag3_history home_frag3_history = new Home_frag3_history();
+        Home_frag3_history home_frag3_history = new Home_frag3_history().newInstance(MY_IDX);
         getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_history).commit();
     }
 
@@ -91,9 +91,19 @@ public class Home_fragment3 extends Fragment {
     ImageButton account_bookmark_imgbtn;
     @OnClick(R.id.account_bookmark_imgbtn)
     public void bookmark (){
-        Home_frag3_bookmark home_frag3_bookmark = new Home_frag3_bookmark();
+        Home_frag3_bookmark home_frag3_bookmark = new Home_frag3_bookmark().newInstance(MY_IDX);
         getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_bookmark).commit();
     }
+
+    @BindView(R.id.account_liked_imgbtn)
+    ImageButton account_liked_imgbtn;
+    @OnClick(R.id.account_liked_imgbtn)
+    public void liked (){
+        Home_frag3_like home_frag3_like = new Home_frag3_like().newInstance(MY_IDX);
+        getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_like).commit();
+    }
+
+
 
     @BindView(R.id.account_framelayout)
     FrameLayout account_framelayout;
@@ -169,7 +179,7 @@ public class Home_fragment3 extends Fragment {
 
         setHasOptionsMenu(true);
         /**fragment test success*/
-        Home_frag3_history home_frag3_history = new Home_frag3_history();
+        Home_frag3_history home_frag3_history = new Home_frag3_history().newInstance(MY_IDX);
         getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_history).commit();
 
         loadMYinfo();

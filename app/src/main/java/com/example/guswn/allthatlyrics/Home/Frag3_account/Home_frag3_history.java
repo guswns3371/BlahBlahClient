@@ -54,6 +54,26 @@ import static com.example.guswn.allthatlyrics.PhotoFilter.getTypeFromString;
 
 public class Home_frag3_history extends Fragment {
 
+    /**프래그먼트 생성자 역할*/
+    String UserIdx;
+    public static Home_frag3_history newInstance(String UserIdx) {
+        Bundle bundle = new Bundle();
+        bundle.putString("UserIdx", UserIdx);
+
+
+        Home_frag3_history fragment = new Home_frag3_history();
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
+    private void readBundle(Bundle bundle) {
+        if (bundle != null) {
+            UserIdx = bundle.getString("UserIdx");
+
+        }
+    }
+    /**프래그먼트 생성자 역할*/
      SocialAPI api;
      ArrayList<SocialInfoModel> historyInfos = new ArrayList<>();
     HistoryAdapter historyAdapter;
@@ -63,7 +83,9 @@ public class Home_frag3_history extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_home_frag3_history, container, false);
         ButterKnife.bind(this, rootView);
-
+        /**프래그먼트 생성자 역할*/
+        readBundle(getArguments());
+        /**프래그먼트 생성자 역할*/
         //레트로핏
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -82,7 +104,7 @@ public class Home_frag3_history extends Fragment {
         api = retrofit.create(SocialAPI.class);
         //레트로핏
 
-        loadSocialHistory_oneidx(MY_IDX);
+        loadSocialHistory_oneidx(UserIdx);
         return rootView;
     }
 

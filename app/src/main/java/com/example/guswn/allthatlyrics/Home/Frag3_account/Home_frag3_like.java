@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,16 +49,16 @@ import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 import static com.example.guswn.allthatlyrics.PhotoFilter.getTypeFromString;
 
-public class Home_frag3_bookmark extends Fragment {
+public class Home_frag3_like extends Fragment {
 
     /**프래그먼트 생성자 역할*/
     String UserIdx;
-    public static Home_frag3_bookmark newInstance(String UserIdx) {
+    public static Home_frag3_like newInstance(String UserIdx) {
         Bundle bundle = new Bundle();
         bundle.putString("UserIdx", UserIdx);
 
 
-        Home_frag3_bookmark fragment = new Home_frag3_bookmark();
+        Home_frag3_like fragment = new Home_frag3_like();
         fragment.setArguments(bundle);
 
         return fragment;
@@ -71,14 +72,13 @@ public class Home_frag3_bookmark extends Fragment {
     }
     /**프래그먼트 생성자 역할*/
 
-
     private SocialAPI api;
     ArrayList<SocialInfoModel> historyInfos = new ArrayList<>();
     HistoryAdapter historyAdapter;
-    @BindView(R.id.frag3_bookmark_gridview)
+    @BindView(R.id.frag3_like_gridview)
     GridView gridView;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_home_frag3_bookmark, container, false);
+        View rootView = inflater.inflate(R.layout.activity_home_frag3_like, container, false);
         ButterKnife.bind(this, rootView);
 
         readBundle(getArguments());
@@ -104,7 +104,7 @@ public class Home_frag3_bookmark extends Fragment {
         return rootView;
     }
     public void loadSocialHistory_ike_or_bookmark(final String USER_IDX){
-        Call<SocialUploadResponse> call = api.getSocialHistoryList_like_or_bookmark(USER_IDX,"bookmark");
+        Call<SocialUploadResponse> call = api.getSocialHistoryList_like_or_bookmark(USER_IDX,"like");
 
         final ProgressDialog progressDoalog;
         progressDoalog = new ProgressDialog(getActivity());
