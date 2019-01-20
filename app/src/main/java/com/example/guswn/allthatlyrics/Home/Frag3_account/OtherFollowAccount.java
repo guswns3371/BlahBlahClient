@@ -50,10 +50,12 @@ import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 public class OtherFollowAccount extends AppCompatActivity {
     @BindView(R.id.account_tb)
     Toolbar account_tb;
-    @BindView(R.id.account_username)
+    @BindView(R.id.account_nametxt)
     TextView account_username;
-    @BindView(R.id.account_email)
+    @BindView(R.id.account_emailtxt)
     TextView account_email;
+    @BindView(R.id.account_introducetxt)
+    TextView account_introducetxt;
     @BindView(R.id.account_img)
     ImageView account_img;
     @BindView(R.id.account_edit_btn)
@@ -174,6 +176,7 @@ public class OtherFollowAccount extends AppCompatActivity {
                 photo = MainActivity.URL+photo;
                 String birthday = val.getBirthday();
                 String introduce = val.getIntroduce();
+                String socialHistorycnt = val.getSocialHistoryCount();
                 List<FollowingResponse> UserFollower = val.getUserfollower();
                 List<FollowingResponse> UserFollowing = val.getUserfollowing();
                 int follower_cnt=0;
@@ -197,13 +200,15 @@ public class OtherFollowAccount extends AppCompatActivity {
                 }
                 follower_cnt_txt.setText(follower_cnt+"");
                 following_cnt_txt.setText(following_cnt+"");
+                content_cnt_txt.setText(socialHistorycnt+"");
 //                Picasso.with(OtherFollowAccount.this)
 //                        .load(photo)
 //                        .transform(new CircleTransform())
 //                        .placeholder(R.drawable.account)
 //                        .into(account_img);
-//                account_username.setText(username);
-//                account_email.setText(email);
+                account_username.setText(username);
+                account_email.setText(email);
+                account_introducetxt.setText(introduce);
             }
 
             @Override

@@ -34,7 +34,7 @@ public class PhotoFilter {
     public PhotoFilter(boolean isURL,Integer type, String filepath_or_url, File file,Context context,  ImageView imageView) {
         this.isURL = isURL;
         this.filepath_or_url = filepath_or_url;
-        if (!isURL){
+        if (!isURL){ // url 이 아닐때만
             if (file==null){ // 이펙트 보여주는 사진 부분에서
                 this.file = new File(filepath_or_url);
             }else {

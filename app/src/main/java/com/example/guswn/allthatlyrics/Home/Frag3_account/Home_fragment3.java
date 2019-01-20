@@ -1,10 +1,17 @@
 package com.example.guswn.allthatlyrics.Home.Frag3_account;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,6 +22,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,10 +61,6 @@ public class Home_fragment3 extends Fragment {
 
     @BindView(R.id.account_tb)
     Toolbar account_tb;
-    @BindView(R.id.account_username)
-    TextView account_username;
-    @BindView(R.id.account_email)
-    TextView account_email;
     @BindView(R.id.account_img)
     ImageView account_img;
     @BindView(R.id.account_edit_btn)
@@ -67,6 +72,32 @@ public class Home_fragment3 extends Fragment {
     TextView follower_cnt_txt;
     @BindView(R.id.following_cnt_txt)
     TextView following_cnt_txt;
+    @BindView(R.id.account_nametxt)
+    TextView account_nametxt;
+    @BindView(R.id.account_emailtxt)
+    TextView account_emailtxt;
+    @BindView(R.id.account_introducetxt)
+    TextView account_introducetxt;
+
+    @BindView(R.id.account_myhistory_imgbtn)
+    ImageButton account_myhistory_imgbtn;
+    @OnClick(R.id.account_myhistory_imgbtn)
+    public void historybtn (){
+        Home_frag3_history home_frag3_history = new Home_frag3_history();
+        getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_history).commit();
+    }
+
+    @BindView(R.id.account_bookmark_imgbtn)
+    ImageButton account_bookmark_imgbtn;
+    @OnClick(R.id.account_bookmark_imgbtn)
+    public void bookmark (){
+        Home_frag3_bookmark home_frag3_bookmark = new Home_frag3_bookmark();
+        getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_bookmark).commit();
+    }
+
+    @BindView(R.id.account_framelayout)
+    FrameLayout account_framelayout;
+
 //    @BindView(R.id.swipeRefreshLo)
 //    SwipeRefreshLayout swipeRefreshLayout;
 
@@ -137,9 +168,10 @@ public class Home_fragment3 extends Fragment {
         actionBar.setTitle(SaveSharedPreference.getUserName(getActivity(),MY_EMAIL));
 
         setHasOptionsMenu(true);
-        //View viewToolbar = getActivity().getLayoutInflater().inflate(R.layout.toolbar_main_timeline, null);
-       /**실험 성공*/
-//        getoneinfo();
+        /**fragment test success*/
+        Home_frag3_history home_frag3_history = new Home_frag3_history();
+        getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_history).commit();
+
         loadMYinfo();
         /**실험*/
         //이미지뷰
@@ -153,10 +185,10 @@ public class Home_fragment3 extends Fragment {
 //            account_img.setImageBitmap(decodedByte);
 //        }
 
-
 //        swipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -204,6 +236,7 @@ public class Home_fragment3 extends Fragment {
                 photo = MainActivity.URL+photo;
                 String birthday = val.getBirthday();
                 String introduce = val.getIntroduce();
+                String socialHistorycnt = val.getSocialHistoryCount();
                 List<FollowingResponse> UserFollower = val.getUserfollower();
                 List<FollowingResponse> UserFollowing = val.getUserfollowing();
                 int follower_cnt=0;
@@ -227,13 +260,15 @@ public class Home_fragment3 extends Fragment {
                 }
                 follower_cnt_txt.setText(follower_cnt+"");
                 following_cnt_txt.setText(following_cnt+"");
+                content_cnt_txt.setText(socialHistorycnt+"");
                 Picasso.with(getActivity())
                         .load(photo)
                         .transform(new CircleTransform())
                         .placeholder(R.drawable.account)
                         .into(account_img);
-                account_username.setText(username);
-                account_email.setText(email);
+                account_nametxt.setText(username);
+                account_emailtxt.setText(email);
+                account_introducetxt.setText(introduce);
 
 
             }
@@ -269,8 +304,9 @@ public class Home_fragment3 extends Fragment {
 
                 if(!username.isEmpty()){
 
-                    account_username.setText(username);
-                    account_email.setText(email);
+                    account_nametxt.setText(username);
+                    account_emailtxt.setText(email);
+                    account_introducetxt.setText(introduce);
                     if(photo!=null){
 
                         Picasso.with(getActivity())

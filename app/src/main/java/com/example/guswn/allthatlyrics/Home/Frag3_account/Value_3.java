@@ -23,6 +23,8 @@ public class Value_3 {
     String password;
     @SerializedName("Token")
     String token;
+    @SerializedName("SocialHistoryCount")
+    String SocialHistoryCount;
 
     @SerializedName("userinfo")
     List<Value_3> userinfolist;
@@ -30,6 +32,10 @@ public class Value_3 {
     List<FollowingResponse> userfollower;
     @SerializedName("UserFollowing")
     List<FollowingResponse> userfollowing;
+
+    public String getSocialHistoryCount() {
+        return SocialHistoryCount;
+    }
 
     public List<FollowingResponse> getUserfollowing() {
         return userfollowing;

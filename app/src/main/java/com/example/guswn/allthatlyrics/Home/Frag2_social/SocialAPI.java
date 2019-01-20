@@ -18,6 +18,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 
 public interface SocialAPI {
     @Multipart
@@ -33,6 +34,9 @@ public interface SocialAPI {
     );
     @GET("Social/getjson_socialhistory.php")
     Call<SocialUploadResponse> getSocialHistoryList();
+
+    @GET("Social/getjson_socialhistory_oneidx.php")
+    Call<SocialUploadResponse> getSocialHistoryList_oneidx(@Query("idx") String useridx);
 
     @FormUrlEncoded
     @POST("Social/make_liked_unliked.php")

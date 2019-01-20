@@ -1,8 +1,11 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class SocialInfoModel {
+public class SocialInfoModel implements Parcelable{
     String social_useridx;
     String social_idx;
     String social_userimg;
@@ -39,6 +42,31 @@ public class SocialInfoModel {
 //        this.isBookMarked = isBookMarked;
 //    }
 
+
+    protected SocialInfoModel(Parcel in) {
+        social_useridx = in.readString();
+        social_idx = in.readString();
+        social_userimg = in.readString();
+        social_username = in.readString();
+        social_location = in.readString();
+        social_like_cnt = in.readString();
+        social_content_txt = in.readString();
+        social_time = in.readString();
+        isLiked = in.readByte() != 0;
+        isBookMarked = in.readByte() != 0;
+    }
+
+    public static final Creator<SocialInfoModel> CREATOR = new Creator<SocialInfoModel>() {
+        @Override
+        public SocialInfoModel createFromParcel(Parcel in) {
+            return new SocialInfoModel(in);
+        }
+
+        @Override
+        public SocialInfoModel[] newArray(int size) {
+            return new SocialInfoModel[size];
+        }
+    };
 
     public String getSocial_useridx() {
         return social_useridx;
@@ -126,5 +154,24 @@ public class SocialInfoModel {
 
     public void setSocialImageModelList(ArrayList<SocialImageModel> socialImageModelList) {
         this.socialImageModelList = socialImageModelList;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(social_useridx);
+        dest.writeString(social_idx);
+        dest.writeString(social_userimg);
+        dest.writeString(social_username);
+        dest.writeString(social_location);
+        dest.writeString(social_like_cnt);
+        dest.writeString(social_content_txt);
+        dest.writeString(social_time);
+        dest.writeByte((byte) (isLiked ? 1 : 0));
+        dest.writeByte((byte) (isBookMarked ? 1 : 0));
     }
 }
