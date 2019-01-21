@@ -1,6 +1,7 @@
 package com.example.guswn.allthatlyrics.Main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_NAME;
+import static com.example.guswn.allthatlyrics.Main.Logo.MY_IMG;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 
 
@@ -70,6 +72,7 @@ public class Login extends AppCompatActivity {
                 String message = val.getMessage();
                 String username = val.getUsername();
                 String email = val.getEmail();
+                String img = val.getPhoto();
                 String idx = val.getIdx();
                 Log.e("Login_log_username_idx",username+"/"+idx);
 
@@ -79,11 +82,13 @@ public class Login extends AppCompatActivity {
                     SaveSharedPreference.setMY_EMAIL(Login.this,email);
                     SaveSharedPreference.setUserIdx(Login.this,idx,email);
                     SaveSharedPreference.setUserName(Login.this, username,email);
+                    SaveSharedPreference.setUserPhoto(Login.this,img,email);
                     MY_IDX = SaveSharedPreference.getUserIdx(Login.this,email);
                     MY_NAME = SaveSharedPreference.getUserName(Login.this,email);
                     MY_EMAIL = SaveSharedPreference.getUserEmail(Login.this,email);
                     MY_EMAIL_2 = SaveSharedPreference.getUserEmail(Login.this,email);
-                    Log.e("Login_log_MY_EMAIL/MY_EMAIL_2/MY_IDX/MY_NAME",MY_EMAIL+"/"+MY_EMAIL_2+"/"+MY_IDX+"/"+MY_NAME);
+                    MY_IMG = SaveSharedPreference.getUserPhoto(Login.this,email);
+                    Log.e("Login_log_MY_EMAIL/MY_EMAIL_2/MY_IDX/MY_NAME/MY_IMG",MY_EMAIL+"/"+MY_EMAIL_2+"/"+MY_IDX+"/"+MY_NAME+"/"+MY_IMG);
                     Intent intent = new Intent(Login.this,Home.class);
                     startActivity(intent);
                     //Toast.makeText(Login.this,email,Toast.LENGTH_SHORT).show();

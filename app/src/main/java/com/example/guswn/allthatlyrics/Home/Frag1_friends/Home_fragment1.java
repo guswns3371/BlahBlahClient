@@ -22,6 +22,7 @@ import com.example.guswn.allthatlyrics.Home.Frag3_account.EditAPI;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Userinfo_Edit;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
 import com.example.guswn.allthatlyrics.Main.SaveSharedPreference;
+import com.example.guswn.allthatlyrics.MyRetrofit;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,25 +65,11 @@ public class Home_fragment1 extends Fragment{
         View view = inflater.inflate(R.layout.activity_home_fragment1,container,false);
         ButterKnife.bind(this,view);
 
-
-        //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(FriendAPI.class);
-        //레트로핏
-
+        /**test success*/
+        /**레트로핏*/
+        retrofit = new MyRetrofit(retrofit).getRetrofit();
+        api =retrofit.create(FriendAPI.class);
+        /**레트로핏*/
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());

@@ -77,7 +77,8 @@
         <activity android:name=".Home.Frag3_account.Home_frag3_history" />
         <activity android:name=".Home.Frag3_account.Home_frag3_bookmark" />
         <activity android:name=".Home.Frag2_social.InnerSocialActivity" />
-        <activity android:name=".Home.Frag3_account.Home_frag3_like"></activity>
+        <activity android:name=".Home.Frag3_account.Home_frag3_like" />
+        <activity android:name=".Home.Frag2_social.Reply.SocialReplyActivity"></activity>
     </application>
 
 </manifest>

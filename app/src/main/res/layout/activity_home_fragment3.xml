@@ -161,8 +161,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:orientation="vertical"
-                android:padding="30dp">
+                android:padding="25dp">
 
                 <TextView
                     android:id="@+id/account_nametxt"
@@ -176,16 +177,22 @@
                     android:id="@+id/account_emailtxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:text="TextView" />
 
                 <TextView
                     android:id="@+id/account_introducetxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:text="TextView" />
             </LinearLayout>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="#d5d5d5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -198,6 +205,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#00000000"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
                     app:srcCompat="@drawable/dash_board_ios_b" />
 
                 <ImageButton
@@ -207,7 +216,7 @@
                     android:layout_weight="1"
                     android:background="#00000000"
                     android:cropToPadding="false"
-                    android:padding="5dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/heart_filled_ios" />
 
@@ -217,6 +226,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#00000000"
+                    android:padding="12dp"
+                    android:scaleType="fitCenter"
                     app:srcCompat="@drawable/book_ios_b" />
             </LinearLayout>
 

@@ -21,21 +21,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.guswn.allthatlyrics.Home.Frag1_friends.FollowingResponse;
+import com.example.guswn.allthatlyrics.Home.Frag2_social.Reply.SocialReplyActivity;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatAPI;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatAddActivity;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatInfo;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.MyAdapter_Chat;
 import com.example.guswn.allthatlyrics.Home.Home;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nostra13.universalimageloader.utils.L;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -400,7 +394,15 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
 
     @Override
     public void onreply_btnnClick(int position, View v) {
-
+        SocialInfoModel ClickModel = socialInfos.get(position);
+        Intent intent = new Intent(getActivity(),SocialReplyActivity.class);
+        intent.putExtra("replyroom_idx",ClickModel.getSocial_idx());
+        intent.putExtra("history_userimg",ClickModel.getSocial_userimg());
+        intent.putExtra("history_username",ClickModel.getSocial_username());
+        intent.putExtra("history_content",ClickModel.getSocial_content_txt());
+        intent.putExtra("history_useridx",ClickModel.getSocial_useridx());
+        intent.putExtra("history_time",ClickModel.getSocial_time());
+        getActivity().startActivity(intent);
     }
 
     @Override

@@ -2,9 +2,7 @@ package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -18,8 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Home.Frag2_social.Reply.SocialReplyActivity;
+import com.example.guswn.allthatlyrics.Home.Frag3_account.OtherFollowAccount;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
-import com.example.guswn.allthatlyrics.Main.Logo;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,7 +48,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_DRAGGING;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_IDLE;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
-import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
@@ -92,6 +90,28 @@ public class InnerSocialActivity extends AppCompatActivity {
 
     @BindView(R.id.inner_social_tb)
     Toolbar inner_social_tb;
+
+    @OnClick({R.id.social_user_img,R.id.social_username})
+    public void userpage(){
+            SocialInfoModel model = object;
+            Intent intent = new Intent(InnerSocialActivity.this, OtherFollowAccount.class);
+            intent.putExtra("useridx",model.getSocial_useridx());
+            intent.putExtra("username",model.getSocial_username());
+            intent.putExtra("userimg",model.getSocial_userimg());
+            startActivity(intent);
+
+    }
+    @OnClick(R.id.social_reply_btn)
+    public void reply(){
+        Intent intent = new Intent(InnerSocialActivity.this,SocialReplyActivity.class);
+        intent.putExtra("replyroom_idx",object.getSocial_idx());
+        intent.putExtra("history_userimg",object.getSocial_userimg());
+        intent.putExtra("history_username",object.getSocial_username());
+        intent.putExtra("history_content",object.getSocial_content_txt());
+        intent.putExtra("history_useridx",object.getSocial_useridx());
+        intent.putExtra("history_time",object.getSocial_time());
+        startActivity(intent);
+    }
 
 //    @BindView(R.id.SwipeInner)
 //    SwipeRefreshLayout swipeRefreshLayout;

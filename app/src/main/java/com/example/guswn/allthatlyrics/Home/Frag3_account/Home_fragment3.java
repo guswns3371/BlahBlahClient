@@ -83,6 +83,9 @@ public class Home_fragment3 extends Fragment {
     ImageButton account_myhistory_imgbtn;
     @OnClick(R.id.account_myhistory_imgbtn)
     public void historybtn (){
+        account_myhistory_imgbtn.setColorFilter(Color.BLUE);
+        account_bookmark_imgbtn.setColorFilter(Color.BLACK);
+        account_liked_imgbtn.setColorFilter(Color.BLACK);
         Home_frag3_history home_frag3_history = new Home_frag3_history().newInstance(MY_IDX);
         getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_history).commit();
     }
@@ -91,6 +94,9 @@ public class Home_fragment3 extends Fragment {
     ImageButton account_bookmark_imgbtn;
     @OnClick(R.id.account_bookmark_imgbtn)
     public void bookmark (){
+        account_myhistory_imgbtn.setColorFilter(Color.BLACK);
+        account_bookmark_imgbtn.setColorFilter(Color.BLUE);
+        account_liked_imgbtn.setColorFilter(Color.BLACK);
         Home_frag3_bookmark home_frag3_bookmark = new Home_frag3_bookmark().newInstance(MY_IDX);
         getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_bookmark).commit();
     }
@@ -99,6 +105,10 @@ public class Home_fragment3 extends Fragment {
     ImageButton account_liked_imgbtn;
     @OnClick(R.id.account_liked_imgbtn)
     public void liked (){
+        account_myhistory_imgbtn.setColorFilter(Color.BLACK);
+        account_bookmark_imgbtn.setColorFilter(Color.BLACK);
+        account_liked_imgbtn.setColorFilter(Color.BLUE);
+
         Home_frag3_like home_frag3_like = new Home_frag3_like().newInstance(MY_IDX);
         getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_like).commit();
     }
@@ -179,6 +189,7 @@ public class Home_fragment3 extends Fragment {
 
         setHasOptionsMenu(true);
         /**fragment test success*/
+        account_myhistory_imgbtn.setColorFilter(Color.BLUE);
         Home_frag3_history home_frag3_history = new Home_frag3_history().newInstance(MY_IDX);
         getFragmentManager().beginTransaction().replace(R.id.account_framelayout,home_frag3_history).commit();
 

@@ -358,6 +358,7 @@ public class InnerChatActivity extends AppCompatActivity {
     MyAdapter_InnerChat myAdapter;
     LinearLayoutManager mLayoutManager;
     ArrayList<InnerChatInfo> innerChatInfosList;
+
     ChatAPI api_chat;
     Retrofit retrofit;
     Intent intent;
@@ -436,8 +437,6 @@ public class InnerChatActivity extends AppCompatActivity {
         //레트로핏
 
         mRecyclerView.setHasFixedSize(true);
-
-
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         innerChatInfosList = new ArrayList<>();
@@ -853,7 +852,6 @@ public class InnerChatActivity extends AppCompatActivity {
                             }
                             info.setIsReadPeopleList(list);
                             innerChatInfosList.add(info);
-
 //                                int people_num = (Integer.parseInt(chatpeople_num)-1);
 //                                String str_people_num = people_num+"";
 //
@@ -873,8 +871,8 @@ public class InnerChatActivity extends AppCompatActivity {
                             toast.show();
                             //Log.e("loadChatHistory_history",message);
                         }
-
                     }
+//                    myAdapter.notifyDataSetChanged();
                 }
             }
 

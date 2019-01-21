@@ -75,6 +75,8 @@ import static android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION;
 import static android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION;
 import static com.example.guswn.allthatlyrics.Main.Login.MY_EMAIL;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
+import static com.example.guswn.allthatlyrics.Main.Logo.MY_IMG;
+import static com.example.guswn.allthatlyrics.Main.Logo.MY_NAME;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 
 
@@ -254,10 +256,10 @@ public class Userinfo_Edit extends AppCompatActivity {
 
 
                     if(mCurrentPhotoPath==null){//사진 변경 안 할 경우
-                        infoUpload();
+                        infoUpload(false);
                     }else {
                         if(fileUri== null){//사진 찍을 경우
-                            infoUpload();
+                            infoUpload(true);
                             imgUpload();
                         }else { //사진 고를 경우
                             img_info_Upload();
@@ -296,7 +298,7 @@ public class Userinfo_Edit extends AppCompatActivity {
                     INTRODUCE = introduce;
                     PHOTO = photo;
                     Log.e("getoneinfo_PHOTO",URL+PHOTO);
-                    SaveSharedPreference.setUserBitmapImage(Userinfo_Edit.this,PHOTO,MY_EMAIL);
+                    //SaveSharedPreference.setUserBitmapImage(Userinfo_Edit.this,PHOTO,MY_EMAIL);
                     edit_username.setText(NAME);
                     edit_birthday.setText(BIRTHDAY);
                     edit_introduce.setText(INTRODUCE);
@@ -346,7 +348,7 @@ public class Userinfo_Edit extends AppCompatActivity {
 //        });
 //    }
 
-    public void infoUpload(){
+    public void infoUpload(final Boolean isShot){
         String username2 = edit_username.getText().toString();
         String birthday2 = edit_birthday.getText().toString();
         String introduce2 = edit_introduce.getText().toString();
@@ -377,7 +379,7 @@ public class Userinfo_Edit extends AppCompatActivity {
                 String value = val.getValue();
                 String message = val.getMessage();
                 String username = val.getUsername();
-                //String photo = val.getPhoto();
+                String photo = val.getPhoto();
                 String birthday = val.getBirthday();
                 String introduce = val.getIntroduce();
 
@@ -385,13 +387,18 @@ public class Userinfo_Edit extends AppCompatActivity {
 
                 if(value.equals("1")){
                     SaveSharedPreference.setUserName(Userinfo_Edit.this,username,MY_EMAIL);
-                  //  SaveSharedPreference.setUserPhoto(Userinfo_Edit.this,photo,MY_EMAIL);
+                    SaveSharedPreference.setUserPhoto(Userinfo_Edit.this,photo,MY_EMAIL);
                     SaveSharedPreference.setUserBirthday(Userinfo_Edit.this,birthday,MY_EMAIL);
                     SaveSharedPreference.setUserIntroduce(Userinfo_Edit.this,introduce,MY_EMAIL);
+                    MY_NAME = username;
+                    MY_IMG = photo;
                    // Userinfo_Edit.this.finish();// 인텐트로 넘기지 못하는구나.. ㅠㅠ
-                    Intent resultIntent = new Intent();
-                    setResult(RESULT_OK,resultIntent);
-                    finish();
+                    if (!isShot){
+                        Intent resultIntent = new Intent();
+                        setResult(RESULT_OK,resultIntent);
+                        finish();
+                    }
+
                 }else {
                     Toast.makeText(Userinfo_Edit.this,message,Toast.LENGTH_SHORT).show();
                 }
@@ -439,13 +446,13 @@ public class Userinfo_Edit extends AppCompatActivity {
                         //변환된 비트맵을 string 으로 변환하여 저장
                         Boolean value = serverResponse.getSuccess();
                         String photo = serverResponse.getMessage();
-
-                        String base64Image = photo;
-                        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        photo = BitMapToString(decodedByte);
+                        SaveSharedPreference.setUserPhoto(Userinfo_Edit.this,photo,MY_EMAIL);
+                        MY_IMG = photo;
+//                        String base64Image = photo;
+//                        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+//                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//                        photo = BitMapToString(decodedByte);
                         if(value==true){
-                            SaveSharedPreference.setUserPhoto(Userinfo_Edit.this,photo,MY_EMAIL);
                             //Userinfo_Edit.this.finish();
                             Intent resultIntent = new Intent();
                             setResult(RESULT_OK,resultIntent);
@@ -526,6 +533,8 @@ public class Userinfo_Edit extends AppCompatActivity {
                     SaveSharedPreference.setUserPhoto(Userinfo_Edit.this,photo,MY_EMAIL);
                     SaveSharedPreference.setUserBirthday(Userinfo_Edit.this,birthday,MY_EMAIL);
                     SaveSharedPreference.setUserIntroduce(Userinfo_Edit.this,introduce,MY_EMAIL);
+                    MY_NAME = username;
+                    MY_IMG = photo;
                    // Userinfo_Edit.this.finish();// 인텐트로 넘기지 못하는구나.. ㅠㅠ
                     Intent resultIntent = new Intent();
                     setResult(RESULT_OK,resultIntent);

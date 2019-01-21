@@ -1,6 +1,7 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FollowingResponse;
+import com.example.guswn.allthatlyrics.Home.Frag2_social.Reply.SocialReplyResponse;
 import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatResponse;
 
 import org.json.JSONArray;
@@ -46,6 +47,9 @@ public interface SocialAPI {
 
     @GET("Social/getjson_socialhistory_oneidx.php")
     Call<SocialUploadResponse> getSocialHistoryList_oneidx(@Query("idx") String useridx);
+
+    @GET("Social/getjson_social_replyhistory_userinfo.php")
+    Call<SocialReplyResponse> getSocial_ReplyHistoryList(@Query("replyroom_idx") String replyroom_idx);
 
     @FormUrlEncoded
     @POST("Social/make_liked_unliked.php")

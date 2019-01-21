@@ -26,6 +26,7 @@ public class Logo extends AppCompatActivity {
     public static String MY_EMAIL_2;
     public static String MY_IDX;
     public static String MY_NAME;
+    public static String MY_IMG;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,8 @@ public class Logo extends AppCompatActivity {
                         MY_EMAIL_2 = SaveSharedPreference.getMY_EMAIL(Logo.this);
                         MY_IDX = SaveSharedPreference.getUserIdx(Logo.this,MY_EMAIL_2);
                         MY_NAME = SaveSharedPreference.getUserName(Logo.this,MY_EMAIL_2);
-                        Log.e("Logo_log_MY_IDX/MY_EMAIL_2/MY_NAME",MY_IDX+"/"+MY_EMAIL_2+"/"+MY_NAME);
+                        MY_IMG = SaveSharedPreference.getUserPhoto(Logo.this,MY_EMAIL_2);
+                        Log.e("Logo_log_MY_IDX/MY_EMAIL_2/MY_NAME/MY_IMG",MY_IDX+"/"+MY_EMAIL_2+"/"+MY_NAME+"/"+MY_IMG);
                         intent = new Intent(Logo.this, Home.class);
                         intent.putExtra("STD_NUM", SaveSharedPreference.getMY_EMAIL(Logo.this).toString());
                         startActivity(intent);
