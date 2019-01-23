@@ -10,6 +10,28 @@ public class SocialReplyModel {
     String replycontent;
     String replytime;
     boolean isLoaded = false;
+    boolean isReReply = false;
+    String replyit ;
+
+    public void setLoaded(boolean loaded) {
+        isLoaded = loaded;
+    }
+
+    public String getReplyit() {
+        return replyit;
+    }
+
+    public void setReplyit(String replyit) {
+        this.replyit = replyit;
+    }
+
+    public boolean isReReply() {
+        return isReReply;
+    }
+
+    public void setReReply(boolean reReply) {
+        isReReply = reReply;
+    }
 
     public boolean isLoaded() {
         return isLoaded;
@@ -19,7 +41,7 @@ public class SocialReplyModel {
         isLoaded = isloaded;
     }
 
-    public SocialReplyModel(String idx, String useridx, String roomidx,String username, String userimg, String replycontent, String replytime) {
+    public SocialReplyModel(String idx, String useridx, String roomidx,String username, String userimg, String replycontent, String replytime, String replyit ) {
         this.idx = idx;
         this.useridx = useridx;
         this.roomidx = roomidx;
@@ -27,6 +49,7 @@ public class SocialReplyModel {
         this.userimg = userimg;
         this.replycontent = replycontent;
         this.replytime = replytime;
+        this.replyit = replyit;
     }
 
     public String getRoomidx() {

@@ -71,12 +71,14 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    //navigation architecture
+    def nav_version = "1.0.0-alpha09"
+    implementation "android.arch.navigation:navigation-fragment:$nav_version"
+    implementation "android.arch.navigation:navigation-ui:$nav_version"
 
-    //
 //    implementation 'com.google.android.gms:play-services-auth:9.4.0'
 //    implementation 'com.google.android.gms:play-services:9.4.0'
 
-    //
 //    implementation 'com.afollestad:drag-select-recyclerview:2.3.0'
 //    implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
     implementation 'com.afollestad:drag-select-recyclerview:0.3.6'

@@ -23,8 +23,15 @@ public class SocialReplyResponse {
 
     @SerializedName("UserIdx_Info")
     List<Value_3> UserIdx_Info;
+    /**ㅁㅊ놈ㅋㅋㅋㅋ*/
+    @SerializedName("ReReply_info")
+    List<SocialReReplyReponse> ReReply_info;
     @SerializedName("social_replylist")
     List<SocialReplyResponse> social_replylist;
+
+    public List<SocialReReplyReponse> getReReply_info() {
+        return ReReply_info;
+    }
 
     public String getValue() {
         return value;

@@ -62,6 +62,7 @@
                     android:layout_weight="1"
                     android:background="#FFFFFF"
                     android:ems="10"
+                    android:maxLines="5"
                     android:hint="문구 입력..."
                     android:inputType="textLongMessage"
                     android:textSize="14sp" />

@@ -163,8 +163,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp"
+                android:maxLines="5"
+                android:ellipsize="end"
                 android:text="TextView"
                 android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/social_content_showmore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="더보기"
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/social_more_reply_txt_btn"

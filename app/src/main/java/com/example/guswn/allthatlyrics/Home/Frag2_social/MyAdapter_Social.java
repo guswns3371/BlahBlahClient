@@ -59,6 +59,9 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
         @BindView(R.id.social_time)
         TextView social_time;
 
+        @BindView(R.id.social_content_showmore)
+        TextView social_content_showmore;
+
         @BindView(R.id.social_like_btn)
         ImageButton social_like_btn;
         @BindView(R.id.social_reply_btn)
@@ -87,12 +90,17 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
             ButterKnife.bind(this,itemView);
         }
     }
-
+    void remove(int position) {
+        socialInfoModels.remove(position);
+        notifyItemChanged(position);
+        notifyItemRangeRemoved(position, 1);
+    }
 
     public interface SocialReycyclerClickListner{
         void onlike_btnClick(int position,View v,TextView tv);
         void onmore_btnClick(int position,View v,View itemview);
         void onreply_btnnClick(int position,View v);
+        void onreply_txtClick(int position,View v);
         void onshare_btnClick(int position,View v);
         void onbookmark_btnClick(int position,View v);
     }
@@ -125,26 +133,49 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
         if(object!=null){
             myViewHolder.social_username.setText(object.getSocial_username());
 
+            myViewHolder.social_location.setText(object.getSocial_location());
             if (object.getSocial_location()!=null){
                 myViewHolder.social_location.setVisibility(View.VISIBLE);
-                myViewHolder.social_location.setText(object.getSocial_location());
             }else {
                 myViewHolder.social_location.setVisibility(View.GONE);
             }
 
+            myViewHolder.social_content_txt.setText(object.getSocial_content_txt());
             if (object.getSocial_content_txt()!=null){
                 myViewHolder.social_content_txt.setVisibility(View.VISIBLE);
-                myViewHolder.social_content_txt.setText(object.getSocial_content_txt());
             }else {
                 myViewHolder.social_content_txt.setVisibility(View.GONE);
             }
 
+            Log.e("myViewHolder.social_content_txt.getLineHeight() ",""+myViewHolder.social_content_txt.getLineCount()+"/"+ object.getSocial_content_txt().length());
+            /**내용 더보기 버튼*/
+            if (object.getSocial_content_txt().length()>=181){
+                final boolean[] expanded = {false};
+                myViewHolder.social_content_showmore.setVisibility(View.VISIBLE);
+                myViewHolder.social_content_showmore.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (expanded[0]) {
+                            myViewHolder.social_content_txt.setMaxLines(5);
+                            myViewHolder.social_content_showmore.setText("펼치기");
+                        } else {
+                            myViewHolder.social_content_txt.setMaxLines(100);
+                            myViewHolder.social_content_showmore.setText("접기");
+                        }
+                        expanded[0] = !expanded[0];
+                    }
+                });
+            }else {
+                myViewHolder.social_content_showmore.setVisibility(View.GONE);
+            }
+
+            /**좋아요 버튼*/
             if (object.getLiked()){
                 myViewHolder.social_like_btn.setImageResource(R.drawable.heart_filled_ios);
             }else {
                 myViewHolder.social_like_btn.setImageResource(R.drawable.heart_blank_ios);
             }
-
+            /**북마크 버튼*/
             if (object.getBookMarked()){
                 myViewHolder.social_bookmark_btn.setImageResource(R.drawable.bookmark_filled_ios);
             }else {
@@ -218,6 +249,12 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
                     @Override
                     public void onClick(View v) {
                         SRlistner.onreply_btnnClick(pos,v);
+                    }
+                });
+                myViewHolder.social_more_reply_txt_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SRlistner.onreply_txtClick(pos,v);
                     }
                 });
                 myViewHolder.social_share_btn.setOnClickListener(new View.OnClickListener() {

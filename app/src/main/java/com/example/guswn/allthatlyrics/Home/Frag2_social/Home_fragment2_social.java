@@ -1,5 +1,6 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,12 +25,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.Home.CameraPermission;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.Reply.SocialReplyActivity;
+import com.example.guswn.allthatlyrics.Home.Frag3_account.Userinfo_Edit;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
 import com.example.guswn.allthatlyrics.Home.Home;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -121,6 +126,7 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
         swipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
+
     @Override
     public void onRefresh() {
         // 프래그먼트 새로고침
@@ -140,12 +146,33 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_toolbar_social_add :
-                Intent intent = new Intent(getActivity(), ShowGalleryActivity.class);
-                getActivity().startActivityForResult(intent,2);
-                // Toast.makeText(getActivity(),"setting",Toast.LENGTH_SHORT).show();
+                CameraPermission();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void CameraPermission(){
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                //Toast.makeText(Userinfo_Edit.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                Log.e("1_CameraPermission ","Permission Granted");
+                Intent intent = new Intent(getActivity(), ShowGalleryActivity.class);
+                getActivity().startActivityForResult(intent,2);
+            }
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                // Toast.makeText(Userinfo_Edit.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                Log.e("2_CameraPermission ","Permission Denied"+ deniedPermissions.toString());
+                Toast.makeText(getActivity(),"카메라 권한을 승인해주세요",Toast.LENGTH_LONG).show();
+            }
+        };
+        TedPermission.with(getActivity())
+                .setPermissionListener(permissionlistener)
+                .setDeniedMessage("퍼미션 거부시 ,서비스를 이용 할 수 없습니다\n\n설정에서 퍼미션을 승인하세요 ")
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                //카메라 퍼미션
+                .check();
     }
     //툴바
 
@@ -406,6 +433,19 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
     }
 
     @Override
+    public void onreply_txtClick(int position, View v) {
+        SocialInfoModel ClickModel = socialInfos.get(position);
+        Intent intent = new Intent(getActivity(),SocialReplyActivity.class);
+        intent.putExtra("replyroom_idx",ClickModel.getSocial_idx());
+        intent.putExtra("history_userimg",ClickModel.getSocial_userimg());
+        intent.putExtra("history_username",ClickModel.getSocial_username());
+        intent.putExtra("history_content",ClickModel.getSocial_content_txt());
+        intent.putExtra("history_useridx",ClickModel.getSocial_useridx());
+        intent.putExtra("history_time",ClickModel.getSocial_time());
+        getActivity().startActivity(intent);
+    }
+
+    @Override
     public void onshare_btnClick(int position, View v) {
 
     }
@@ -431,12 +471,13 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
                         liked_or_unliked("no",MY_IDX,ClickModel.getSocial_idx());
                         marked_or_unmarked("no",MY_IDX,ClickModel.getSocial_idx());
                         delete_history(MY_IDX,ClickModel.getSocial_idx());
-                        socialInfos.remove(position);
-                        myAdapter.notifyItemRemoved(position);
-                        myAdapter.notifyItemRangeChanged(position, socialInfos.size());
-                        itemview.setVisibility(View.GONE);
-                        /**test success*/
-                        myAdapter.notifyDataSetChanged();
+//                        socialInfos.remove(position);
+//                        myAdapter.notifyItemRemoved(position);
+//                        myAdapter.notifyItemRangeChanged(position, socialInfos.size());
+//                        itemview.setVisibility(View.GONE);
+//                        /**test success*/
+//                        myAdapter.notifyDataSetChanged();
+                        myAdapter.remove(position);
                         break;
                     case "JoonTalk으로 공유하기" :
                         Toast.makeText(getActivity(),"JoonTalk으로 공유하기",Toast.LENGTH_SHORT).show();

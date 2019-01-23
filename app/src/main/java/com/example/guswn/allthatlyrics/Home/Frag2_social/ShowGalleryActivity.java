@@ -1,5 +1,6 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,8 @@ import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatInfo;
 import com.example.guswn.allthatlyrics.Home.Frag4_chat.ShowImageActivity;
 import com.example.guswn.allthatlyrics.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
@@ -50,6 +53,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -192,6 +196,8 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_gallery);
         ButterKnife.bind(this);
+
+
         show_gall_more_btn.setColorFilter(Color.GRAY);
         show_gall_crop_btn.setColorFilter(Color.GRAY);
         show_gall_camera_btn.setColorFilter(Color.GRAY);
@@ -248,8 +254,6 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
 //            }
 //        });
         //갤러리
-
-
     }
 
     /**
@@ -428,9 +432,9 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
 
             String[] projection = { MediaStore.MediaColumns.DATA,
                     MediaStore.Images.Media.BUCKET_DISPLAY_NAME };
-
+            final String orderBy = MediaStore.Images.Media.DATE_TAKEN;
             cursor = activity.getContentResolver().query(uri, projection, null,
-                    null, null);
+                    null, orderBy + " DESC");
 
             column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
             column_index_folder_name = cursor
@@ -440,6 +444,16 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
 
                 listOfAllImages.add(absolutePathOfImage);
             }
+            Log.e("1_listOfAllImages.size() ",""+listOfAllImages.size());
+            /**사진이 안나올 때*/
+            if (listOfAllImages.size()==0){
+                while (cursor.moveToNext()) {
+                    absolutePathOfImage = cursor.getString(column_index_folder_name);
+
+                    listOfAllImages.add(absolutePathOfImage);
+                }
+            }
+            Log.e("2_listOfAllImages.size() ",""+listOfAllImages.size());
             return listOfAllImages;
         }
     }
@@ -513,7 +527,6 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
     //spinner
     //툴바
     /** 툴바관련 코드*/
-
 
 
 }

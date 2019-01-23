@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Space;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -48,6 +49,9 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.s_reply_deletebtn_txt)
         TextView s_reply_deletebtn_txt;
 
+        @BindView(R.id.space)
+        Space space;
+
         @BindView(R.id.reply_line)
         View reply_line;
 
@@ -59,7 +63,13 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 Intent intent = new Intent(context, OtherFollowAccount.class);
                 intent.putExtra("useridx",model.getUseridx());
                 intent.putExtra("username",model.getUsername());
-                intent.putExtra("userimg",model.getUserimg());
+                String userimg = model.getUserimg();
+                Log.e("userimg",userimg);
+                boolean isContain = userimg.contains(URL);
+                if (isContain){
+                    userimg = userimg.replace(URL,"");
+                }
+                intent.putExtra("userimg",userimg);
                 context.startActivity(intent);
             }
 
@@ -69,6 +79,30 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+    }
+
+    void insert(int position,SocialReplyModel model){
+        socialReplyModels.add(position,model);
+//        socialReplyModels.get(position-1).setReplyit("답글 달기");
+        notifyItemChanged(position);
+        notifyItemInserted(position);
+    }
+
+    void remove(int position) {
+        socialReplyModels.remove(position);
+        notifyItemChanged(position);
+        notifyItemRangeRemoved(position, 1);
+        notifyDataSetChanged();
+    }
+    /**interface*/
+    public interface SocialReplyClickListener{
+        void ondelete_txtClick(int position,View v);
+        void onre_reply_txtClick(int position,View v);
+    }
+
+    private SocialReplyClickListener SRlistner;
+    public void setOnClickListener_Reply(SocialReplyClickListener f){
+        this.SRlistner = f;
     }
 
     private ArrayList<SocialReplyModel> socialReplyModels;
@@ -98,7 +132,7 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             myViewHolder.s_reply_username.setText(object.getUsername());
             myViewHolder.s_reply_time.setText(object.getReplytime());
-
+            myViewHolder.s_reply_replybtn_txt.setText(object.getReplyit());
             if (object.getIdx().equals("null")){
                 myViewHolder.s_reply_replybtn_txt.setVisibility(View.GONE);
                 myViewHolder.s_reply_deletebtn_txt.setVisibility(View.GONE);
@@ -112,9 +146,33 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     myViewHolder.s_reply_deletebtn_txt.setVisibility(View.GONE);
                 }
             }
-
+            /**대댓글일 경우*/
+            if (object.isReReply){
+                myViewHolder.space.setVisibility(View.VISIBLE);
+                myViewHolder.s_reply_replybtn_txt.setVisibility(View.GONE);
+            }else {
+                myViewHolder.space.setVisibility(View.GONE);
+                myViewHolder.s_reply_replybtn_txt.setVisibility(View.VISIBLE);
+            }
+            if (SRlistner!=null){
+                final int pos = i;
+                myViewHolder.s_reply_replybtn_txt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SRlistner.onre_reply_txtClick(pos,v);
+                    }
+                });
+                myViewHolder.s_reply_deletebtn_txt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SRlistner.ondelete_txtClick(pos,v);
+                    }
+                });
+            }
         }
     }
+
+
 
     @Override
     public int getItemCount() {
