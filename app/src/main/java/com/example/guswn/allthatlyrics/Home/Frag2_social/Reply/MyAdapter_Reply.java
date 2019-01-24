@@ -23,6 +23,7 @@ import com.example.guswn.allthatlyrics.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,11 +65,12 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 intent.putExtra("useridx",model.getUseridx());
                 intent.putExtra("username",model.getUsername());
                 String userimg = model.getUserimg();
-                Log.e("userimg",userimg);
+                Log.e("1_userimg",userimg);
                 boolean isContain = userimg.contains(URL);
                 if (isContain){
                     userimg = userimg.replace(URL,"");
                 }
+                Log.e("2_userimg",userimg);
                 intent.putExtra("userimg",userimg);
                 context.startActivity(intent);
             }
@@ -83,15 +85,44 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     void insert(int position,SocialReplyModel model){
         socialReplyModels.add(position,model);
-//        socialReplyModels.get(position-1).setReplyit("답글 달기");
         notifyItemChanged(position);
         notifyItemInserted(position);
     }
 
     void remove(int position) {
-        socialReplyModels.remove(position);
-        notifyItemChanged(position);
-        notifyItemRangeRemoved(position, 1);
+        String ori_idx = socialReplyModels.get(position).getIdx();
+        boolean isReReply = socialReplyModels.get(position).isReReply();
+        Log.e("_isReReply",isReReply+"");
+        if (isReReply){ // 대댓글일때
+            socialReplyModels.remove(position);
+            notifyItemChanged(position);
+            notifyItemRangeRemoved(position, 1);
+        }else { // 댓글일때
+            /**먼저 댓글 에 달린 대댓글들 position 값*/
+            ArrayList<Integer> deletethese = new ArrayList<>();
+            deletethese.add(position);
+            for (int i=0; i<socialReplyModels.size(); i++){
+                if (socialReplyModels.get(i).isReReply()){
+                    String rere_idx =socialReplyModels.get(i).getWhereReplyto();
+                    String rere_con = socialReplyModels.get(i).getReplycontent();
+                   // Log.e("1_remove_it__rere_idx/ori_idx ",rere_con+"_"+rere_idx+"/"+ori_idx);
+                    if (rere_idx.equals(ori_idx)){
+                        Log.e("2_remove_it__rere_idx/ori_idx ",rere_con+"_"+rere_idx+"/"+ori_idx);
+                        deletethese.add(i);
+                    }
+                }
+            }
+
+            /**이제 대댓글 삭제*/
+            Collections.sort(deletethese, Collections.reverseOrder());// position 역순으로 정렬
+                for (int a=0; a<deletethese.size(); a++){
+                    int deletePos = deletethese.get(a);
+                    Log.e("deletethese.get(a) position",deletePos+"/"+position);
+                    socialReplyModels.remove(deletePos);
+                    notifyItemChanged(deletePos);
+                   notifyItemRangeRemoved(deletePos, 1);
+                }
+        }
         notifyDataSetChanged();
     }
     /**interface*/
@@ -154,6 +185,7 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 myViewHolder.space.setVisibility(View.GONE);
                 myViewHolder.s_reply_replybtn_txt.setVisibility(View.VISIBLE);
             }
+            /**클릭 인터페이스*/
             if (SRlistner!=null){
                 final int pos = i;
                 myViewHolder.s_reply_replybtn_txt.setOnClickListener(new View.OnClickListener() {

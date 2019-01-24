@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -102,7 +103,7 @@ public class InnerSocialActivity extends AppCompatActivity {
 
     }
     @OnClick(R.id.social_reply_btn)
-    public void reply(){
+    public void reply_act(){
         Intent intent = new Intent(InnerSocialActivity.this,SocialReplyActivity.class);
         intent.putExtra("replyroom_idx",object.getSocial_idx());
         intent.putExtra("history_userimg",object.getSocial_userimg());
@@ -113,6 +114,17 @@ public class InnerSocialActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.social_more_reply_txt_btn)
+    public void reply_act_txt(){
+        Intent intent = new Intent(InnerSocialActivity.this,SocialReplyActivity.class);
+        intent.putExtra("replyroom_idx",object.getSocial_idx());
+        intent.putExtra("history_userimg",object.getSocial_userimg());
+        intent.putExtra("history_username",object.getSocial_username());
+        intent.putExtra("history_content",object.getSocial_content_txt());
+        intent.putExtra("history_useridx",object.getSocial_useridx());
+        intent.putExtra("history_time",object.getSocial_time());
+        startActivity(intent);
+    }
 //    @BindView(R.id.SwipeInner)
 //    SwipeRefreshLayout swipeRefreshLayout;
 
@@ -147,7 +159,7 @@ public class InnerSocialActivity extends AppCompatActivity {
         //레트로핏
 
         intent = getIntent();
-        object = intent.getParcelableExtra("Clikedmodel");
+        object = intent.getParcelableExtra("Clikedmodel"); // 사실상 필요 없는 코드 어차피 밑에서 새롭게 초기화 됨
         imageModels = intent.getParcelableArrayListExtra("Clikedmodel_SocialImageModelList");
         social_idx = object.getSocial_idx();
 
@@ -443,8 +455,18 @@ public class InnerSocialActivity extends AppCompatActivity {
                             for (Iterator<String> it = explrObject.keys(); it.hasNext(); ) {
                                 String key = it.next(); /**제이슨 오브젝트의 키*/
                                 String value2 = explrObject.getString(key); /** 제이슨오브젝트의 밸류*/
-                                Log.e("2_explrObject key/value"+a,URL_withoutslash+key+" ____ "+value2); /** 성공*/
-                                socialImageModels.add(new SocialImageModel(key,value2));
+                                String mimetype = null;
+                                String filter = null;
+                                if (value2.contains(",")){//array ["filter_type","mime_type"]
+                                    JSONArray innerArray  = explrObject.getJSONArray(key);
+                                    filter = innerArray.getString(0);
+                                    mimetype = innerArray.getString(1);
+                                }else {//string "Normal" etc...
+                                    filter = value2;
+                                    mimetype = "image";
+                                }
+                                Log.e("2_loadSocialHistory_oneidx_explrObject key/value"+a,URL_withoutslash+key+" ____ "+filter+"___"+mimetype); /** 성공*/
+                                socialImageModels.add(new SocialImageModel(key,filter,mimetype));
                             }
                         }
                     } catch (JSONException e) {

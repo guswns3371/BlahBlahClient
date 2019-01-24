@@ -40,7 +40,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -217,14 +219,25 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
                         JSONArray jsonArray = new JSONArray(imgpath);
                         /**스트링을 제이슨어레이로 [ {" 파일URL":" 필터종류"},{" 파일URL":" 필터종류"},{" 파일URL":" 필터종류"}...]*/
                         JSONObject explrObject;
+                        JSONArray innerarray;
                         for (int a=0;a<jsonArray.length();a++){
                             explrObject = jsonArray.getJSONObject(a);
                             //Log.e("1_explrObject key "+a, String.valueOf(explrObject));
                             for (Iterator<String> it = explrObject.keys(); it.hasNext(); ) {
-                                String key = it.next(); /**제이슨 오브젝트의 키*/
-                                String value2 = explrObject.getString(key); /** 제이슨오브젝트의 밸류*/
-                                Log.e("2_explrObject key/value"+a,URL_withoutslash+key+" ____ "+value2); /** 성공*/
-                                socialImageModels.add(new SocialImageModel(key,value2));
+                                String key = it.next(); /**제이슨 오브젝트의 키 "url" */
+                                String value2 = explrObject.getString(key); /** 제이슨오브젝트의 밸류 array ["filter_type","mime_type"]*/
+                                String mimetype = null;
+                                String filter = null;
+                                if (value2.contains(",")){//array ["filter_type","mime_type"]
+                                    JSONArray innerArray  = explrObject.getJSONArray(key);
+                                    filter = innerArray.getString(0);
+                                    mimetype = innerArray.getString(1);
+                                }else {//string "Normal" etc...
+                                    filter = value2;
+                                    mimetype = "image";
+                                }
+                                Log.e("2_loadSocialHistory_oneidx_explrObject key/value"+a,URL_withoutslash+key+" ____ "+filter+"___"+mimetype); /** 성공*/
+                                socialImageModels.add(new SocialImageModel(key,filter,mimetype));
                             }
                         }
                     } catch (JSONException e) {

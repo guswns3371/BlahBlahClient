@@ -50,11 +50,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <FrameLayout
+                    android:id="@+id/show_gall_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <VideoView
+                        android:id="@+id/show_gall_video"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center" />
+                </FrameLayout>
+
                 <ImageView
                     android:id="@+id/show_gall_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:maxHeight="600dp"
+
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

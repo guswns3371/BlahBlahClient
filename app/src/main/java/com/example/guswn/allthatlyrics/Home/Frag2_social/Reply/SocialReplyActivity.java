@@ -1,6 +1,7 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social.Reply;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
@@ -60,6 +61,7 @@ import static com.example.guswn.allthatlyrics.Main.Logo.MY_IMG;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_NAME;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
+import static com.example.guswn.allthatlyrics.MainActivity.hideSoftKeyboard;
 import static com.example.guswn.allthatlyrics.MainActivity.showKeyboard;
 
 public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_Reply.SocialReplyClickListener{
@@ -150,6 +152,8 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
     public void replyit(){
         String reply_content = social_reply_edit.getText().toString();
         if (!reply_content.equals("")){
+            hideSoftKeyboard(social_reply_edit,SocialReplyActivity.this);
+
             Date TODAY = new Date();
             SimpleDateFormat TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String  chat_time = TIME.format(TODAY);
@@ -176,6 +180,7 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             social_reply_uploadtxt.setText("게시");
             social_reply_edit.setText("");
             social_reply_edit.setHint("");
@@ -236,7 +241,7 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
                             for (SocialReReplyReponse rere : ReReply_info){
                                 String rere_idx = rere.getIdx();
                                 String rere_roomidx = rere.getRere_roomidx();
-
+                                String rere_contentidx = rere.getRere_contentidx();
                                 if (!rere_idx.equals("null")){
                                     if (rere_roomidx.equals(replyroom_idx)){
                                         String rere_content = rere.getRere_content();
@@ -263,6 +268,7 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
                                                         URL_withoutslash+rere_userimg,rere_content,rere_time,"답글 달기");
                                         rere_loadedmodel.setisLoaded(true);
                                         rere_loadedmodel.setReReply(true);
+                                        rere_loadedmodel.setWhereReplyto(rere_contentidx);
                                         replytInfosList.add(rere_loadedmodel);
                                     }
                                 }
@@ -336,10 +342,19 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
                 public void run() {
                     JSONObject dataRecieved = (JSONObject) args[0];
                     String is_ReReply;
+                    String is_Delete;
+                    String delete_reply_position = null;
                     String reply_re_contentidx = null;
                     String reply_content_position = null;
                     String idx,reply_useridx,reply_username,reply_roomidx,reply_time,reply_content,reply_userimg;
                     try{
+                        is_Delete = dataRecieved.getString("is_Delete");
+                        if (is_Delete.equals("yes")){
+                            delete_reply_position = dataRecieved.getString("delete_reply_position");
+                            int deletepos = Integer.parseInt(delete_reply_position);
+                            /**삭제와 동시에 새로운 댓글을 달면 대환장파티*/
+                            myAdapter.remove(deletepos);
+                        }
                         is_ReReply = dataRecieved.getString("is_ReReply");
                         if (is_ReReply.equals("yes")){
                             /**대댓글일 경우*/
@@ -376,7 +391,7 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
 
                             if (is_ReReply.equals("yes")){//대댓글일 경우
                                 model.setReReply(true);
-
+                                model.setWhereReplyto(reply_re_contentidx);
                                 /**리사이클러뷰 아이템 위로 쌓기*/
                                 /**대댓글 위치 바로 밑에 댓글이 달리도록*/
                                 int reply_position = Integer.parseInt(reply_content_position);
@@ -477,32 +492,73 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
         }
     }
     @Override
-    public void ondelete_txtClick(int position, View v) {
+    public void ondelete_txtClick(final int position, View v) {
+        new AlertDialog.Builder(SocialReplyActivity.this)
+                .setTitle("댓글 삭제")
+                .setMessage("정말 삭제하시겠습니까?")
+                .setCancelable(true)
+                .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SocialReplyModel clickedModel = replytInfosList.get(position);
+                        boolean del_isReply = clickedModel.isReReply();
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            if (del_isReply){
+                                String rere_idx = clickedModel.getIdx();
+                                jsonObject.put("delete_is_ReReply" , "yes");
+                                jsonObject.put("delete_reply_idx",rere_idx);
+                                jsonObject.put("delete_reply_position",position+"");
+                            }else {
+                                String re_idx = clickedModel.getIdx();
+                                jsonObject.put("delete_is_ReReply" , "no");
+                                jsonObject.put("delete_reply_idx",re_idx);
+                                jsonObject.put("delete_reply_position",position+"");
+                            }
+                            jsonObject.put("delete_reply_useridx" , MY_IDX);
+                            jsonObject.put("delete_reply_username" , MY_NAME);
+                            jsonObject.put("delete_reply_roomidx",replyroom_idx);
 
-        SocialReplyModel clickedModel = replytInfosList.get(position);
-        boolean del_isReply = clickedModel.isReReply();
-        JSONObject jsonObject = new JSONObject();
-        try {
-            if (del_isReply){
-                String rere_idx = clickedModel.getIdx();
-                jsonObject.put("delete_is_ReReply" , "yes");
-                jsonObject.put("delete_reply_idx",rere_idx);
-            }else {
-                String re_idx = clickedModel.getIdx();
-                jsonObject.put("delete_is_ReReply" , "no");
-                jsonObject.put("delete_reply_idx",re_idx);
-            }
-            jsonObject.put("delete_reply_useridx" , MY_IDX);
-            jsonObject.put("delete_reply_username" , MY_NAME);
-            jsonObject.put("delete_reply_roomidx",replyroom_idx);
+                            mSocket.emit("social reply delete message",jsonObject);
 
-            mSocket.emit("social reply delete message",jsonObject);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        /**리사틀러뷰 삭제*/
+                        //myAdapter.remove(position);
+                    }
+                }).show();
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        /**리사틀러뷰 삭제*/
-        myAdapter.remove(position);
+//        SocialReplyModel clickedModel = replytInfosList.get(position);
+//        boolean del_isReply = clickedModel.isReReply();
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//            if (del_isReply){
+//                String rere_idx = clickedModel.getIdx();
+//                jsonObject.put("delete_is_ReReply" , "yes");
+//                jsonObject.put("delete_reply_idx",rere_idx);
+//            }else {
+//                String re_idx = clickedModel.getIdx();
+//                jsonObject.put("delete_is_ReReply" , "no");
+//                jsonObject.put("delete_reply_idx",re_idx);
+//            }
+//            jsonObject.put("delete_reply_useridx" , MY_IDX);
+//            jsonObject.put("delete_reply_username" , MY_NAME);
+//            jsonObject.put("delete_reply_roomidx",replyroom_idx);
+//
+//            mSocket.emit("social reply delete message",jsonObject);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        /**리사틀러뷰 삭제*/
+//        myAdapter.remove(position);
     }
 
 

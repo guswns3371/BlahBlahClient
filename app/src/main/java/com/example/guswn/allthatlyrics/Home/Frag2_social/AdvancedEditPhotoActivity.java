@@ -1,9 +1,7 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.content.Intent;
-import android.media.effect.Effect;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,51 +12,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatAPI;
-import com.example.guswn.allthatlyrics.Main.Logo;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.reflect.TypeToken;
-import com.ipaulpro.afilechooser.utils.FileUtils;
-import com.nostra13.universalimageloader.utils.L;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import id.zelory.compressor.Compressor;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
-import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 
 public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAdapter_Advanced_img.AdvanceImgClickListner{
 
@@ -73,10 +44,10 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
     LinearLayoutManager mLayoutManager2;
     public static MyAdapter_Advanced_img myAdapter;
     MyAdapter_Advanced_edit myAdapter_edit;
-    public  static ArrayList<AdvancedImgModel> advancedImgModels;
+    public  static ArrayList<AdvancedImgModel> EditedPreUploadFiles;
     ArrayList<AdvancedImgModel> editEffects;
-    ArrayList<String>  get_multipleSelectedImages;
-    String  get_selectedimage;
+    ArrayList<ShowGalleryModel>  get_multipleSelectedImages;
+    ShowGalleryModel  get_selectedimage;
     Boolean isMulti;
     private Integer [] Effects =
             {R.string.Photo_Normal ,R.string.Photo_Blur,R.string.Photo_Sepia,R.string.Photo_Sketch, R.string.Photo_Invert,
@@ -119,9 +90,9 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
         Intent intent = getIntent();
         isMulti = intent.getBooleanExtra("isMulti",false);
         if (isMulti){ // 사진 여러장
-            get_multipleSelectedImages = intent.getStringArrayListExtra("multipleSelectedImages");
+            get_multipleSelectedImages = intent.getParcelableArrayListExtra("multipleSelectedImages");
         }else {//  사진 한장
-            get_selectedimage = intent.getStringExtra("selectedimage");
+            get_selectedimage = intent.getParcelableExtra("selectedimage");
         }
         Log.e("AdvancedEditPhotoActivity ",get_multipleSelectedImages+"/"+get_selectedimage);
 
@@ -137,44 +108,34 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
         editRecyclerView.setLayoutManager(mLayoutManager2);
         /**editRecyclerView*/
 
-        advancedImgModels = new ArrayList<>();
+        EditedPreUploadFiles = new ArrayList<>();
         editEffects = new ArrayList<>();
         /**Effects load*/
         loadEditEffects();
 
         if (isMulti) { // 사진 여러장
-            myAdapter_edit = new MyAdapter_Advanced_edit(editEffects,AdvancedEditPhotoActivity.this,get_multipleSelectedImages.get(0));
+            myAdapter_edit = new MyAdapter_Advanced_edit(editEffects,AdvancedEditPhotoActivity.this,get_multipleSelectedImages.get(0).getFilepath());
 
-            for (String imgs : get_multipleSelectedImages){
+            for (ShowGalleryModel imgs : get_multipleSelectedImages){
 
-                File imgFile = new  File(imgs);
-                File compressedImageFile = null;
-                try {
-                     compressedImageFile = new Compressor(this).compressToFile(imgFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                File imgFile = new  File(imgs.getFilepath());
                 if(imgFile.exists())
                 {
-                    advancedImgModels.add(new AdvancedImgModel(Uri.fromFile(imgFile),imgFile,imgs,R.string.Photo_Normal));
+                    Log.e("imgs.getMimtype()",imgs.getMimtype());
+                    EditedPreUploadFiles.add(new AdvancedImgModel(Uri.fromFile(imgFile),imgFile,imgs.getFilepath(),R.string.Photo_Normal,imgs.getMimtype()));
                 }
             }
         }else {//  사진 한장
-            myAdapter_edit = new MyAdapter_Advanced_edit(editEffects,AdvancedEditPhotoActivity.this,get_selectedimage);
-            File imgFile = new  File(get_selectedimage);
-            File compressedImageFile = null;
-            try {
-                compressedImageFile = new Compressor(this).compressToFile(imgFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            myAdapter_edit = new MyAdapter_Advanced_edit(editEffects,AdvancedEditPhotoActivity.this,get_selectedimage.getFilepath());
+            File imgFile = new  File(get_selectedimage.getFilepath());
             if(imgFile.exists())
             {
-                advancedImgModels.add(new AdvancedImgModel(Uri.fromFile(imgFile),imgFile,get_selectedimage,R.string.Photo_Normal));
+                Log.e("get_selectedimage.getMimtype()",get_selectedimage.getMimtype());
+                EditedPreUploadFiles.add(new AdvancedImgModel(Uri.fromFile(imgFile),imgFile,get_selectedimage.getFilepath(),R.string.Photo_Normal,get_selectedimage.getMimtype()));
             }
         }
         editRecyclerView.setAdapter(myAdapter_edit);
-        myAdapter = new MyAdapter_Advanced_img(advancedImgModels,AdvancedEditPhotoActivity.this);
+        myAdapter = new MyAdapter_Advanced_img(EditedPreUploadFiles,AdvancedEditPhotoActivity.this);
         myAdapter.setOnClickListner_AdvancedImg(this);
         imgRecyclerView.setAdapter(myAdapter);
 
@@ -183,7 +144,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
 
     public void loadEditEffects(){
         for (int a=0; a< Effects.length; a++){
-            AdvancedImgModel model = new  AdvancedImgModel(null,null,null,Effects[a]);
+            AdvancedImgModel model = new  AdvancedImgModel(null,null,null,Effects[a],null);
             editEffects.add(model);
         }
     }
@@ -202,7 +163,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        advancedImgModels = new ArrayList<>();
+        EditedPreUploadFiles = new ArrayList<>();
     }
 
     //툴바
@@ -217,7 +178,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
-                advancedImgModels = new ArrayList<>();
+                EditedPreUploadFiles = new ArrayList<>();
                 finish();
                 return true;
             }
@@ -226,7 +187,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
                 if (!isSingleEdit){
                     Log.e("isSingleEdit ",myAdapter.isSingleEditNow+"");
                     Intent intent = new Intent(AdvancedEditPhotoActivity.this,MakeSocialContentActivity.class);
-                    intent.putParcelableArrayListExtra("edited_Images",advancedImgModels);
+                    intent.putParcelableArrayListExtra("UploadFiles", EditedPreUploadFiles);
                     startActivityForResult(intent,2);
                 }else {
                     isSingleEdit=false;
@@ -279,8 +240,8 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
 //    public void uploadSocialImage(){
 //        /**map_file*/
 //        List<MultipartBody.Part> map_file = new ArrayList<>();
-//        for (int i =0;i<advancedImgModels.size(); i++){
-//            Uri fileuri = advancedImgModels.get(i).getImg();
+//        for (int i =0;i<EditedPreUploadFiles.size(); i++){
+//            Uri fileuri = EditedPreUploadFiles.get(i).getImg();
 //            String filename = "file"+i;
 //            map_file.add(prepareFilePart(filename,fileuri));
 //        }
@@ -289,9 +250,9 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
 //        /**map_filter*/
 //        JSONArray map_filter = new JSONArray();
 //        JSONObject obj= new JSONObject();
-//        for (int i =0;i<advancedImgModels.size(); i++){
+//        for (int i =0;i<EditedPreUploadFiles.size(); i++){
 //            try {
-//                    String  filter = getResources().getString(advancedImgModels.get(i).getType());
+//                    String  filter = getResources().getString(EditedPreUploadFiles.get(i).getType());
 //                    obj.put("file"+i,filter);
 //            }catch (JSONException e){
 //                e.printStackTrace();
@@ -300,7 +261,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
 //        map_filter.put(obj);
 //        /***/
 //
-//        String count_size = advancedImgModels.size()+"";
+//        String count_size = EditedPreUploadFiles.size()+"";
 //        Date TODAY = new Date();
 //        SimpleDateFormat TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //        String myidx = Logo.MY_IDX;
@@ -372,7 +333,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
 //        Log.e("prepareFilePart_fileUri",""+fileUri);
 //        File file = FileUtils.getFile(AdvancedEditPhotoActivity.this,fileUri);
 //
-//        // Parsing any Media type file
+//        // Parsing any Media typeInfos file
 //        RequestBody requestFile =
 //                RequestBody.create(
 //                        MediaType.parse("*/*"),

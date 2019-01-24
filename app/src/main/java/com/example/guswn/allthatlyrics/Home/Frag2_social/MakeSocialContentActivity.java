@@ -1,5 +1,6 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -16,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.guswn.allthatlyrics.Home.Home;
 import com.example.guswn.allthatlyrics.Main.Logo;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
@@ -64,7 +64,7 @@ public class MakeSocialContentActivity extends AppCompatActivity {
     TextView make_social_location;
 
     Intent intent;
-    ArrayList<AdvancedImgModel> edited_Images;
+    ArrayList<AdvancedImgModel> UploadFiles;
     Retrofit retrofit;
     SocialAPI api;
     @Override
@@ -99,17 +99,18 @@ public class MakeSocialContentActivity extends AppCompatActivity {
         //레트로핏
 
         intent = getIntent();
-        edited_Images = intent.getParcelableArrayListExtra("edited_Images");
-        make_social_img.setImageURI(edited_Images.get(0).getImg());
-        Log.e("edited_Images.size() ",edited_Images.size()+"");
-        if (edited_Images.size()==1){
+        UploadFiles = intent.getParcelableArrayListExtra("UploadFiles");
+        make_social_img.setImageURI(UploadFiles.get(0).getImg());
+        Log.e("UploadFiles.size() ", UploadFiles.size()+"");
+        if (UploadFiles.size()==1){
             make_social_ismulti_img.setVisibility(View.INVISIBLE);
         }else {
             make_social_ismulti_img.setVisibility(View.VISIBLE);
         }
             int a=0;
-            for (AdvancedImgModel model : edited_Images){
-                Log.e("MakeSocialContentActivity "+a,getResources().getString(model.getType()));
+            for (AdvancedImgModel model : UploadFiles){
+                Log.e("MakeSocialContentActivity getType "+a,getResources().getString(model.getType()));
+                Log.e("MakeSocialContentActivity getMimetype "+a,model.getMimetype());
                 a++;
             }
 
@@ -134,9 +135,9 @@ public class MakeSocialContentActivity extends AppCompatActivity {
                 uploadSocialImage();
 //                Intent intent = new Intent(MakeSocialContentActivity.this, Home.class);
 //                startActivityForResult(intent,2);
-                Intent resultIntent = new Intent();
-                setResult(RESULT_OK,resultIntent);
-                finish();
+//                Intent resultIntent = new Intent();
+//                setResult(RESULT_OK,resultIntent);
+//                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -175,8 +176,8 @@ public class MakeSocialContentActivity extends AppCompatActivity {
     public void uploadSocialImage(){
         /**map_file*/
         List<MultipartBody.Part> map_file = new ArrayList<>();
-        for (int i =0;i<edited_Images.size(); i++){
-            Uri fileuri = edited_Images.get(i).getImg();
+        for (int i = 0; i< UploadFiles.size(); i++){
+            Uri fileuri = UploadFiles.get(i).getImg();
             String filename = "file"+i;
             map_file.add(prepareFilePart(filename,fileuri));
         }
@@ -185,9 +186,9 @@ public class MakeSocialContentActivity extends AppCompatActivity {
         /**map_filter*/
         JSONArray map_filter = new JSONArray();
         JSONObject obj= new JSONObject();
-        for (int i =0;i<edited_Images.size(); i++){
+        for (int i = 0; i< UploadFiles.size(); i++){
             try {
-                String  filter = getResources().getString(edited_Images.get(i).getType());
+                String  filter = getResources().getString(UploadFiles.get(i).getType());
                 obj.put("file"+i,filter);
             }catch (JSONException e){
                 e.printStackTrace();
@@ -196,7 +197,22 @@ public class MakeSocialContentActivity extends AppCompatActivity {
         map_filter.put(obj);
         /***/
 
-        String count_size = edited_Images.size()+"";
+        /**map_mime*/
+        JSONArray map_mime = new JSONArray();
+        JSONObject obj2= new JSONObject();
+        for (int i = 0; i< UploadFiles.size(); i++){
+            try {
+                String mime = UploadFiles.get(i).getMimetype();
+                Log.e("UploadFiles.get(i).getMimetype() ",mime);
+                obj2.put("file"+i,mime);
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        map_mime.put(obj2);
+        /***/
+
+        String count_size = UploadFiles.size()+"";
         Date TODAY = new Date();
         SimpleDateFormat TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String myidx = Logo.MY_IDX;
@@ -209,7 +225,17 @@ public class MakeSocialContentActivity extends AppCompatActivity {
         RequestBody count = createPartFromString(count_size);
         RequestBody content = createPartFromString(make_social_content_edit.getText().toString());
 
-        Call<SocialUploadResponse> call = api.uploadMultiFiles(map_file,map_filter,count,idx,name,time,content);
+        Call<SocialUploadResponse> call = api.uploadMultiFiles(map_file,map_filter,map_mime,count,idx,name,time,content);
+
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(MakeSocialContentActivity.this);
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Please Wait");
+        progressDoalog.setTitle("Social Files Uploading...");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        // show it
+        progressDoalog.show();
+
         call.enqueue(new Callback<SocialUploadResponse>() {
             @Override
             public void onResponse(Call<SocialUploadResponse> call, Response<SocialUploadResponse> response) {
@@ -217,6 +243,7 @@ public class MakeSocialContentActivity extends AppCompatActivity {
                     Log.e("uploadSocialImage_code",""+response.code());
                     return;
                 }
+                progressDoalog.dismiss();
                 SocialUploadResponse res = response.body();
                 String value = res.getValue();
                 String message = res.getMessage();
@@ -246,12 +273,16 @@ public class MakeSocialContentActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                Intent resultIntent = new Intent();
+                setResult(RESULT_OK,resultIntent);
+                finish();
 
             }
 
             @Override
             public void onFailure(Call<SocialUploadResponse> call, Throwable t) {
                 Log.e("uploadSocialImage_fail","Error : "+t.getMessage());
+                progressDoalog.dismiss();
             }
         });
     }
@@ -269,7 +300,7 @@ public class MakeSocialContentActivity extends AppCompatActivity {
         Log.e("prepareFilePart_fileUri",""+fileUri);
         File file = FileUtils.getFile(this,fileUri);
 
-        // Parsing any Media type file
+        // Parsing any Media typeInfos file
         RequestBody requestFile =
                 RequestBody.create(
                         MediaType.parse("*/*"),

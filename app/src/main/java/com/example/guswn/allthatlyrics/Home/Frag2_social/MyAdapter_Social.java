@@ -2,6 +2,8 @@ package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.example.guswn.allthatlyrics.CircleTransform;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.OtherFollowAccount;
@@ -35,7 +38,7 @@ import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 import static com.example.guswn.allthatlyrics.PhotoFilter.getTypeFromString;
 
-public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SlideAdapter.SlideClickListener {
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -124,7 +127,33 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.social_recycler_item,viewGroup,false);
         return new MyAdapter_Social.MyViewHolder(v);
     }
+    /**SlideAdapter clicklistener interface*/
+    int flag = 0;
+    @Override
+    public void onSlideClick(int postion, View v,MediaPlayer mp) {
+        Log.e("1_onSlideClick ",postion+"/"+flag);
+        if (v instanceof ImageView) {
+            ImageView view = (ImageView) v;
+            Log.e("2_onSlideClick ","ImageView"+"/"+flag);
+        }else if (v instanceof VideoView) {
+            VideoView view = (VideoView) v;
+            Log.e("2_onSlideClick ","VideoView"+"/"+flag);
 
+            switch (flag){
+                case 0:
+                    mp.setVolume(1,1);
+                    // 0.0f = no sound , 1.0f =full sound
+                    Log.e("3_onSlideClick ","100");
+                    flag++;
+                    break;
+                case 1:
+                    mp.setVolume(0,0);
+                    Log.e("3_onSlideClick ","0");
+                    flag=0;
+                    break;
+            }
+        }
+    }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
@@ -147,7 +176,7 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
                 myViewHolder.social_content_txt.setVisibility(View.GONE);
             }
 
-            Log.e("myViewHolder.social_content_txt.getLineHeight() ",""+myViewHolder.social_content_txt.getLineCount()+"/"+ object.getSocial_content_txt().length());
+           // Log.e("myViewHolder.social_content_txt.getLineHeight() ",""+myViewHolder.social_content_txt.getLineCount()+"/"+ object.getSocial_content_txt().length());
             /**내용 더보기 버튼*/
             if (object.getSocial_content_txt().length()>=181){
                 final boolean[] expanded = {false};
@@ -205,7 +234,9 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
             }else {
                 myViewHolder.social_content_img_cnt.setVisibility(View.INVISIBLE);
             }
+            /**viewpager*/
             SlideAdapter slideAdapter = new SlideAdapter(context,object.getSocialImageModelList());
+            slideAdapter.SetSlideClickListener(this);
             myViewHolder.social_content_img_viewpager.setAdapter(slideAdapter);
             myViewHolder.social_content_img_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
@@ -213,8 +244,13 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
                 }
                 @Override
                 public void onPageSelected(int i) {
+                    /**몇번째 사지인지 나타는 txtview*/
                     String count = (i+1)+"/"+object.getSocialImageModelList().size();
                     myViewHolder.social_content_img_cnt.setText(count);
+                    /***/
+                    SocialImageModel model = object.getSocialImageModelList().get(i);
+                    String url = URL+model.getUrl();
+                    String mime = model.getMimetype();
                 }
                 @Override
                 public void onPageScrollStateChanged(int i) {
@@ -233,7 +269,7 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
             Integer type =  getTypeFromString(object.getSocialImageModelList().get(0).getFilter());
             String url = URL_withoutslash+object.getSocialImageModelList().get(0).getUrl();
             Log.e("onBindViewHolder "+i,context.getResources().getString(type)+"/"+url);
-//            photoFilter = new PhotoFilter(true,type,url,null,context,myViewHolder.social_content_img);
+//            photoFilter = new PhotoFilter(true,typeInfos,url,null,context,myViewHolder.social_content_img);
 //            photoFilter.photoFilterByType();
 
             /**클릭 리스너 인터페이스*/

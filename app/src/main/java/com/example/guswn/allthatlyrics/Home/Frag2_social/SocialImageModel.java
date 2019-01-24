@@ -4,16 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class SocialImageModel implements Parcelable{
-    String url,filter;
+    String url,filter,mimetype;
 
-    public SocialImageModel(String url, String filter) {
+    public SocialImageModel(String url, String filter, String mimetype) {
         this.url = url;
         this.filter = filter;
+        this.mimetype = mimetype;
     }
 
     protected SocialImageModel(Parcel in) {
         url = in.readString();
         filter = in.readString();
+        mimetype = in.readString();
     }
 
     public static final Creator<SocialImageModel> CREATOR = new Creator<SocialImageModel>() {
@@ -44,6 +46,14 @@ public class SocialImageModel implements Parcelable{
         this.filter = filter;
     }
 
+    public String getMimetype() {
+        return mimetype;
+    }
+
+    public void setMimetype(String mimetype) {
+        this.mimetype = mimetype;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -53,5 +63,6 @@ public class SocialImageModel implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(url);
         dest.writeString(filter);
+        dest.writeString(mimetype);
     }
 }

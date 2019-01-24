@@ -149,9 +149,19 @@ public class Home_frag3_like extends Fragment {
                             //Log.e("1_explrObject key "+a, String.valueOf(explrObject));
                             for (Iterator<String> it = explrObject.keys(); it.hasNext(); ) {
                                 String key = it.next(); /**제이슨 오브젝트의 키*/
-                                String value2 = explrObject.getString(key); /** 제이슨오브젝트의 밸류*/
-                                Log.e("2_loadSocialHistory_oneidx_explrObject key/value"+a,URL_withoutslash+key+" ____ "+value2); /** 성공*/
-                                socialImageModels.add(new SocialImageModel(key,value2));
+                                String value2 = explrObject.getString(key); /** 제이슨오브젝트의 밸류 ["filter","mimetype"]*/
+                                String mimetype = null;
+                                String filter = null;
+                                if (value2.contains(",")){//array ["filter_type","mime_type"]
+                                    JSONArray innerArray  = explrObject.getJSONArray(key);
+                                    filter = innerArray.getString(0);
+                                    mimetype = innerArray.getString(1);
+                                }else {//string "Normal" etc...
+                                    filter = value2;
+                                    mimetype = "image";
+                                }
+                                Log.e("2_loadSocialHistory_oneidx_explrObject key/value"+a,URL_withoutslash+key+" ____ "+filter+"___"+mimetype); /** 성공*/
+                                socialImageModels.add(new SocialImageModel(key,filter,mimetype));
                             }
                         }
                     } catch (JSONException e) {
@@ -188,6 +198,7 @@ public class Home_frag3_like extends Fragment {
                             // model.setBookMarked(true);
                         }
                     }
+
                     SocialInfoModel model = new SocialInfoModel(idx,useridx,photo,name,location,likedcnt+"",content,time,socialImageModels);
                     if (isLiked){
                         model.setLiked(true);

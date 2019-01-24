@@ -27,6 +27,7 @@ public interface SocialAPI {
     Call<SocialUploadResponse> uploadMultiFiles(
             @Part List< MultipartBody.Part> Files,
             @Part("filter") JSONArray Filter,
+            @Part("mime") JSONArray mimetypes,
             @Part("count") RequestBody file_count,
             @Part("MY_IDX") RequestBody MY_IDX,
             @Part("MY_NAME") RequestBody MY_NAME,

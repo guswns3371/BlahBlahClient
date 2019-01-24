@@ -161,7 +161,7 @@ public class OtherFollowAccount extends AppCompatActivity {
         getSupportActionBar().setTitle(username);
 
         Picasso.with(this)
-                .load(URL_withoutslash+userimg)
+                .load(URL+userimg)
                 .transform(new CircleTransform())
                 .placeholder(R.drawable.account)
                 .into(account_img);

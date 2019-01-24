@@ -2,14 +2,17 @@ package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -29,6 +32,10 @@ public class MyAdapter_Advanced_img extends RecyclerView.Adapter<RecyclerView.Vi
         ImageButton show_img_btn;
         @BindView(R.id.show_img_img)
         ImageView show_img_img;
+        @BindView(R.id.show_img_video)
+        VideoView show_img_video;
+        @BindView(R.id.show_img_frame)
+        FrameLayout show_img_frame;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -38,7 +45,7 @@ public class MyAdapter_Advanced_img extends RecyclerView.Adapter<RecyclerView.Vi
 //                public void onClick(View v) {
 //                    int pos = getAdapterPosition();
 //                    if(pos != RecyclerView.NO_POSITION){
-//                        AdvancedImgModel clickedImg = advancedImgModels.get(pos);
+//                        AdvancedImgModel clickedImg = EditedPreUploadFiles.get(pos);
 //                        Intent intent = new Intent(context,AdvancedEditPhotoActivity.class);
 //                        intent.putExtra("clickedImg",clickedImg);
 //                        intent.putExtra("position",pos);
@@ -84,14 +91,56 @@ public class MyAdapter_Advanced_img extends RecyclerView.Adapter<RecyclerView.Vi
 //            if (isEdit){
 //                object.setType(editedType);
 //            }
-            /**test success*/
-            if (!isSingleEditNow){
-                myViewHolder.itemView.setVisibility(View.VISIBLE);
-                myViewHolder.show_img_btn.setVisibility(View.VISIBLE);
-                if (isEdit) {
-                    object.setType(editedType);
+            String mime = object.getMimetype();
+            Log.e("mimeInfos ",mime);
+            if (mime.contains("video")){
+                myViewHolder.show_img_img.setVisibility(View.GONE);
+                myViewHolder.show_img_frame.setVisibility(View.VISIBLE);
+                myViewHolder.show_img_video.setVisibility(View.VISIBLE);
+                myViewHolder.show_img_btn.setVisibility(View.GONE);
+
+                myViewHolder.show_img_video.setVideoPath(object.getFilepath());
+                myViewHolder.show_img_video.start();
+                myViewHolder.show_img_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mp.setVolume(0,0);
+                        mp.setLooping(true);
+                    }
+                });
+                if (!isSingleEditNow){
+                    myViewHolder.itemView.setVisibility(View.VISIBLE);
+                    if (isEdit) {
+                        object.setType(editedType);
+                    }
+                }else {
+                    if (clickedpos == i){
+                        myViewHolder.itemView.setVisibility(View.VISIBLE);
+                        myViewHolder.show_img_btn.setVisibility(View.GONE);
+                        if (isEdit){
+                            object.setType(editedType);
+                        }
+                    }else {
+                        myViewHolder.itemView.setVisibility(View.GONE);
+                    }
                 }
-            }else {
+            }else if (mime.contains("image")){
+                myViewHolder.show_img_img.setVisibility(View.VISIBLE);
+                myViewHolder.show_img_frame.setVisibility(View.GONE);
+                myViewHolder.show_img_video.setVisibility(View.GONE);
+                myViewHolder.show_img_btn.setVisibility(View.VISIBLE);
+
+                if (myViewHolder.show_img_video.isPlaying()){
+                    myViewHolder.show_img_video.stopPlayback();
+                }
+                /**test success*/
+                if (!isSingleEditNow){
+                    myViewHolder.itemView.setVisibility(View.VISIBLE);
+                    myViewHolder.show_img_btn.setVisibility(View.VISIBLE);
+                    if (isEdit) {
+                        object.setType(editedType);
+                    }
+                }else {
                     if (clickedpos == i){
                         myViewHolder.itemView.setVisibility(View.VISIBLE);
                         myViewHolder.show_img_btn.setVisibility(View.GONE);
@@ -102,7 +151,9 @@ public class MyAdapter_Advanced_img extends RecyclerView.Adapter<RecyclerView.Vi
                         myViewHolder.itemView.setVisibility(View.GONE);
 
                     }
+                }
             }
+
 //
 //            if (isEdit){
 //                if (!isSingleEditNow){ // 여러개 편집 할 때

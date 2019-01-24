@@ -11,6 +11,15 @@ public class AdvancedImgModel implements Parcelable {
     File file;
     Integer type;
     String filepath;
+    String mimetype;
+
+    public AdvancedImgModel(Uri img, File file, String filepath,Integer type, String mimetype) {
+        this.img = img;
+        this.file = file;
+        this.type = type;
+        this.filepath = filepath;
+        this.mimetype = mimetype;
+    }
 
     protected AdvancedImgModel(Parcel in) {
         img = in.readParcelable(Uri.class.getClassLoader());
@@ -20,6 +29,7 @@ public class AdvancedImgModel implements Parcelable {
             type = in.readInt();
         }
         filepath = in.readString();
+        mimetype = in.readString();
     }
 
     public static final Creator<AdvancedImgModel> CREATOR = new Creator<AdvancedImgModel>() {
@@ -33,29 +43,6 @@ public class AdvancedImgModel implements Parcelable {
             return new AdvancedImgModel[size];
         }
     };
-
-    public String getFilepath() {
-        return filepath;
-    }
-
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public AdvancedImgModel(Uri img, File file,String filepath,Integer type) {
-        this.img = img;
-        this.file = file;
-        this.filepath = filepath;
-        this.type = type;
-    }
 
     public Uri getImg() {
         return img;
@@ -73,6 +60,30 @@ public class AdvancedImgModel implements Parcelable {
         this.file = file;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public String getMimetype() {
+        return mimetype;
+    }
+
+    public void setMimetype(String mimetype) {
+        this.mimetype = mimetype;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -88,5 +99,6 @@ public class AdvancedImgModel implements Parcelable {
             dest.writeInt(type);
         }
         dest.writeString(filepath);
+        dest.writeString(mimetype);
     }
 }

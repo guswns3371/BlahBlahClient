@@ -12,6 +12,15 @@ public class SocialReplyModel {
     boolean isLoaded = false;
     boolean isReReply = false;
     String replyit ;
+    String whereReplyto = "null";
+
+    public String getWhereReplyto() {
+        return whereReplyto;
+    }
+
+    public void setWhereReplyto(String whereReplyto) {
+        this.whereReplyto = whereReplyto;
+    }
 
     public void setLoaded(boolean loaded) {
         isLoaded = loaded;

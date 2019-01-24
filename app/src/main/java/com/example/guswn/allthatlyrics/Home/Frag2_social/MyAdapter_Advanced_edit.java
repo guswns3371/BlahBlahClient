@@ -1,18 +1,14 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.guswn.allthatlyrics.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 
@@ -20,9 +16,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.BlurTransformation;
-
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class MyAdapter_Advanced_edit extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -46,9 +39,9 @@ public class MyAdapter_Advanced_edit extends RecyclerView.Adapter<RecyclerView.V
                         AdvancedEditPhotoActivity.myAdapter.notifyDataSetChanged();
 
                       if (AdvancedEditPhotoActivity.myAdapter.isSingleEditNow) {
-                          AdvancedEditPhotoActivity.advancedImgModels.get(AdvancedEditPhotoActivity.myAdapter.clickedpos).setType(clikedEffect.getType());
+                          AdvancedEditPhotoActivity.EditedPreUploadFiles.get(AdvancedEditPhotoActivity.myAdapter.clickedpos).setType(clikedEffect.getType());
                       }else {
-                          for ( AdvancedImgModel model : AdvancedEditPhotoActivity.advancedImgModels){
+                          for ( AdvancedImgModel model : AdvancedEditPhotoActivity.EditedPreUploadFiles){
                               model.setType(clikedEffect.getType());
                           }
                       }

@@ -2,12 +2,14 @@ package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,12 +28,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 
 import com.afollestad.dragselectrecyclerview.DragSelectRecyclerView;
@@ -73,6 +77,10 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
 
     @BindView(R.id.show_gall_img)
     ImageView show_gall_img;
+    @BindView(R.id.show_gall_video)
+    VideoView show_gall_video;
+    @BindView(R.id.show_gall_frame)
+    FrameLayout show_gall_frame;
 
     @BindView(R.id.show_gall_more_btn)
     ImageButton show_gall_more_btn;
@@ -89,8 +97,8 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
 
     @OnClick(R.id.show_gall_crop_btn)
     public void crop(){
-        if (selectedimage!=null){
-            File imgFile = new  File(selectedimage);
+        if (selected_onefile!=null){
+            File imgFile = new  File(selected_onefile.getFilepath());
             if(imgFile.exists())
             {
                 CropImage.activity(Uri.fromFile(imgFile))
@@ -108,7 +116,8 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
                 pAttacher = new PhotoViewAttacher(show_gall_img);
                 Uri resultUri = result.getUri();
                 /**test success!!!!*/
-                selectedimage = resultUri.getPath();
+                selected_onefile = new ShowGalleryModel(resultUri.getPath(),"image");
+//                selectedfile = resultUri.getPath();
                 /**test*/
                 Glide.with(ShowGalleryActivity.this)
                         .load(resultUri)
@@ -158,7 +167,8 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
                 imageAdapter.isMulti =true;
                 imageAdapter.notifyDataSetChanged();
 
-                selectedimage=null;
+                //selectedfile=null;
+                selected_onefile=null;
 
                 show_gall_more_btn.setColorFilter(Color.BLUE);
                 show_gall_select_cnt.setVisibility(View.VISIBLE);
@@ -169,7 +179,8 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
                 break;
             case 1:
                 imageAdapter.isMulti =false;
-                multipleSelectedImages = new ArrayList<>();
+                //multipleSelectedImages = new ArrayList<>();
+                Selectedfiles = new ArrayList<>();
                 imageAdapter.count=0;
                 imageAdapter.notifyDataSetChanged();
 
@@ -186,10 +197,12 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
     }
 
     /** The images. */
-    private ArrayList<String> images;
-    static String selectedimage;
+    private ArrayList<ShowGalleryModel> images;
+    static String selectedfile;
+    static ShowGalleryModel selected_onefile;
     ImageAdapter imageAdapter;
     private ArrayList<String> multipleSelectedImages = new ArrayList<>();
+    private ArrayList<ShowGalleryModel> Selectedfiles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -310,33 +323,56 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             ImageView imageViewAndroid;
             final TextView textViewAndroid;
+            final TextView textViewAndroid2;
             /** final TextView textViewAndroid; 를 밖에다 정의를 하면 getView함수가 마지막으로 실행된 view 개체의 textview 가 textViewAndroid에 정의 된다
              * 그래서 클릭리스너로 textViewAndroid의 정보를 바꾸면 getView함수가 마지막으로 실행된 view 개체의 textview의 정보만 바뀐다! 함부로 뷰 개체를 전역변수로 정의하지마라 */
             if (convertView == null) {
                 picturesView = new View(context);
                 picturesView = inflater.inflate(R.layout.custom_grid_view, null);
                 textViewAndroid = (TextView) picturesView.findViewById(R.id.custom_txt);
+                textViewAndroid2 = (TextView) picturesView.findViewById(R.id.custom_videolength_txt);
                 imageViewAndroid = (ImageView) picturesView.findViewById(R.id.custom_img);
             } else {
                 picturesView = (View) convertView;
                 picturesView = inflater.inflate(R.layout.custom_grid_view, null);
                 textViewAndroid = (TextView) picturesView.findViewById(R.id.custom_txt);
+                textViewAndroid2 = (TextView) picturesView.findViewById(R.id.custom_videolength_txt);
                 imageViewAndroid = (ImageView) picturesView.findViewById(R.id.custom_img);
             }
 
+            Log.e("mimeType",images.get(position).getMimtype());
+            final String mime = images.get(position).getMimtype();
+            if (mime.contains("video")){
+                textViewAndroid2.setVisibility(View.VISIBLE);
+            }else {
+                textViewAndroid2.setVisibility(View.GONE);
+            }
 
             /**선택박스 보이기*/
             if (isMulti){
                 textViewAndroid.setVisibility(View.VISIBLE);
 
-                if (multipleSelectedImages.contains(images.get(position))){
-                textViewAndroid.setText("v");
-                textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_3));
-                flag[0]=1;
+//                if (multipleSelectedImages.contains(images.get(position).getFilepath())){
+//                textViewAndroid.setText("v");
+//                textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_3));
+//                flag[0]=1;
+//                }else {
+//                textViewAndroid.setText("");
+//                textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_4));
+//                flag[0]=0;
+//                }
+                ArrayList<String> filepathes = new ArrayList<>();
+                for (int a=0; a<Selectedfiles.size(); a++){
+                    filepathes.add(Selectedfiles.get(a).getFilepath());
+                }
+                if (filepathes.contains(images.get(position).getFilepath())){
+                    textViewAndroid.setText("v");
+                    textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_3));
+                    flag[0]=1;
                 }else {
-                textViewAndroid.setText("");
-                textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_4));
-                flag[0]=0;
+                    textViewAndroid.setText("");
+                    textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_4));
+                    flag[0]=0;
                 }
             }else {
                 textViewAndroid.setVisibility(View.INVISIBLE);
@@ -355,8 +391,10 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
                                    // textViewAndroid.setText(count+"");
                                     textViewAndroid.setText("v");
                                     textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_3));
-                                    multipleSelectedImages.add(images.get(position));
-                                    show_gall_select_cnt.setText(count+"");
+                                    //multipleSelectedImages.add(images.get(position).getFilepath());
+                                    Selectedfiles.add(images.get(position));
+                                    String cnt =count+"";
+                                    show_gall_select_cnt.setText(cnt);
                                     flag[0]++;
                                     //Log.e("multipleSelectedImages",multipleSelectedImages.toString());
                                     break;
@@ -364,25 +402,38 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
                                     count--;
                                     textViewAndroid.setText("");
                                     textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_4));
-                                    multipleSelectedImages.remove(images.get(position));
-                                    show_gall_select_cnt.setText(count+"");
+                                    //multipleSelectedImages.remove(images.get(position).getFilepath());
+                                    Selectedfiles.remove(images.get(position));
+                                    String cnt2 =count+"";
+                                    show_gall_select_cnt.setText(cnt2);
                                     flag[0]=0;
                                     // Log.e("multipleSelectedImages",multipleSelectedImages.toString());
                                     break;
                             }
-                            if (multipleSelectedImages.size()>10){
-                                count--;
-                                textViewAndroid.setText("");
-                                textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_4));
-                                multipleSelectedImages.remove(images.get(position));
-                                show_gall_select_cnt.setText(count+"");
-                                flag[0]=0;
+//                            if (multipleSelectedImages.size()>10){
+//                                count--;
+//                                textViewAndroid.setText("");
+//                                textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_4));
+//                                multipleSelectedImages.remove(images.get(position).getFilepath());
+//                                show_gall_select_cnt.setText(count+"");
+//                                flag[0]=0;
+//
+//                                Toast toast =  Toast.makeText(ShowGalleryActivity.this,"최대 10장까지 선택할수 있습니다",Toast.LENGTH_SHORT);
+//                                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
+//                                toast.show();
+//                            }
+                        if (Selectedfiles.size()>10){
+                            count--;
+                            textViewAndroid.setText("");
+                            textViewAndroid.setBackground(getDrawable(R.drawable.mybtn_4));
+                            Selectedfiles.remove(images.get(position));
+                            show_gall_select_cnt.setText(count+"");
+                            flag[0]=0;
 
-                                Toast toast =  Toast.makeText(ShowGalleryActivity.this,"최대 10장까지 선택할수 있습니다",Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
-                                toast.show();
-                            }
-
+                            Toast toast =  Toast.makeText(ShowGalleryActivity.this,"최대 10개까지 선택할수 있습니다",Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
+                            toast.show();
+                        }
 
                     }
                     /**이미지 여러장 선택하기*/
@@ -391,27 +442,51 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
                     if (null != images && !images.isEmpty()){
 //                        File imgFile = new  File(images.get(position));
 //                        if(imgFile.exists())
-                            selectedimage = images.get(position);
-                            /**실험 성공*/
+                        String mimetype = images.get(position).getMimtype();
+                        if (mimetype.contains("image")){
+                            show_gall_crop_btn.setVisibility(View.VISIBLE);
+                            show_gall_frame.setVisibility(View.GONE);
+                            show_gall_video.setVisibility(View.GONE);
+                            show_gall_img.setVisibility(View.VISIBLE);
+                            if (show_gall_video.isPlaying()){
+                                show_gall_video.stopPlayback();
+                            }
+                           // selectedfile = images.get(position).getFilepath();
+                            selected_onefile = images.get(position);
                             Glide.with(ShowGalleryActivity.this)
-                                    .load(images.get(position))
+                                    .load(images.get(position).getFilepath())
                                     .apply(new RequestOptions().fitCenter())
                                     .into(show_gall_img);
-//                        PhotoFilter photoFilter = new PhotoFilter(R.string.Photo_Cartoon,images.get(position),context,show_gall_img);
-//                        photoFilter.photoFilterByType();
-                        /**실험*/
+                        }else if (mimetype.contains("video")){
+                            show_gall_crop_btn.setVisibility(View.GONE);
+                            show_gall_frame.setVisibility(View.VISIBLE);
+                            show_gall_video.setVisibility(View.VISIBLE);
+                            show_gall_img.setVisibility(View.GONE);
+
+                            //selectedfile = images.get(position).getFilepath();
+                            selected_onefile = images.get(position);
+                            show_gall_video.setVideoPath(selected_onefile.getFilepath());
+                            show_gall_video.start();
+                            show_gall_video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                @Override
+                                public void onPrepared(MediaPlayer mp) {
+                                    mp.setLooping(true);
+                                }
+                            });
+                            /**비디오뷰 비율에 맞게 조정하기*/
+                        }
                     }
                     /**이미지 보이기*/
                 }
             });
 
 
-            /**그리그 이미지*/
+            /**그리드 이미지*/
             Glide.with(context)
-                    .load(images.get(position))
+                    .load(images.get(position).getFilepath())
                     .apply(new RequestOptions().centerCrop())
                     .into(imageViewAndroid);
-            /**그리그 이미지*/
+            /**그리드 이미지*/
             return picturesView;
         }
 
@@ -422,38 +497,58 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
          *            the activity
          * @return ArrayList with images Path
          */
-        private ArrayList<String> getAllShownImagesPath(Activity activity) {
+
+
+        private ArrayList<ShowGalleryModel> getAllShownImagesPath(Activity activity) {
             Uri uri;
             Cursor cursor;
             int column_index_data, column_index_folder_name;
-            ArrayList<String> listOfAllImages = new ArrayList<String>();
+            int column_index_data_video;
+            int mime_type;
+            ArrayList<ShowGalleryModel> listOfAllImages = new ArrayList<ShowGalleryModel>();
             String absolutePathOfImage = null;
-            uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            String mimeType = null;
 
-            String[] projection = { MediaStore.MediaColumns.DATA,
-                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME };
-            final String orderBy = MediaStore.Images.Media.DATE_TAKEN;
-            cursor = activity.getContentResolver().query(uri, projection, null,
-                    null, orderBy + " DESC");
+//            uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI; //image
+//            uri = android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI; //video
+            uri = MediaStore.Files.getContentUri("external");//video and image
+
+//            String[] projection = {
+//                    MediaStore.MediaColumns.DATA,
+//                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME ,
+//                    MediaStore.Video.VideoColumns.DATA
+//            };
+            String[] projection = {
+                    MediaStore.MediaColumns.DATA,
+                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME ,
+                    MediaStore.Video.VideoColumns.DATA,
+                    MediaStore.Files.FileColumns._ID,
+                    MediaStore.Files.FileColumns.DATA,
+                    MediaStore.Files.FileColumns.DATE_ADDED,
+                    MediaStore.Files.FileColumns.MEDIA_TYPE,
+                    MediaStore.Files.FileColumns.MIME_TYPE,
+                    MediaStore.Files.FileColumns.TITLE
+            };
+            final String selection = MediaStore.Files.FileColumns.MEDIA_TYPE + "="
+                    + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
+                    + " OR "
+                    + MediaStore.Files.FileColumns.MEDIA_TYPE + "="
+                    + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
+            final String orderBy = MediaStore.Files.FileColumns.DATE_ADDED + " DESC";
+            cursor = activity.getContentResolver().query(uri, projection, selection,
+                    null, orderBy);
 
             column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            column_index_folder_name = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
+            column_index_data_video = cursor.getColumnIndexOrThrow( MediaStore.Video.VideoColumns.DATA);
+            mime_type = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.MIME_TYPE);
+
             while (cursor.moveToNext()) {
                 absolutePathOfImage = cursor.getString(column_index_data);
-
-                listOfAllImages.add(absolutePathOfImage);
+                mimeType = cursor.getString(mime_type);
+                //Log.e("_absolutePathOfImage ",absolutePathOfImage);
+               // Log.e("_mimeType ",mimeType);
+                listOfAllImages.add(new ShowGalleryModel(absolutePathOfImage,mimeType));
             }
-            Log.e("1_listOfAllImages.size() ",""+listOfAllImages.size());
-            /**사진이 안나올 때*/
-            if (listOfAllImages.size()==0){
-                while (cursor.moveToNext()) {
-                    absolutePathOfImage = cursor.getString(column_index_folder_name);
-
-                    listOfAllImages.add(absolutePathOfImage);
-                }
-            }
-            Log.e("2_listOfAllImages.size() ",""+listOfAllImages.size());
             return listOfAllImages;
         }
     }
@@ -471,26 +566,28 @@ public class ShowGalleryActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        selectedimage=null;
+        //selectedfile=null;
+        selected_onefile=null;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
-                selectedimage=null;
+                //selectedfile=null;
+                selected_onefile=null;
                 finish();
                 return true;
             }
             case R.id.menu_toolbar_next:
-                if (selectedimage!=null){
+                if (selected_onefile!=null){
                     Intent intent = new Intent(ShowGalleryActivity.this,AdvancedEditPhotoActivity.class);
                     if (imageAdapter.isMulti){
                         intent.putExtra("isMulti",true);
-                        intent.putStringArrayListExtra("multipleSelectedImages",multipleSelectedImages);
+                        intent.putParcelableArrayListExtra("multipleSelectedImages",Selectedfiles);
                     }else {
                         intent.putExtra("isMulti",false);
-                        intent.putExtra("selectedimage",selectedimage);
+                        intent.putExtra("selectedimage",selected_onefile);
                     }
                     startActivityForResult(intent,2);
 
