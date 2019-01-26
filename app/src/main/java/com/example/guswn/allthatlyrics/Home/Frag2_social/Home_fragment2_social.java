@@ -117,6 +117,7 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
         mLayoutManager.setStackFromEnd(true);
         //리스트 역순 배열
         mRecyclerView.setLayoutManager(mLayoutManager);
+
         socialInfos = new ArrayList<>();
 
         loadSocialHistory();

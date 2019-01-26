@@ -141,14 +141,14 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             switch (flag){
                 case 0:
-                    mp.setVolume(1,1);
-                    // 0.0f = no sound , 1.0f =full sound
-                    Log.e("3_onSlideClick ","100");
+                    mp.setVolume(0,0);
+                    Log.e("3_onSlideClick ","0");
                     flag++;
                     break;
                 case 1:
-                    mp.setVolume(0,0);
-                    Log.e("3_onSlideClick ","0");
+                    mp.setVolume(1,1);
+                    // 0.0f = no sound , 1.0f =full sound
+                    Log.e("3_onSlideClick ","100");
                     flag=0;
                     break;
             }
@@ -235,22 +235,19 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
                 myViewHolder.social_content_img_cnt.setVisibility(View.INVISIBLE);
             }
             /**viewpager*/
-            SlideAdapter slideAdapter = new SlideAdapter(context,object.getSocialImageModelList());
+            final SlideAdapter slideAdapter = new SlideAdapter(context,object.getSocialImageModelList());
             slideAdapter.SetSlideClickListener(this);
             myViewHolder.social_content_img_viewpager.setAdapter(slideAdapter);
             myViewHolder.social_content_img_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int i, float v, int i1) {
+
                 }
                 @Override
                 public void onPageSelected(int i) {
                     /**몇번째 사지인지 나타는 txtview*/
                     String count = (i+1)+"/"+object.getSocialImageModelList().size();
                     myViewHolder.social_content_img_cnt.setText(count);
-                    /***/
-                    SocialImageModel model = object.getSocialImageModelList().get(i);
-                    String url = URL+model.getUrl();
-                    String mime = model.getMimetype();
                 }
                 @Override
                 public void onPageScrollStateChanged(int i) {

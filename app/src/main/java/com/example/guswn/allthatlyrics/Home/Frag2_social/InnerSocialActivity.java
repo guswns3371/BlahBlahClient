@@ -2,6 +2,7 @@ package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.guswn.allthatlyrics.CircleTransform;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.Reply.SocialReplyActivity;
@@ -53,7 +55,7 @@ import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 
-public class InnerSocialActivity extends AppCompatActivity {
+public class InnerSocialActivity extends AppCompatActivity implements SlideAdapter.SlideClickListener {
 
     @BindView(R.id.social_user_img)
     ImageView social_user_img;
@@ -174,11 +176,19 @@ public class InnerSocialActivity extends AppCompatActivity {
         object.setSocialImageModelList(imageModels);
         /**test success*/
 
+        /**test success*/
+        //loadSocialHistory(social_idx);
+        /**test success*/
+
+        //swipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    protected void onResume() {
         /**test*/
         loadSocialHistory(social_idx);
         /**test*/
-
-        //swipeRefreshLayout.setOnRefreshListener(this);
+        super.onResume();
     }
 
     /**좋아요*/
@@ -405,7 +415,33 @@ public class InnerSocialActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**SlideAdapter clicklistener interface*/
+    int flag = 0;
+    @Override
+    public void onSlideClick(int postion, View v,MediaPlayer mp) {
+        Log.e("1_onSlideClick ",postion+"/"+flag);
+        if (v instanceof ImageView) {
+            ImageView view = (ImageView) v;
+            Log.e("2_onSlideClick ","ImageView"+"/"+flag);
+        }else if (v instanceof VideoView) {
+            VideoView view = (VideoView) v;
+            Log.e("2_onSlideClick ","VideoView"+"/"+flag);
 
+            switch (flag){
+                case 0:
+                    mp.setVolume(0,0);
+                    Log.e("3_onSlideClick ","0");
+                    flag++;
+                    break;
+                case 1:
+                    mp.setVolume(1,1);
+                    // 0.0f = no sound , 1.0f =full sound
+                    Log.e("3_onSlideClick ","100");
+                    flag=0;
+                    break;
+            }
+        }
+    }
 
     /**load*/
     public void loadSocialHistory(String social_idx){
@@ -561,6 +597,7 @@ public class InnerSocialActivity extends AppCompatActivity {
                         social_content_img_cnt.setVisibility(View.INVISIBLE);
                     }
                     SlideAdapter slideAdapter = new SlideAdapter(InnerSocialActivity.this,object2.getSocialImageModelList());
+                    slideAdapter.SetSlideClickListener(InnerSocialActivity.this);
                     social_content_img_viewpager.setAdapter(slideAdapter);
                     social_content_img_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                         @Override
