@@ -15,10 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Home.Frag3_account.Setting;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Userinfo_Edit;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
 import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatAPI;
 import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatResponse;
+import com.example.guswn.allthatlyrics.Home.VideoChat.AgoraVideoChatOne;
 import com.example.guswn.allthatlyrics.MainActivity;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
@@ -61,10 +63,15 @@ public class InnerFriendActivity extends AppCompatActivity {
     ImageButton innerf_chat_btn;
     @BindView(R.id.innerf_edit_profile_btn)
     ImageButton innerf_edit_profile_btn;
+    @BindView(R.id.innerf_call_btn)
+    ImageButton innerf_call_btn;
+
     @BindView(R.id.innerf_follow_btn)
     ImageButton innerf_follow_btn;
     @BindView(R.id.edit_linear)
     LinearLayout edit_linear;
+    @BindView(R.id.call_linear)
+    LinearLayout call_linear;
 
     int flag=0;
     @OnClick(R.id.innerf_follow_btn)
@@ -92,8 +99,13 @@ public class InnerFriendActivity extends AppCompatActivity {
 //        intent = new Intent(InnerFriendActivity.this, InnerChatActivity.class);
 //        intent.putExtra("chatperson_idx",friend_idx);
 //        startActivityForResult(intent,4);
-
     }
+    @OnClick(R.id.innerf_call_btn)
+    public void startcall(){
+       Intent intent = new Intent(InnerFriendActivity.this, AgoraVideoChatOne.class);
+        startActivity(intent);
+    }
+
     Intent intent;
     String friend_idx;
 
@@ -209,6 +221,8 @@ public class InnerFriendActivity extends AppCompatActivity {
                     }
                         if(!email.equals(MY_EMAIL_2)){
                             edit_linear.setVisibility(View.GONE);
+                        }else {
+                            call_linear.setVisibility(View.GONE);
                         }
                         Picasso.with(InnerFriendActivity.this)
                                 .load(photo)

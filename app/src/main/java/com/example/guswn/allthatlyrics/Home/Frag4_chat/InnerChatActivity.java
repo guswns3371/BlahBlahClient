@@ -22,6 +22,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -648,7 +650,7 @@ public class InnerChatActivity extends AppCompatActivity {
                             /***/
                         if(chatroomidx.equals(chatroom_idx_1)){
                             if(!useridx.equals(MY_IDX)){
-                                Toast.makeText(getApplicationContext(),useridx+" Connected",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(),useridx+" Connected",Toast.LENGTH_SHORT).show();
                                 String chat_readpeople = (Integer.parseInt(chatpeople_num)-peopleList.size())+"";
                                 AllPeople =chatpeople_num; // 전체 사람수
                                 isRead = peopleList.size()+""; //읽은사람수
@@ -1010,6 +1012,13 @@ public class InnerChatActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.inner_chat_menu, menu);
+        return  true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -1028,6 +1037,9 @@ public class InnerChatActivity extends AppCompatActivity {
                 finish();
                 return true;
             }
+            case R.id.menu_toolbar_inner_chat_info:
+                Toast.makeText(InnerChatActivity.this,"fuck",Toast.LENGTH_SHORT).show();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

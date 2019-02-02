@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     //#efebe9 - 기본색
     //#ffffff - 밝은색
     //#bdb9b7 - 어두운 색
-    public static String URL_withoutslash = "http://54.180.153.114";
+    public static String URL_withoutslash = "http://13.209.89.121";
     public static String URL = URL_withoutslash+"/";
 
     Retrofit retrofit;

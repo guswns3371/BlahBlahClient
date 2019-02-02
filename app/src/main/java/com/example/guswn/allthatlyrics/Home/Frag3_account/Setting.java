@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.guswn.allthatlyrics.Home.VideoChat.AgoraVideoChatOne;
 import com.example.guswn.allthatlyrics.Main.Login;
 import com.example.guswn.allthatlyrics.Main.SaveSharedPreference;
 import com.example.guswn.allthatlyrics.R;
@@ -21,7 +23,14 @@ public class Setting extends AppCompatActivity {
     Toolbar setting_tb;
     @BindView(R.id.logout_btn)
     Button logout_btn;
+    @BindView(R.id.streamingtest)
+    TextView streamingtest;
 
+    @OnClick(R.id.streamingtest)
+    public void streamingtest(){
+//        Intent intent = new Intent(Setting.this, AgoraVideoChatOne.class);
+//        startActivity(intent);
+    }
     @OnClick(R.id.logout_btn)
     public void logout(){
         SaveSharedPreference.clearMY_EMAIL(Setting.this);

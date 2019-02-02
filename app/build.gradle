@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "com.example.guswn.allthatlyrics"
         minSdkVersion 26
@@ -9,6 +10,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86", "armeabi", "mips"
+        }
     }
     buildTypes {
         release {
@@ -75,7 +80,14 @@ dependencies {
     def nav_version = "1.0.0-alpha09"
     implementation "android.arch.navigation:navigation-fragment:$nav_version"
     implementation "android.arch.navigation:navigation-ui:$nav_version"
-
+    //FFmpegAndroid + libvlc
+    implementation 'de.mrmaffen:vlc-android-sdk:2.0.6'
+//    implementation 'de.mrmaffen:libvlc-android:2.1.12@aar'
+    implementation 'com.writingminds:FFmpegAndroid:0.3.2'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.7.7.1'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.7.1'
+    //agora.io
+    implementation 'io.agora.rtc:full-sdk:2.3.3'
 //    implementation 'com.google.android.gms:play-services-auth:9.4.0'
 //    implementation 'com.google.android.gms:play-services:9.4.0'
 

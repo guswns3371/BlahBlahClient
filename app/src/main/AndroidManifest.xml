@@ -2,16 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.guswn.allthatlyrics">
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- PlayRTC SDK Android-SDK -->
+    <!-- PlayRTC SDK permission START -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- PlayRTC SDK permission END -->
+
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /> <!-- c2dm은 gcm서비스 명칭들 중 하나이고, RECEIVE로 메시지를 받는 권한 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!-- 디바이스가 꺼진 상태에서도 알림이 오면 진동이나 기타 이벤트를 처리 -->
-    <!-- <uses-feature android:name="android.hardware.camera2"/> -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/allthatlyrics_icon_1"
@@ -20,6 +29,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Home.VideoChat.AgoraVideoChatOne"></activity>
+        <activity android:name=".Home.Streaming.StreamingTest" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Main.Login" />
         <activity android:name=".Main.Register" />
@@ -32,8 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home.Frag3_account.Userinfo_Edit" />
-        <!-- 카메라로 사진찍을 때 필요 한 부분 FileProvider -->
+        <activity android:name=".Home.Frag3_account.Userinfo_Edit" /> <!-- 카메라로 사진찍을 때 필요 한 부분 FileProvider -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.guswn.allthatlyrics"
@@ -42,9 +52,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>
-        <!-- 카메라로 사진찍을 때 필요 한 부분 FileProvider -->
-
+        </provider> <!-- 카메라로 사진찍을 때 필요 한 부분 FileProvider -->
         <activity android:name=".Home.Frag1_friends.InnerFriendActivity" />
         <activity android:name=".Home.Frag4_chat.InnerChatActivity" />
         <activity android:name=".Home.Frag4_chat.ChatAddActivity" />
@@ -78,10 +86,12 @@
         <activity android:name=".Home.Frag3_account.Home_frag3_bookmark" />
         <activity android:name=".Home.Frag2_social.InnerSocialActivity" />
         <activity android:name=".Home.Frag3_account.Home_frag3_like" />
-        <activity android:name=".Home.Frag2_social.Reply.SocialReplyActivity"
-            android:windowSoftInputMode="adjustUnspecified|adjustResize|stateHidden"
-            >
-        </activity>
+        <activity
+            android:name=".Home.Frag2_social.Reply.SocialReplyActivity"
+            android:windowSoftInputMode="adjustUnspecified|adjustResize|stateHidden" />
+        <activity
+            android:name=".Home.Streaming.VideoActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

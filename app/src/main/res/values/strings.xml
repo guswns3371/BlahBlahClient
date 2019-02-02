@@ -20,4 +20,8 @@
     <string name="Photo_Cartoon">Cartoon</string>
     <string name="Photo_Blur">Blur</string>
     <string name="Photo_Normal">Normal</string>
+
+
+    <string name="agora_app_id">85124a58795a407f8d8caf84ac75678b</string>
+
 </resources>

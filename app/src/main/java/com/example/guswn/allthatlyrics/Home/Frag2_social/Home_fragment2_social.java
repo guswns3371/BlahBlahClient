@@ -124,6 +124,17 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
         myAdapter = new MyAdapter_Social(socialInfos,getActivity());
         myAdapter.setOnClickListener_Social(this);
         mRecyclerView.setAdapter(myAdapter);
+        mRecyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(@NonNull View view) {
+
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
+
+            }
+        });
 
 
         swipeRefreshLayout.setOnRefreshListener(this);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.guswn.allthatlyrics.CircleTransform;
@@ -140,16 +142,18 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
             Log.e("2_onSlideClick ","VideoView"+"/"+flag);
 
             switch (flag){
-                case 0:
-                    mp.setVolume(0,0);
-                    Log.e("3_onSlideClick ","0");
-                    flag++;
-                    break;
                 case 1:
+                    mp.setVolume(0,0);
+                    Log.e("3_onSlideClick ","sound off");
+                    Toast.makeText(context,"sound off",Toast.LENGTH_SHORT).show();
+                    flag=0;
+                    break;
+                case 0:
                     mp.setVolume(1,1);
                     // 0.0f = no sound , 1.0f =full sound
-                    Log.e("3_onSlideClick ","100");
-                    flag=0;
+                    Log.e("3_onSlideClick ","sound on");
+                    Toast.makeText(context,"sound on",Toast.LENGTH_SHORT).show();
+                    flag++;
                     break;
             }
         }
@@ -157,6 +161,7 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        flag = 0;
         final SocialInfoModel object = socialInfoModels.get(i);
         final MyViewHolder myViewHolder = (MyViewHolder) viewHolder;
         if(object!=null){
@@ -236,18 +241,70 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
             /**viewpager*/
             final SlideAdapter slideAdapter = new SlideAdapter(context,object.getSocialImageModelList());
+
             slideAdapter.SetSlideClickListener(this);
             myViewHolder.social_content_img_viewpager.setAdapter(slideAdapter);
             myViewHolder.social_content_img_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
                 @Override
                 public void onPageScrolled(int i, float v, int i1) {
 
                 }
                 @Override
-                public void onPageSelected(int i) {
+                public void onPageSelected(final int i) {
                     /**몇번째 사지인지 나타는 txtview*/
                     String count = (i+1)+"/"+object.getSocialImageModelList().size();
                     myViewHolder.social_content_img_cnt.setText(count);
+                    flag = 0;
+                    /**test*/
+//                    View viewTag = myViewHolder.social_content_img_viewpager.findViewWithTag("view" + i);
+//                    Log.e("viewTag"+i,"/ "+viewTag);
+//                    if (viewTag instanceof VideoView){
+//                        final VideoView videoViewTag = (VideoView)viewTag.findViewById(R.id.slidevideo);
+//                        String url = URL+object.getSocialImageModelList().get(i).getUrl();
+//                        Log.e("url ",url);
+//                        Uri uri = Uri.parse(url);
+//                        videoViewTag.setVideoURI(uri);
+//                        videoViewTag.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//                            @Override
+//                            public void onFocusChange(final View v, boolean hasFocus) {
+//                                Log.e("0_hasFocus_???","hasFocus"+i);
+//                                if (hasFocus){
+//                                    Log.e("1_hasFocus_true","hasFocus"+i);
+//                                    videoViewTag.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                                        @Override
+//                                        public void onPrepared(final MediaPlayer mp) {
+//                                            mp.start();
+//                                            mp.setLooping(true);
+//                                            mp.setVolume(1,1);
+//                                            final int[] flag = {0};
+//                                            v.setOnClickListener(new View.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(View v) {
+//                                                    switch (flag[0]){
+//                                                        case 0:
+//                                                            Toast.makeText(context,"0",Toast.LENGTH_SHORT).show();
+//                                                            mp.setVolume(0,0);
+//                                                            flag[0]++;
+//                                                            break;
+//                                                        case 1:
+//                                                            Toast.makeText(context,"1",Toast.LENGTH_SHORT).show();
+//                                                            mp.setVolume(1,1);
+//                                                            flag[0]=0;
+//                                                            break;
+//                                                    }
+//                                                }
+//                                            });
+//                                        }
+//                                    });
+//                                }else {
+//                                    Log.e("1_hasFocus_false","hasFocus"+i);
+//                                    videoViewTag.stopPlayback();
+//                                }
+//                            }
+//                        });
+//                    }
+                    /**test*/
                 }
                 @Override
                 public void onPageScrollStateChanged(int i) {

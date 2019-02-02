@@ -131,6 +131,35 @@
                             android:textSize="13sp" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/call_linear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <ImageButton
+                            android:id="@+id/innerf_call_btn"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#00000000"
+                            android:padding="3dp"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/call_ios" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Call"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
 
