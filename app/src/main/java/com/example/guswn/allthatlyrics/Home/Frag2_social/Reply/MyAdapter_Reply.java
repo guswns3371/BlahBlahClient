@@ -12,14 +12,8 @@ import android.widget.ImageView;
 import android.widget.Space;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.guswn.allthatlyrics.Home.Frag2_social.InnerSocialActivity;
-import com.example.guswn.allthatlyrics.Home.Frag2_social.MyAdapter_Social;
-import com.example.guswn.allthatlyrics.Home.Frag2_social.SocialInfoModel;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.OtherFollowAccount;
-import com.example.guswn.allthatlyrics.MyGlide;
-import com.example.guswn.allthatlyrics.PhotoFilter;
+import com.example.guswn.allthatlyrics.Extension.MyGlide;
 import com.example.guswn.allthatlyrics.R;
 
 import java.util.ArrayList;

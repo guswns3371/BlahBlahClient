@@ -1,7 +1,6 @@
 package com.example.guswn.allthatlyrics.Main;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Home;
 import com.example.guswn.allthatlyrics.R;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -22,20 +22,16 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.guswn.allthatlyrics.Extension.Extension.log;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_NAME;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IMG;
-import static com.example.guswn.allthatlyrics.MainActivity.URL;
 
 
 public class Login extends AppCompatActivity {
@@ -58,16 +54,16 @@ public class Login extends AppCompatActivity {
 //        map.put("Idx",MY_IDX);
         map.put("Password",password);
         map.put("Token", FirebaseInstanceId.getInstance().getToken());
-        Call<Value> call = api.loginUser(map);
+        Call<UserValue> call = api.loginUser(map);
 
-        call.enqueue(new Callback<Value>() {
+        call.enqueue(new Callback<UserValue>() {
             @Override
-            public void onResponse(Call<Value> call, Response<Value> response) {
+            public void onResponse(Call<UserValue> call, Response<UserValue> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(Login.this,response.code()+"",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Value val = response.body();
+                UserValue val = response.body();
                 String value = val.getValue();
                 String message = val.getMessage();
                 String username = val.getUsername();
@@ -111,9 +107,9 @@ public class Login extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Value> call, Throwable t) {
+            public void onFailure(Call<UserValue> call, Throwable t) {
                 Toast.makeText(Login.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-
+                log(Login.this,t.getMessage());
             }
         });
     }
@@ -131,17 +127,7 @@ public class Login extends AppCompatActivity {
         ButterKnife.bind(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(RegisterAPI.class);
+        api = new MyRetrofit().create(RegisterAPI.class);
 
     }
 }

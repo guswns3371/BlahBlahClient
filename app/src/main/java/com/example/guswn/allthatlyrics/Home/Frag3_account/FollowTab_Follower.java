@@ -12,16 +12,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FollowingResponse;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendAPI;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatAPI;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.MyAdapter_Chat;
-import com.example.guswn.allthatlyrics.MainActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,18 +24,12 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.guswn.allthatlyrics.Home.Frag3_account.FollowTab.Follower_InfoList;
-import static com.example.guswn.allthatlyrics.Home.Frag3_account.FollowTab.isfollower_following;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
-import static com.example.guswn.allthatlyrics.MainActivity.URL;
 
 
 public class FollowTab_Follower extends Fragment implements MyAdapter_FollowTab.FollowTabRycyclerClickListner{
@@ -52,7 +40,6 @@ public class FollowTab_Follower extends Fragment implements MyAdapter_FollowTab.
     @BindView(R.id.follower_RV)
     RecyclerView mRecyclerView;
     ArrayList<String> infoList;
-    Retrofit retrofit;
     FriendAPI api_friend;
     EditAPI api;
     @Override
@@ -62,22 +49,8 @@ public class FollowTab_Follower extends Fragment implements MyAdapter_FollowTab.
 
         infoList = Follower_InfoList;
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(EditAPI.class);
-        api_friend = retrofit.create(FriendAPI.class);
+        api = new MyRetrofit().create(EditAPI.class);
+        api_friend = new MyRetrofit().create(FriendAPI.class);
         //레트로핏
 
         mRecyclerView.setHasFixedSize(true);

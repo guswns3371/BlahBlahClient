@@ -1,9 +1,7 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social.Reply;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,23 +12,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendAPI;
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.SocialAPI;
-import com.example.guswn.allthatlyrics.Home.Frag2_social.SocialUploadResponse;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.Home_fragment4;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.InnerChatActivity;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.MyAdapter_InnerChat;
-import com.example.guswn.allthatlyrics.Main.Logo;
-import com.example.guswn.allthatlyrics.MainActivity;
-import com.example.guswn.allthatlyrics.MyGlide;
-import com.example.guswn.allthatlyrics.MyRetrofit;
+import com.example.guswn.allthatlyrics.Extension.MyGlide;
 import com.example.guswn.allthatlyrics.R;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -43,9 +33,7 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,12 +41,12 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IMG;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_NAME;
+import static com.example.guswn.allthatlyrics.MainActivity.NodeServer;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 import static com.example.guswn.allthatlyrics.MainActivity.hideSoftKeyboard;
@@ -81,7 +69,6 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
     MyAdapter_Reply myAdapter;
     ArrayList<SocialReplyModel> replytInfosList;
 
-    Retrofit retrofit;
     SocialAPI api;
     Intent intent;
     String replyroom_idx,history_userimg,history_username,history_content,history_useridx,history_time;
@@ -90,8 +77,10 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_reply);
         ButterKnife.bind(this);
-         retrofit = new MyRetrofit(retrofit).getRetrofit();
-         api = retrofit.create(SocialAPI.class);
+
+        MyRetrofit myRetrofit = new MyRetrofit();
+        api = myRetrofit.create(SocialAPI.class);
+
 
         MyGlide myGlide = new MyGlide(SocialReplyActivity.this,social_reply_myimg);
         myGlide.glideURL(URL+MY_IMG);
@@ -295,7 +284,7 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
     boolean isConnected;
     {
         try {
-            mSocket = IO.socket(URL_withoutslash+":5000");
+            mSocket = IO.socket(NodeServer);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

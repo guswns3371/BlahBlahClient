@@ -18,11 +18,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.EditAPI;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Userinfo_Edit;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
 import com.example.guswn.allthatlyrics.Main.SaveSharedPreference;
-import com.example.guswn.allthatlyrics.MyRetrofit;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +52,6 @@ public class Home_fragment1 extends Fragment{
     String NAME,BIRTHDAY,INTRODUCE,PHOTO;
     MyAdapter_Friend myAdapter;
     RecyclerView.LayoutManager mLayoutManager;
-    Retrofit retrofit;
     FriendAPI api;
     ArrayList<FriendInfo> friendInfos;
     @BindView(R.id.recyclerview_f1)
@@ -67,8 +66,9 @@ public class Home_fragment1 extends Fragment{
 
         /**test success*/
         /**레트로핏*/
-        retrofit = new MyRetrofit(retrofit).getRetrofit();
-        api =retrofit.create(FriendAPI.class);
+        MyRetrofit myRetrofit = new MyRetrofit();
+        api = myRetrofit.create(FriendAPI.class);
+
         /**레트로핏*/
 
         mRecyclerView.setHasFixedSize(true);

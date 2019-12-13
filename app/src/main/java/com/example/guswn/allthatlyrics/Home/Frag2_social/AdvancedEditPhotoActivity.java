@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,7 +55,6 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
             R.string.Photo_Pixel,R.string.Photo_Contrast, R.string.Photo_Brightness,
             R.string.Photo_Vignette, R.string.Photo_Gray,R.string.Photo_Cartoon };
 
-    Retrofit retrofit;
     SocialAPI api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,21 +70,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
         //툴바
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(SocialAPI.class);
+        api = new MyRetrofit().create(SocialAPI.class);
         //레트로핏
 
         Intent intent = getIntent();

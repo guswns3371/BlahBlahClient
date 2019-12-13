@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.CircleTransform;
 import com.example.guswn.allthatlyrics.R;
 import com.squareup.picasso.Picasso;
 
@@ -22,7 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
-import static com.example.guswn.allthatlyrics.MainActivity.isNullOrEmpty;
 
 public class MyAdapter_Chat extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

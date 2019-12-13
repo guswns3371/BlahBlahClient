@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Firebase.FireBaseMessagingService;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendAPI;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.MyAdapter_Friend;
@@ -95,6 +96,7 @@ import static com.example.guswn.allthatlyrics.Home.Frag4_chat.MyAdapter_InnerCha
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 
+import static com.example.guswn.allthatlyrics.MainActivity.NodeServer;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 import static com.ipaulpro.afilechooser.utils.FileUtils.getDataColumn;
@@ -362,7 +364,6 @@ public class InnerChatActivity extends AppCompatActivity {
     ArrayList<InnerChatInfo> innerChatInfosList;
 
     ChatAPI api_chat;
-    Retrofit retrofit;
     Intent intent;
     String firebaseToken;
     String chatroomname;
@@ -374,7 +375,7 @@ public class InnerChatActivity extends AppCompatActivity {
     {
         try {
 //         mSocket = IO.socket("https://socket-io-chat.now.sh/");
-            mSocket = IO.socket(URL_withoutslash+":5000");
+            mSocket = IO.socket(NodeServer);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -420,22 +421,8 @@ public class InnerChatActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api_chat = retrofit.create(ChatAPI.class);
+        api_chat = new MyRetrofit().create(ChatAPI.class);
         //레트로핏
 
         mRecyclerView.setHasFixedSize(true);

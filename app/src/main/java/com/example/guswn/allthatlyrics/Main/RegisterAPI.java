@@ -13,16 +13,16 @@ public interface RegisterAPI {
 
     @FormUrlEncoded
     @POST("Register_Login/insert_userinfo.php")
-    Call<Value> createUser(
+    Call<UserValue> createUser(
             @FieldMap Map<String,String> fields
     );
 
     @FormUrlEncoded
     @POST("Register_Login/login_userinfo.php")
-    Call<Value> loginUser(
+    Call<UserValue> loginUser(
             @FieldMap Map<String,String> fields
     );
 
     @GET("Register_Login/getjson_one_idx.php")
-    Call<Value> getuserInfo_withidx(@Query("idx") String user_idx);
+    Call<UserValue> getuserInfo_withidx(@Query("idx") String user_idx);
 }

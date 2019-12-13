@@ -1,4 +1,4 @@
-package com.example.guswn.allthatlyrics;
+package com.example.guswn.allthatlyrics.Extension;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

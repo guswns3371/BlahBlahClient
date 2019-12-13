@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.guswn.allthatlyrics.PhotoFilter;
+import com.example.guswn.allthatlyrics.Extension.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 
 import java.util.ArrayList;

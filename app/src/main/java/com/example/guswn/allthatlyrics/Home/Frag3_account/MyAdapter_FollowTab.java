@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.CircleTransform;
 import com.example.guswn.allthatlyrics.R;
 import com.squareup.picasso.Picasso;
 

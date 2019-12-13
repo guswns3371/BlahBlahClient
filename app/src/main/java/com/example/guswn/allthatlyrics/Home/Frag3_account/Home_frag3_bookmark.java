@@ -14,40 +14,32 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.InnerSocialActivity;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.SocialAPI;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.SocialImageModel;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.SocialInfoModel;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.SocialLikedMarkedResponse;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.SocialUploadResponse;
-import com.example.guswn.allthatlyrics.PhotoFilter;
+import com.example.guswn.allthatlyrics.Extension.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
-import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
-import static com.example.guswn.allthatlyrics.PhotoFilter.getTypeFromString;
+import static com.example.guswn.allthatlyrics.Extension.PhotoFilter.getTypeFromString;
 
 public class Home_frag3_bookmark extends Fragment {
 
@@ -85,21 +77,7 @@ public class Home_frag3_bookmark extends Fragment {
         readBundle(getArguments());
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(SocialAPI.class);
+        api = new MyRetrofit().create(SocialAPI.class);
         //레트로핏
         loadSocialHistory_ike_or_bookmark(UserIdx);
         return rootView;

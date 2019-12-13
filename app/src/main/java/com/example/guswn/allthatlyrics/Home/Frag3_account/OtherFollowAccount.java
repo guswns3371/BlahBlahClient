@@ -3,8 +3,6 @@ package com.example.guswn.allthatlyrics.Home.Frag3_account;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Activity;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,21 +11,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FollowingResponse;
 import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatAPI;
 import com.example.guswn.allthatlyrics.Home.Frag4_chat.InnerChatActivity;
-import com.example.guswn.allthatlyrics.Home.Home;
-import com.example.guswn.allthatlyrics.Main.Logo;
-import com.example.guswn.allthatlyrics.Main.SaveSharedPreference;
 import com.example.guswn.allthatlyrics.MainActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,19 +26,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.guswn.allthatlyrics.Main.Login.MY_EMAIL;
-import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
-import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 
 public class OtherFollowAccount extends AppCompatActivity {
     @BindView(R.id.account_tb)
@@ -138,7 +122,6 @@ public class OtherFollowAccount extends AppCompatActivity {
     }
 
     Intent intent;
-    Retrofit retrofit;
     EditAPI api;
     ChatAPI api_chat;
     ArrayList<String> follower_List = new ArrayList<>();
@@ -172,22 +155,8 @@ public class OtherFollowAccount extends AppCompatActivity {
         }
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(EditAPI.class);
-        api_chat = retrofit.create(ChatAPI.class);
+        api = new MyRetrofit().create(EditAPI.class);
+        api_chat = new MyRetrofit().create(ChatAPI.class);
         //레트로핏
         account_myhistory_imgbtn.setColorFilter(Color.BLUE);
         Home_frag3_history home_frag3_history = new Home_frag3_history().newInstance(useridx);

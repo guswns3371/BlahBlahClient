@@ -17,7 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.Reply.SocialReplyActivity;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.OtherFollowAccount;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
@@ -31,7 +32,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -143,21 +143,7 @@ public class InnerSocialActivity extends AppCompatActivity implements SlideAdapt
 
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(SocialAPI.class);
+        api = new MyRetrofit().create(SocialAPI.class);
         //레트로핏
 
         intent = getIntent();

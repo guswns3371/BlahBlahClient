@@ -1,7 +1,6 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.content.Context;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,11 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendInfo;
-import com.example.guswn.allthatlyrics.Home.Frag1_friends.InnerFriendActivity;
-import com.example.guswn.allthatlyrics.PhotoFilter;
+import com.example.guswn.allthatlyrics.Extension.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 
 import java.util.ArrayList;

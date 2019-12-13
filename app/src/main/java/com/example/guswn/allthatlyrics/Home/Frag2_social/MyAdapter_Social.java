@@ -2,9 +2,7 @@ package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -12,19 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.CircleTransform;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.OtherFollowAccount;
-import com.example.guswn.allthatlyrics.PhotoFilter;
+import com.example.guswn.allthatlyrics.Extension.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
-import com.nostra13.universalimageloader.utils.L;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,7 +33,7 @@ import static android.support.v4.view.ViewPager.SCROLL_STATE_IDLE;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
-import static com.example.guswn.allthatlyrics.PhotoFilter.getTypeFromString;
+import static com.example.guswn.allthatlyrics.Extension.PhotoFilter.getTypeFromString;
 
 public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SlideAdapter.SlideClickListener {
 

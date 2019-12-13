@@ -1,21 +1,15 @@
 package com.example.guswn.allthatlyrics.Home.Frag2_social;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -38,34 +32,18 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 
-import com.afollestad.dragselectrecyclerview.DragSelectRecyclerView;
-import com.afollestad.dragselectrecyclerview.DragSelectRecyclerViewAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatInfo;
-import com.example.guswn.allthatlyrics.Home.Frag4_chat.ShowImageActivity;
-import com.example.guswn.allthatlyrics.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
-import com.nostra13.universalimageloader.utils.L;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import id.zelory.compressor.Compressor;
 import uk.co.senab.photoview.PhotoViewAttacher;
-
-import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 
 public class ShowGalleryActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 

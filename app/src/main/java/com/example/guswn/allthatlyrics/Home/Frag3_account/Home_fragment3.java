@@ -5,13 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,21 +15,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.guswn.allthatlyrics.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FollowingResponse;
 import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatAPI;
 import com.example.guswn.allthatlyrics.Home.Home;
 import com.example.guswn.allthatlyrics.Main.SaveSharedPreference;
 import com.example.guswn.allthatlyrics.MainActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -44,13 +36,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.guswn.allthatlyrics.Main.Login.MY_EMAIL;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
@@ -148,7 +136,6 @@ public class Home_fragment3 extends Fragment {
     }
 
     Intent intent;
-    Retrofit retrofit;
     EditAPI api;
     ChatAPI api_chat;
     @Nullable
@@ -158,22 +145,8 @@ public class Home_fragment3 extends Fragment {
         ButterKnife.bind(this,view);
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(EditAPI.class);
-        api_chat = retrofit.create(ChatAPI.class);
+        api = new MyRetrofit().create(EditAPI.class);
+        api_chat = new MyRetrofit().create(ChatAPI.class);
         //레트로핏
 
 

@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Main.Logo;
 import com.example.guswn.allthatlyrics.R;
 import com.google.gson.Gson;
@@ -65,7 +66,6 @@ public class MakeSocialContentActivity extends AppCompatActivity {
 
     Intent intent;
     ArrayList<AdvancedImgModel> UploadFiles;
-    Retrofit retrofit;
     SocialAPI api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,21 +81,7 @@ public class MakeSocialContentActivity extends AppCompatActivity {
         //툴바
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(SocialAPI.class);
+        api = new MyRetrofit().create(SocialAPI.class);
         //레트로핏
 
         intent = getIntent();

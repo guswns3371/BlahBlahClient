@@ -1,4 +1,4 @@
-package com.example.guswn.allthatlyrics;
+package com.example.guswn.allthatlyrics.Extension;
 
 import android.content.Context;
 import android.net.Uri;
@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.guswn.allthatlyrics.R;
 
 import java.io.File;
 

@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
 import com.example.guswn.allthatlyrics.Home.Home;
 import com.example.guswn.allthatlyrics.Main.Logo;
@@ -64,13 +65,13 @@ import static com.example.guswn.allthatlyrics.Home.Frag4_chat.MyAdapter_InnerCha
 import static com.example.guswn.allthatlyrics.Home.Frag4_chat.MyAdapter_InnerChat.isReadList;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
+import static com.example.guswn.allthatlyrics.MainActivity.NodeServer;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 
 public class Home_fragment4 extends Fragment {
 
     LinearLayoutManager mLayoutManager;
-    Retrofit retrofit;
     ChatAPI api;
     public static MyAdapter_Chat myAdapter;
 
@@ -80,7 +81,7 @@ public class Home_fragment4 extends Fragment {
     {
         try {
 //         mSocket = IO.socket("https://socket-io-chat.now.sh/");
-            mSocket = IO.socket(URL_withoutslash+":5000");
+            mSocket = IO.socket(NodeServer);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -108,22 +109,8 @@ public class Home_fragment4 extends Fragment {
         setHasOptionsMenu(true);
         //툴바
 //        onSocketConnect();
-        //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(ChatAPI.class);
+        api = new MyRetrofit().create(ChatAPI.class);
         //레트로핏
 
         mRecyclerView.setHasFixedSize(true);
@@ -147,7 +134,7 @@ public class Home_fragment4 extends Fragment {
     public void onResume() {
         super.onResume();
         try {
-            mSocket = IO.socket(URL_withoutslash+":5000");
+            mSocket = IO.socket(NodeServer);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

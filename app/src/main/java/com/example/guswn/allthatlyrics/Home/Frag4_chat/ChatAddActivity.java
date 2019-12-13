@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendAPI;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendInfo;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.MyAdapter_Friend;
@@ -53,7 +54,6 @@ public class ChatAddActivity extends AppCompatActivity{
 
     MyAdapter_Friend myAdapter;
     RecyclerView.LayoutManager mLayoutManager;
-    Retrofit retrofit;
     FriendAPI api;
     ChatAPI api_chat;
     ArrayList<FriendInfo> friendInfos2;
@@ -71,24 +71,11 @@ public class ChatAddActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_black);// 뒤로가기 버튼, 내가 지정할수 있다
 
-        //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        MyRetrofit ret  = new MyRetrofit();
+        api = ret.create(FriendAPI.class);
+        api_chat = ret.create(ChatAPI.class);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(FriendAPI.class);
-        api_chat=retrofit.create(ChatAPI.class);
-        //레트로핏
 
 
         mRecyclerView.setHasFixedSize(true);
@@ -98,7 +85,6 @@ public class ChatAddActivity extends AppCompatActivity{
         myAdapter = new MyAdapter_Friend(friendInfos2,ChatAddActivity.this,true);
         mRecyclerView.setAdapter(myAdapter);
         getoneinfo_B();
-//        test();
     }
 
     public void getoneinfo_B(){

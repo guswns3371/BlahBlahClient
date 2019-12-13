@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendAPI;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendInfo;
 import com.example.guswn.allthatlyrics.R;
@@ -39,7 +40,6 @@ public class Follow_info_activity extends AppCompatActivity {
     @BindView(R.id.follow_RV)
     RecyclerView follow_RV;
 
-    Retrofit retrofit;
     EditAPI api;
     String isfollower_following;
     ArrayList<String> Follow_InfoList;
@@ -49,21 +49,7 @@ public class Follow_info_activity extends AppCompatActivity {
         setContentView(R.layout.activity_follow_info_activity);
         ButterKnife.bind(this);
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(EditAPI.class);
+        api = new MyRetrofit().create(EditAPI.class);
         //레트로핏
 
         //툴바

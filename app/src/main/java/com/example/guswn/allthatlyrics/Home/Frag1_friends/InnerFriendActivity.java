@@ -14,8 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.guswn.allthatlyrics.CircleTransform;
-import com.example.guswn.allthatlyrics.Home.Frag3_account.Setting;
+import com.example.guswn.allthatlyrics.Extension.CircleTransform;
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Userinfo_Edit;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_3;
 import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatAPI;
@@ -23,8 +23,6 @@ import com.example.guswn.allthatlyrics.Home.Frag4_chat.ChatResponse;
 import com.example.guswn.allthatlyrics.Home.VideoChat.AgoraVideoChatOne;
 import com.example.guswn.allthatlyrics.MainActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -34,18 +32,13 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.guswn.allthatlyrics.Home.Frag1_friends.MyAdapter_Friend.AddedChatPeopleList;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
-import static com.example.guswn.allthatlyrics.MainActivity.URL;
 
 public class InnerFriendActivity extends AppCompatActivity {
 
@@ -109,7 +102,6 @@ public class InnerFriendActivity extends AppCompatActivity {
     Intent intent;
     String friend_idx;
 
-    Retrofit retrofit;
     FriendAPI api_friend;
     ChatAPI api_chat;
     @Override
@@ -120,22 +112,8 @@ public class InnerFriendActivity extends AppCompatActivity {
 
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build();
-
-        api_chat = retrofit.create(ChatAPI.class);
-        api_friend = retrofit.create(FriendAPI.class);
+        api_chat = new MyRetrofit().create(ChatAPI.class);
+        api_friend = new MyRetrofit().create(FriendAPI.class);
         //레트로핏
 
         intent = getIntent();

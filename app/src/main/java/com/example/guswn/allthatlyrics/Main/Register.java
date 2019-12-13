@@ -1,7 +1,6 @@
 package com.example.guswn.allthatlyrics.Main;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.R;
 
 import java.util.HashMap;
@@ -19,15 +19,9 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.example.guswn.allthatlyrics.MainActivity.URL;
 
 public class Register extends AppCompatActivity {
 
@@ -84,17 +78,17 @@ public class Register extends AppCompatActivity {
             map.put("Username",username);
             map.put("Email",email);
 
-            Call<Value> call = api.createUser(map);
+            Call<UserValue> call = api.createUser(map);
 
-            call.enqueue(new Callback<Value>() {
+            call.enqueue(new Callback<UserValue>() {
                 @Override
-                public void onResponse(Call<Value> call, Response<Value> response) {
+                public void onResponse(Call<UserValue> call, Response<UserValue> response) {
                     if(!response.isSuccessful()){
                         Toast.makeText(Register.this,response.code()+"",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    Value values = response.body();
+                    UserValue values = response.body();
                     String value = values.getValue();
                     String message = values.getMessage();
 
@@ -112,7 +106,7 @@ public class Register extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Value> call, Throwable t) {
+                public void onFailure(Call<UserValue> call, Throwable t) {
                     Toast.makeText(Register.this,t.getMessage(),Toast.LENGTH_SHORT).show();
 
                 }
@@ -128,17 +122,7 @@ public class Register extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         //레트로핏
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(RegisterAPI.class);
+        api = new MyRetrofit().create(RegisterAPI.class);
         //레트로핏
     }
 

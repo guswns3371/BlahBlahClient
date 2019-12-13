@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.Home_fragment1;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.Home_fragment2_social;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Home_fragment3;
@@ -48,6 +49,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.example.guswn.allthatlyrics.Home.Frag1_friends.MyAdapter_Friend.AddedChatPeopleList;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
+import static com.example.guswn.allthatlyrics.MainActivity.NodeServer;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 
@@ -59,7 +61,6 @@ public class Home extends AppCompatActivity {
     FrameLayout fragment_container;
 
     private BackPressCloseHandler backPressCloseHandler;
-    Retrofit retrofit;
     HomeAPI api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,21 +70,7 @@ public class Home extends AppCompatActivity {
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(HomeAPI.class);
+        api = new MyRetrofit().create(HomeAPI.class);
         //레트로핏
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navlistner);
@@ -94,7 +81,7 @@ public class Home extends AppCompatActivity {
     boolean isConnected;
     {
         try {
-            mSocket = IO.socket(URL_withoutslash+":5000");
+            mSocket = IO.socket(NodeServer);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

@@ -25,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Home.CameraPermission;
 import com.example.guswn.allthatlyrics.Home.Frag2_social.Reply.SocialReplyActivity;
 import com.example.guswn.allthatlyrics.Home.Frag3_account.Userinfo_Edit;
@@ -75,7 +76,6 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    Retrofit retrofit;
     SocialAPI api;
     @Nullable
     @Override
@@ -93,21 +93,7 @@ public class Home_fragment2_social extends Fragment implements MyAdapter_Social.
         //툴바
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(SocialAPI.class);
+        api = new MyRetrofit().create(SocialAPI.class);
         //레트로핏
 
         mRecyclerView.setHasFixedSize(true);

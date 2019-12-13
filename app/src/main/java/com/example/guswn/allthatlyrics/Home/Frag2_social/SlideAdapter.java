@@ -12,19 +12,15 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TabWidget;
-import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.example.guswn.allthatlyrics.PhotoFilter;
+import com.example.guswn.allthatlyrics.Extension.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
-import com.nostra13.universalimageloader.utils.L;
 
 import java.util.ArrayList;
 
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
-import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
-import static com.example.guswn.allthatlyrics.PhotoFilter.getTypeFromString;
+import static com.example.guswn.allthatlyrics.Extension.PhotoFilter.getTypeFromString;
 
 public class SlideAdapter extends PagerAdapter {
     Context context;

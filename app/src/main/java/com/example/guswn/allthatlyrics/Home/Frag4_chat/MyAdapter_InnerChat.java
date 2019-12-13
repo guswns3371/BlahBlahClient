@@ -15,8 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.guswn.allthatlyrics.CircleTransform;
-import com.example.guswn.allthatlyrics.Home.Frag1_friends.FriendInfo;
+import com.example.guswn.allthatlyrics.Extension.CircleTransform;
 import com.example.guswn.allthatlyrics.Home.Frag1_friends.InnerFriendActivity;
 import com.example.guswn.allthatlyrics.R;
 import com.squareup.picasso.Picasso;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.guswn.allthatlyrics.Main.Logo.MY_IDX;
 import static com.example.guswn.allthatlyrics.MainActivity.URL;
 import static com.example.guswn.allthatlyrics.MainActivity.URL_withoutslash;
 

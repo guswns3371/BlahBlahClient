@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.guswn.allthatlyrics.Extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.Main.SaveSharedPreference;
 import com.example.guswn.allthatlyrics.MainActivity;
 import com.example.guswn.allthatlyrics.R;
@@ -135,7 +136,6 @@ public class Userinfo_Edit extends AppCompatActivity {
         builder.show();
     }
     EditAPI api;
-    Retrofit retrofit;
     String NAME,BIRTHDAY,INTRODUCE,PHOTO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,21 +144,7 @@ public class Userinfo_Edit extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //레트로핏
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        api = retrofit.create(EditAPI.class);
+        api = new MyRetrofit().create(EditAPI.class);
         //레트로핏
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); // edittext 입력시 키보드가 ui 가림현상 해결

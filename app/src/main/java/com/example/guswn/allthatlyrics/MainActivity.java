@@ -44,11 +44,10 @@ public class MainActivity extends AppCompatActivity {
     //#efebe9 - 기본색
     //#ffffff - 밝은색
     //#bdb9b7 - 어두운 색
-    public static String URL_withoutslash = "http://13.209.89.121";
+    public static String URL_withoutslash = "http://13.125.109.156";
     public static String URL = URL_withoutslash+"/";
+    public static String NodeServer = URL_withoutslash+":5001";
 
-    Retrofit retrofit;
-    MainAPI api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static boolean isNullOrEmpty(String str) {
-        if(str != null && !str.trim().isEmpty())
-            return false;
-        return true;
+        return str == null || str.trim().isEmpty();
     }
 }
