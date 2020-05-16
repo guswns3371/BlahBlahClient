@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.Frag4_chat.ChatAddActivity">
+    tools:context=".home.Frag4_chat.ChatAddActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,27 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AllThatLyrics</string>
-    <string name="title_activity_follow__info__tab">Follow_Info_Tab</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_follow_info_tab">FollowInfoTab</string>
-    <string name="title_activity_othet_follow_account">OthetFollowAccount</string>
-    <string name="title_activity_show_gallery">ShowGalleryActivity</string>
+    <string name="app_name" translatable="false">BlahBlah</string>
+    <string name="title_activity_othet_follow_account" translatable="false">OthetFollowAccount</string>
+    <string name="title_activity_show_gallery" translatable="false">ShowGalleryActivity</string>
 
 
-    <string name="Photo_Sepia">Sepia</string>
-    <string name="Photo_Sketch">Sketch</string>
-    <string name="Photo_Invert">Invert</string>
-    <string name="Photo_Pixel">Pixel</string>
-    <string name="Photo_Contrast">Contrast</string>
-    <string name="Photo_Brightness">Brightness</string>
-    <string name="Photo_Kuwahara">Kuwahara</string>
-    <string name="Photo_Vignette">Vignette</string>
-    <string name="Photo_Gray">Gray</string>
-    <string name="Photo_Cartoon">Cartoon</string>
-    <string name="Photo_Blur">Blur</string>
-    <string name="Photo_Normal">Normal</string>
+    <string name="Photo_Sepia" translatable="false">Sepia</string>
+    <string name="Photo_Sketch" translatable="false">Sketch</string>
+    <string name="Photo_Invert" translatable="false">Invert</string>
+    <string name="Photo_Pixel" translatable="false">Pixel</string>
+    <string name="Photo_Contrast" translatable="false">Contrast</string>
+    <string name="Photo_Brightness" translatable="false">Brightness</string>
+    <string name="Photo_Kuwahara" translatable="false">Kuwahara</string>
+    <string name="Photo_Vignette" translatable="false">Vignette</string>
+    <string name="Photo_Gray" translatable="false">Gray</string>
+    <string name="Photo_Cartoon" translatable="false">Cartoon</string>
+    <string name="Photo_Blur" translatable="false">Blur</string>
+    <string name="Photo_Normal" translatable="false">Normal</string>
 
 
-    <string name="agora_app_id">85124a58795a407f8d8caf84ac75678b</string>
+    <string name="agora_app_id" translatable="false">85124a58795a407f8d8caf84ac75678b</string>
 
+    <string name="URL" translatable="false">http://13.125.241.43/</string>
+    <string name="URL_withoutslash" translatable="false">http://13.125.241.43</string>
+    <string name="NodeServer" translatable="false">http://13.125.241.43:5000</string>
 </resources>

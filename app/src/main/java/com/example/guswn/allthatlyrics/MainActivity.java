@@ -8,30 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.example.guswn.allthatlyrics.Home.Frag3_account.EditAPI;
-import com.example.guswn.allthatlyrics.Home.Frag3_account.Value_2;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.io.ByteArrayOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.example.guswn.allthatlyrics.Main.Logo.MY_EMAIL_2;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,14 +22,6 @@ public class MainActivity extends AppCompatActivity {
     //#3e2723 - 기본색
     //#6a4f4b - 밝은색
     //#1b0000 - 어두운 색
-
-    //2
-    //#efebe9 - 기본색
-    //#ffffff - 밝은색
-    //#bdb9b7 - 어두운 색
-    public static String URL_withoutslash = "http://13.125.109.156";
-    public static String URL = URL_withoutslash+"/";
-    public static String NodeServer = URL_withoutslash+":5001";
 
 
     @Override

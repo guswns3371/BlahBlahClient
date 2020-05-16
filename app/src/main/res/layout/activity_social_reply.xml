@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".Home.Frag2_social.Reply.SocialReplyActivity">
+    tools:context=".home.Frag2_social.Reply.SocialReplyActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout7"
@@ -17,22 +17,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/social_reply_tb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:title="Chatting"
-            app:titleTextColor="#000000" />
 
         <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp">
 
-            android:orientation="vertical">
-
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/social_reply_tb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:title="Chatting"
+                app:titleTextColor="#000000" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/social_reply_rv"
                 android:layout_width="match_parent"
@@ -40,63 +40,50 @@
                 android:layout_weight="1">
 
             </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <LinearLayout
+                android:layout_marginBottom="2dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:orientation="horizontal"
+                android:layout_height="45dp">
 
                 <ImageView
                     android:id="@+id/social_reply_myimg"
                     android:layout_width="55dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="2dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_weight="5"
                     android:padding="10dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/account_ios_w"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/social_reply_edit"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:src="@drawable/account_ios_w"/>
+
+
+                <EditText
+                    android:id="@+id/social_reply_edit"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="2dp"
+                    android:ems="10" />
 
                 <TextView
                     android:id="@+id/social_reply_uploadtxt"
-                    android:layout_width="51dp"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:layout_marginEnd="2dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="2dp"
-                    android:layout_weight="5"
                     android:padding="10dp"
                     android:text="게시"
                     android:textColor="#6b64ff"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/social_reply_edit"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/social_reply_edit"
-                    android:layout_width="0dp"
-                    android:layout_height="87dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_weight="100500"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/social_reply_uploadtxt"
-                    app:layout_constraintStart_toEndOf="@+id/social_reply_myimg"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-        </LinearLayout>
+                    android:textSize="15sp"/>
+            </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

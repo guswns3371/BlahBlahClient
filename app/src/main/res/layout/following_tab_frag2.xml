@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.Frag3_account.FollowTab$PlaceholderFragment">
+    tools:context=".home.Frag3_account.FollowTab$PlaceholderFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/following_RV"

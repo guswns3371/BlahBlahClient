@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="use_activity">true</bool>
-    <bool name="use_provider">false</bool>
     <dimen name="list_item_padding">16dp</dimen>
-    <dimen name="list_padding">0dp</dimen>
-    <string name="choose_file">Select a file</string>
     <string name="empty_directory">Empty Directory</string>
     <string name="error_selecting_file">Error selecting File</string>
     <string name="internal_storage">Internal storage</string>

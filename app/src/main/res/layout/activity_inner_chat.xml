@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.Frag4_chat.InnerChatActivity">
+    tools:context=".home.Frag4_chat.InnerChatActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout7"
@@ -16,85 +16,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/innerchat_tb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:title="Chatting"
-            app:titleTextColor="#000000" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical">
-
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/innerchat_tb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:title="Chatting"
+                app:titleTextColor="#000000" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/innerchat_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:overScrollMode="never">
 
             </android.support.v7.widget.RecyclerView>
-
-            <android.support.constraint.ConstraintLayout
+        </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_height="45dp">
 
                 <ImageView
                     android:id="@+id/innerchat_plus_btn"
-                    android:layout_width="45dp"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:layout_marginEnd="2dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="2dp"
-                    android:layout_weight="5"
                     android:padding="10dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/plus_ios"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/innerchat_edittext"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/innerchat_send_btn"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_weight="5"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/message_send_ios_w"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/innerchat_edittext"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:src="@drawable/plus_ios"/>
 
                 <EditText
                     android:id="@+id/innerchat_edittext"
                     android:layout_width="0dp"
-                    android:layout_height="87dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:layout_marginBottom="2dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="2dp"
-                    android:layout_weight="100500"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/innerchat_send_btn"
-                    app:layout_constraintStart_toEndOf="@+id/innerchat_plus_btn"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-        </LinearLayout>
+                    android:ems="10"   />
+
+                <ImageView
+                    android:id="@+id/innerchat_send_btn"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/message_send_ios_w"/>
+            </LinearLayout>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
