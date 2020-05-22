@@ -57,7 +57,7 @@
         </provider> <!-- 카메라로 사진찍을 때 필요 한 부분 FileProvider -->
         <activity android:name=".ui.friends.activity.InnerFriendActivity" />
         <activity android:name=".ui.chat.activity.InnerChatActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".ui.chat.activity.ChatAddActivity" />
         <activity android:name=".ui.chat.activity.ShowImageActivity" />
 
@@ -91,7 +91,7 @@
         <activity android:name=".ui.account.inner.LikeFragment" />
         <activity
             android:name=".ui.social.reply.SocialReplyActivity"
-            android:windowSoftInputMode="adjustUnspecified|adjustResize|stateHidden" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".ui.streaming.VideoActivity"
             android:configChanges="orientation|screenSize" />

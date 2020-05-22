@@ -11,6 +11,7 @@
         android:id="@+id/linearLayout7"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fitsSystemWindows="true"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,9 +36,11 @@
                 app:titleTextColor="#000000" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/social_reply_rv"
+                android:focusableInTouchMode="true"
+                android:descendantFocusability="beforeDescendants"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                >
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
@@ -51,11 +54,7 @@
                 <ImageView
                     android:id="@+id/social_reply_myimg"
                     android:layout_width="55dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginBottom="2dp"
+                    android:layout_height="match_parent"
                     android:padding="10dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/account_ios_w"/>
@@ -66,20 +65,16 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="2dp"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:background="@null"
                     android:ems="10" />
 
                 <TextView
                     android:id="@+id/social_reply_uploadtxt"
                     android:layout_width="55dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:padding="10dp"
                     android:text="게시"
                     android:textColor="#6b64ff"

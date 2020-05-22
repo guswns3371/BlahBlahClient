@@ -277,7 +277,8 @@ public class SocialReplyActivity extends AppCompatActivity implements SocialRepl
 
                         }
                     }else if (r_value.equals("0")){
-                        Toast.makeText(SocialReplyActivity.this,r_message,Toast.LENGTH_LONG).show();
+                        Log.e("SocialReplyActivity",r_message);
+                        //Toast.makeText(SocialReplyActivity.this,r_message,Toast.LENGTH_LONG).show();
                     }
                 }
                 myAdapter.notifyDataSetChanged();
