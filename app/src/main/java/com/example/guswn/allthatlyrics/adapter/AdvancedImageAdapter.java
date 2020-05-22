@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
-import com.example.guswn.allthatlyrics.extension.PhotoFilter;
+import com.example.guswn.allthatlyrics.extension.MyPhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.model.AdvancedImgModel;
 
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyAdapter_Advanced_img extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdvancedImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.show_img_btn)
         ImageButton show_img_btn;
@@ -53,10 +53,10 @@ public class MyAdapter_Advanced_img extends RecyclerView.Adapter<RecyclerView.Vi
 
     private ArrayList<AdvancedImgModel> advancedImgModels;
     private Context context;
-    PhotoFilter photoFilter;
+    MyPhotoFilter myPhotoFilter;
     public static  boolean isEdit;
     public static  Integer editedType;
-    public MyAdapter_Advanced_img(ArrayList<AdvancedImgModel> advancedImgModels, Context context){
+    public AdvancedImageAdapter(ArrayList<AdvancedImgModel> advancedImgModels, Context context){
         this.advancedImgModels = advancedImgModels;
         this.context = context;
     }
@@ -72,7 +72,7 @@ public class MyAdapter_Advanced_img extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.ad_edit_recycler_item_1,viewGroup,false);
-        return new MyAdapter_Advanced_img.MyViewHolder(v);
+        return new AdvancedImageAdapter.MyViewHolder(v);
     }
 
     public static boolean isSingleEditNow;
@@ -164,8 +164,8 @@ public class MyAdapter_Advanced_img extends RecyclerView.Adapter<RecyclerView.Vi
 //                }
 //            }
 
-            photoFilter = new PhotoFilter(false,object.getType(),object.getFilepath(),object.getFile(),context,myViewHolder.show_img_img);
-            photoFilter.photoFilterByType();
+            myPhotoFilter = new MyPhotoFilter(false,object.getType(),object.getFilepath(),object.getFile(),context,myViewHolder.show_img_img);
+            myPhotoFilter.photoFilterByType();
 //            Glide.with(context)
 //                    .load(object.getImg())
 //                    .apply(new RequestOptions().fitCenter())

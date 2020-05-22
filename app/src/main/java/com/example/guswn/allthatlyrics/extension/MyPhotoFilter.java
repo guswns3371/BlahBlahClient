@@ -24,14 +24,14 @@ import jp.wasabeef.glide.transformations.gpu.VignetteFilterTransformation;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
-public class PhotoFilter {
+public class MyPhotoFilter {
     String filepath_or_url;
     private Context context;
     Integer type;
     ImageView imageView;
     File file;
     boolean isURL;
-    public PhotoFilter(boolean isURL,Integer type, String filepath_or_url, File file,Context context,  ImageView imageView) {
+    public MyPhotoFilter(boolean isURL, Integer type, String filepath_or_url, File file, Context context, ImageView imageView) {
         this.isURL = isURL;
         this.filepath_or_url = filepath_or_url;
         if (!isURL){ // url 이 아닐때만

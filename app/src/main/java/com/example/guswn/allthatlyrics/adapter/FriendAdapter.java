@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyAdapter_Friend extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class FriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private static final int LAYOUT_ONE= 0;
     private static final int LAYOUT_TWO= 1;
     public static ArrayList<String> AddedChatPeopleList = new ArrayList<>();
@@ -119,7 +119,7 @@ public class MyAdapter_Friend extends RecyclerView.Adapter<RecyclerView.ViewHold
     private ArrayList<FriendModel> friendModels;
     private Context context;
     private Boolean isChatAdd =false;
-    public MyAdapter_Friend(ArrayList<FriendModel> friendInfos1, Context context, Boolean isChatAdd){
+    public FriendAdapter(ArrayList<FriendModel> friendInfos1, Context context, Boolean isChatAdd){
         this.friendModels = friendInfos1;
         this.context = context;
         this.isChatAdd = isChatAdd;

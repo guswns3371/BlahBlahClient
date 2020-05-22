@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
-public class MyAdapter_FollowTab extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class FollowTabAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -69,7 +69,7 @@ public class MyAdapter_FollowTab extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
 
 
-    public MyAdapter_FollowTab(ArrayList<FollowTabModel> followTabModels, Context context){
+    public FollowTabAdapter(ArrayList<FollowTabModel> followTabModels, Context context){
         this.context = context;
         this.followTabModels = followTabModels;
     }
@@ -78,7 +78,7 @@ public class MyAdapter_FollowTab extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_follow_tab_item,viewGroup,false);
-        return new MyAdapter_FollowTab.MyViewHolder(v);
+        return new FollowTabAdapter.MyViewHolder(v);
     }
 
     @Override

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyAdapter_Chat extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -72,7 +72,7 @@ public class MyAdapter_Chat extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<ChatModel> chatModels;
     private Context context;
 
-    public MyAdapter_Chat(ArrayList<ChatModel> chatInfos1, Context context){
+    public ChatAdapter(ArrayList<ChatModel> chatInfos1, Context context){
         this.chatModels = chatInfos1;
         this.context = context;
     }
@@ -82,7 +82,7 @@ public class MyAdapter_Chat extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_recyclerview_item,viewGroup,false);
-        return new MyAdapter_Chat.MyViewHolder(v);
+        return new ChatAdapter.MyViewHolder(v);
     }
 
     public static String outidx;

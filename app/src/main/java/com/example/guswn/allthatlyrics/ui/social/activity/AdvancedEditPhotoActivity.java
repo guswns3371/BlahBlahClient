@@ -15,10 +15,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import com.example.guswn.allthatlyrics.adapter.AdvancedEditAdpater;
+import com.example.guswn.allthatlyrics.adapter.AdvancedImageAdapter;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_Advanced_edit;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_Advanced_img;
 import com.example.guswn.allthatlyrics.api.SocialAPI;
 import com.example.guswn.allthatlyrics.model.AdvancedImgModel;
 import com.example.guswn.allthatlyrics.model.ShowGalleryModel;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAdapter_Advanced_img.AdvanceImgClickListner{
+public class AdvancedEditPhotoActivity extends AppCompatActivity implements AdvancedImageAdapter.AdvanceImgClickListner{
 
     @BindView(R.id.ad_edit_tb)
     Toolbar ad_edit_tb;
@@ -40,8 +40,8 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
 
     LinearLayoutManager mLayoutManager;
     LinearLayoutManager mLayoutManager2;
-    public static MyAdapter_Advanced_img myAdapter;
-    MyAdapter_Advanced_edit myAdapter_edit;
+    public static AdvancedImageAdapter myAdapter;
+    AdvancedEditAdpater myAdapter_edit;
     public  static ArrayList<AdvancedImgModel> EditedPreUploadFiles;
     ArrayList<AdvancedImgModel> editEffects;
     ArrayList<ShowGalleryModel>  get_multipleSelectedImages;
@@ -97,7 +97,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
         loadEditEffects();
 
         if (isMulti) { // 사진 여러장
-            myAdapter_edit = new MyAdapter_Advanced_edit(editEffects,AdvancedEditPhotoActivity.this,get_multipleSelectedImages.get(0).getFilepath());
+            myAdapter_edit = new AdvancedEditAdpater(editEffects,AdvancedEditPhotoActivity.this,get_multipleSelectedImages.get(0).getFilepath());
 
             for (ShowGalleryModel imgs : get_multipleSelectedImages){
 
@@ -109,7 +109,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
                 }
             }
         }else {//  사진 한장
-            myAdapter_edit = new MyAdapter_Advanced_edit(editEffects,AdvancedEditPhotoActivity.this,get_selectedimage.getFilepath());
+            myAdapter_edit = new AdvancedEditAdpater(editEffects,AdvancedEditPhotoActivity.this,get_selectedimage.getFilepath());
             File imgFile = new  File(get_selectedimage.getFilepath());
             if(imgFile.exists())
             {
@@ -118,7 +118,7 @@ public class AdvancedEditPhotoActivity extends AppCompatActivity implements MyAd
             }
         }
         editRecyclerView.setAdapter(myAdapter_edit);
-        myAdapter = new MyAdapter_Advanced_img(EditedPreUploadFiles,AdvancedEditPhotoActivity.this);
+        myAdapter = new AdvancedImageAdapter(EditedPreUploadFiles,AdvancedEditPhotoActivity.this);
         myAdapter.setOnClickListner_AdvancedImg(this);
         imgRecyclerView.setAdapter(myAdapter);
 

@@ -21,7 +21,7 @@ import com.example.guswn.allthatlyrics.model.SocialImageModel;
 import com.example.guswn.allthatlyrics.model.SocialInfoModel;
 import com.example.guswn.allthatlyrics.response.SocialLikedMarkedResponse;
 import com.example.guswn.allthatlyrics.response.SocialUploadResponse;
-import com.example.guswn.allthatlyrics.extension.PhotoFilter;
+import com.example.guswn.allthatlyrics.extension.MyPhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.response.userResponse3;
 
@@ -39,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.guswn.allthatlyrics.extension.PhotoFilter.getTypeFromString;
+import static com.example.guswn.allthatlyrics.extension.MyPhotoFilter.getTypeFromString;
 
 public class BookmarkFragment extends Fragment {
 
@@ -269,9 +269,9 @@ public class BookmarkFragment extends Fragment {
             /**그리드 이미지*/
             String imgurl = Clikedmodel.getSocialImageModelList().get(0).getUrl();
             Integer imgFilter =getTypeFromString(Clikedmodel.getSocialImageModelList().get(0).getFilter()) ;
-            PhotoFilter photoFilter = new PhotoFilter(true,imgFilter,
+            MyPhotoFilter myPhotoFilter = new MyPhotoFilter(true,imgFilter,
                     getString(R.string.URL_withoutslash)+imgurl,null,context,imageViewAndroid);
-            photoFilter.photoFilterByType();
+            myPhotoFilter.photoFilterByType();
             /**그리드 이미지*/
             return picturesView;
         }

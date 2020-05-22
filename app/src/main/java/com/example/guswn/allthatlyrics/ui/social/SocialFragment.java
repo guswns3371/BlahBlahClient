@@ -25,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.adapter.SocialAdapter;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.ui.social.activity.ShowGalleryActivity;
 import com.example.guswn.allthatlyrics.ui.social.reply.SocialReplyActivity;
@@ -33,7 +34,6 @@ import com.example.guswn.allthatlyrics.response.SocialUploadResponse;
 import com.example.guswn.allthatlyrics.response.userResponse3;
 import com.example.guswn.allthatlyrics.ui.HomeActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_Social;
 import com.example.guswn.allthatlyrics.api.SocialAPI;
 import com.example.guswn.allthatlyrics.model.SocialImageModel;
 import com.example.guswn.allthatlyrics.model.SocialInfoModel;
@@ -58,10 +58,10 @@ import retrofit2.Response;
 
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
-public class SocialFragment extends Fragment implements MyAdapter_Social.SocialReycyclerClickListner, SwipeRefreshLayout.OnRefreshListener {
+public class SocialFragment extends Fragment implements SocialAdapter.SocialReycyclerClickListner, SwipeRefreshLayout.OnRefreshListener {
 
     LinearLayoutManager mLayoutManager;
-    MyAdapter_Social myAdapter;
+    SocialAdapter myAdapter;
     ArrayList<SocialInfoModel> socialInfos;
     @BindView(R.id.social_RV)
     RecyclerView mRecyclerView;
@@ -102,7 +102,7 @@ public class SocialFragment extends Fragment implements MyAdapter_Social.SocialR
         socialInfos = new ArrayList<>();
 
         loadSocialHistory();
-        myAdapter = new MyAdapter_Social(socialInfos,getActivity());
+        myAdapter = new SocialAdapter(socialInfos,getActivity());
         myAdapter.setOnClickListener_Social(this);
         mRecyclerView.setAdapter(myAdapter);
         mRecyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {

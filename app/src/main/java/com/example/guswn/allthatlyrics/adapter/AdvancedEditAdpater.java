@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.guswn.allthatlyrics.extension.PhotoFilter;
+import com.example.guswn.allthatlyrics.extension.MyPhotoFilter;
 import com.example.guswn.allthatlyrics.ui.social.activity.AdvancedEditPhotoActivity;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.model.AdvancedImgModel;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyAdapter_Advanced_edit extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdvancedEditAdpater extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.show_edit_txt)
         TextView show_edit_txt;
@@ -57,8 +57,8 @@ public class MyAdapter_Advanced_edit extends RecyclerView.Adapter<RecyclerView.V
     private ArrayList<AdvancedImgModel> editEffects;
     private Context context;
     private String FirstFilePath;
-    PhotoFilter photoFilter;
-    public MyAdapter_Advanced_edit(ArrayList<AdvancedImgModel> editEffects, Context context, String FirstFilePath){
+    MyPhotoFilter myPhotoFilter;
+    public AdvancedEditAdpater(ArrayList<AdvancedImgModel> editEffects, Context context, String FirstFilePath){
         this.editEffects = editEffects;
         this.context = context;
         this.FirstFilePath = FirstFilePath;
@@ -68,7 +68,7 @@ public class MyAdapter_Advanced_edit extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.ad_edit_recycler_item_2,viewGroup,false);
-        return new MyAdapter_Advanced_edit.MyViewHolder(v);
+        return new AdvancedEditAdpater.MyViewHolder(v);
     }
 
     @Override
@@ -78,8 +78,8 @@ public class MyAdapter_Advanced_edit extends RecyclerView.Adapter<RecyclerView.V
 
         if(object!=null){
             myViewHolder.show_edit_txt.setText(context.getResources().getString(object.getType()));
-            photoFilter = new PhotoFilter(false,object.getType(),FirstFilePath,null,context,myViewHolder.show_edit_img);
-            photoFilter.photoFilterByType();
+            myPhotoFilter = new MyPhotoFilter(false,object.getType(),FirstFilePath,null,context,myViewHolder.show_edit_img);
+            myPhotoFilter.photoFilterByType();
 //            Glide.with(context)
 //                    .load(FirstFilePath)
 //                    .apply(bitmapTransform(new BlurTransformation(25, 3)))

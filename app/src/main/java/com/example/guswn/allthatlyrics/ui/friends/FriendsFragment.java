@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.guswn.allthatlyrics.adapter.FriendAdapter;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.response.userResponse3;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_Friend;
 import com.example.guswn.allthatlyrics.api.FriendAPI;
 import com.example.guswn.allthatlyrics.model.FriendModel;
 
@@ -34,7 +34,7 @@ public class FriendsFragment extends Fragment{
     private boolean shouldRefreshOnResume = false;
 
     String NAME,BIRTHDAY,INTRODUCE,PHOTO;
-    MyAdapter_Friend myAdapter;
+    FriendAdapter myAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     FriendAPI api;
     ArrayList<FriendModel> friendModels;
@@ -62,7 +62,7 @@ public class FriendsFragment extends Fragment{
         //friendInfos.add(new FriendInfo(FriendInfo.A_TYPE, SaveSharedPreference.getUserPhoto(getActivity(),MY_EMAIL_2),"?","??"));
 
 
-        myAdapter = new MyAdapter_Friend(friendModels,getActivity(),false);
+        myAdapter = new FriendAdapter(friendModels,getActivity(),false);
         mRecyclerView.setAdapter(myAdapter);
 
         getoneinfo_B();
@@ -174,7 +174,7 @@ public class FriendsFragment extends Fragment{
         for(int i=1;i<20;i++){
             friendModels.add(new FriendModel(FriendModel.B_TYPE,i+"","1","name "+i,"des "+i,"email "+i,"birthday "+i));
         }
-        myAdapter = new MyAdapter_Friend(friendModels,getActivity(),false);
+        myAdapter = new FriendAdapter(friendModels,getActivity(),false);
         mRecyclerView.setAdapter(myAdapter);
     }
 }

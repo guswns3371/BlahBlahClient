@@ -19,13 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.adapter.ChatAdapter;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.response.userResponse3;
 import com.example.guswn.allthatlyrics.ui.HomeActivity;
 import com.example.guswn.allthatlyrics.ui.chat.activity.ChatAddActivity;
 import com.example.guswn.allthatlyrics.ui.auth.LogoActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat;
 import com.example.guswn.allthatlyrics.api.ChatAPI;
 import com.example.guswn.allthatlyrics.model.ChatModel;
 import com.example.guswn.allthatlyrics.response.ChatResponse;
@@ -52,10 +52,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat.outidx;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat.outmessage;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat.outtime;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat.unReadMessage;
+import static com.example.guswn.allthatlyrics.adapter.ChatAdapter.outidx;
+import static com.example.guswn.allthatlyrics.adapter.ChatAdapter.outmessage;
+import static com.example.guswn.allthatlyrics.adapter.ChatAdapter.outtime;
+import static com.example.guswn.allthatlyrics.adapter.ChatAdapter.unReadMessage;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
@@ -63,7 +63,7 @@ public class ChatFragment extends Fragment {
 
     LinearLayoutManager mLayoutManager;
     ChatAPI api;
-    public static MyAdapter_Chat myAdapter;
+    public static ChatAdapter myAdapter;
 
     ArrayList<ChatModel> chatModels;
     boolean isConnected;
@@ -109,7 +109,7 @@ public class ChatFragment extends Fragment {
         chatModels = new ArrayList<>();
 
         // chatInfos.add(new ChatInfo("1","title","innercontent","time",null));
-        myAdapter = new MyAdapter_Chat(chatModels,getActivity());
+        myAdapter = new ChatAdapter(chatModels,getActivity());
         mRecyclerView.setAdapter(myAdapter);
 
         loadChatRoomList();

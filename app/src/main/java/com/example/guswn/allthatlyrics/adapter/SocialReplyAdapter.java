@@ -26,7 +26,7 @@ import butterknife.OnClick;
 
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
-public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SocialReplyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -133,7 +133,7 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ArrayList<SocialReplyModel> socialReplyModels;
     private Context context;
 
-    public MyAdapter_Reply(ArrayList<SocialReplyModel> socialReplyModels, Context context){
+    public SocialReplyAdapter(ArrayList<SocialReplyModel> socialReplyModels, Context context){
         this.socialReplyModels = socialReplyModels;
         this.context = context;
     }
@@ -142,7 +142,7 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.social_reply_item,viewGroup,false);
-        return new MyAdapter_Reply.MyViewHolder(v);
+        return new SocialReplyAdapter.MyViewHolder(v);
     }
 
     @Override

@@ -17,8 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.adapter.SocialReplyAdapter;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_Reply;
 import com.example.guswn.allthatlyrics.api.SocialAPI;
 import com.example.guswn.allthatlyrics.response.SocialReReplyReponse;
 import com.example.guswn.allthatlyrics.response.SocialReplyResponse;
@@ -53,7 +53,7 @@ import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_NAME;
 import static com.example.guswn.allthatlyrics.extension.Extensions.hideSoftKeyboard;
 import static com.example.guswn.allthatlyrics.extension.Extensions.showKeyboard;
 
-public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_Reply.SocialReplyClickListener{
+public class SocialReplyActivity extends AppCompatActivity implements SocialReplyAdapter.SocialReplyClickListener{
 
     @BindView(R.id.social_reply_tb)
     Toolbar social_reply_tb;
@@ -67,7 +67,7 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
     TextView social_reply_uploadtxt;
 
     LinearLayoutManager mLayoutManager;
-    MyAdapter_Reply myAdapter;
+    SocialReplyAdapter myAdapter;
     ArrayList<SocialReplyModel> replytInfosList;
 
     SocialAPI api;
@@ -134,7 +134,7 @@ public class SocialReplyActivity extends AppCompatActivity implements MyAdapter_
         Firstmodel.setisLoaded(false);
         replytInfosList.add(Firstmodel);
 
-        myAdapter = new MyAdapter_Reply(replytInfosList, SocialReplyActivity.this);
+        myAdapter = new SocialReplyAdapter(replytInfosList, SocialReplyActivity.this);
         myAdapter.setOnClickListener_Reply(this);
         mRecyclerView.setAdapter(myAdapter);
 

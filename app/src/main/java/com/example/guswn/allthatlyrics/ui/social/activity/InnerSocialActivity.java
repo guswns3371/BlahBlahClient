@@ -25,7 +25,7 @@ import com.example.guswn.allthatlyrics.response.SocialLikedMarkedResponse;
 import com.example.guswn.allthatlyrics.response.SocialUploadResponse;
 import com.example.guswn.allthatlyrics.response.userResponse3;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.adapter.SlideAdapter;
+import com.example.guswn.allthatlyrics.adapter.SlideImageAdapter;
 import com.example.guswn.allthatlyrics.api.SocialAPI;
 import com.example.guswn.allthatlyrics.model.SocialImageModel;
 import com.example.guswn.allthatlyrics.model.SocialInfoModel;
@@ -53,7 +53,7 @@ import static android.support.v4.view.ViewPager.SCROLL_STATE_IDLE;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
-public class InnerSocialActivity extends AppCompatActivity implements SlideAdapter.SlideClickListener {
+public class InnerSocialActivity extends AppCompatActivity implements SlideImageAdapter.SlideClickListener {
 
     @BindView(R.id.social_user_img)
     ImageView social_user_img;
@@ -581,9 +581,9 @@ public class InnerSocialActivity extends AppCompatActivity implements SlideAdapt
                     }else {
                         social_content_img_cnt.setVisibility(View.INVISIBLE);
                     }
-                    SlideAdapter slideAdapter = new SlideAdapter(InnerSocialActivity.this,object2.getSocialImageModelList());
-                    slideAdapter.SetSlideClickListener(InnerSocialActivity.this);
-                    social_content_img_viewpager.setAdapter(slideAdapter);
+                    SlideImageAdapter slideImageAdapter = new SlideImageAdapter(InnerSocialActivity.this,object2.getSocialImageModelList());
+                    slideImageAdapter.SetSlideClickListener(InnerSocialActivity.this);
+                    social_content_img_viewpager.setAdapter(slideImageAdapter);
                     social_content_img_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                         @Override
                         public void onPageScrolled(int i, float v, int i1) {

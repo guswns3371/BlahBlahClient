@@ -13,10 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.adapter.FriendAdapter;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.api.FriendAPI;
 import com.example.guswn.allthatlyrics.model.FriendModel;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_Friend;
 import com.example.guswn.allthatlyrics.response.userResponse3;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.api.ChatAPI;
@@ -35,13 +35,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Friend.AddedChatPeopleList;
+import static com.example.guswn.allthatlyrics.adapter.FriendAdapter.AddedChatPeopleList;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
 public class ChatAddActivity extends AppCompatActivity{
 
-    MyAdapter_Friend myAdapter;
+    FriendAdapter myAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     FriendAPI api;
     ChatAPI api_chat;
@@ -71,7 +71,7 @@ public class ChatAddActivity extends AppCompatActivity{
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         friendInfos2 = new ArrayList<>();
-        myAdapter = new MyAdapter_Friend(friendInfos2,ChatAddActivity.this,true);
+        myAdapter = new FriendAdapter(friendInfos2,ChatAddActivity.this,true);
         mRecyclerView.setAdapter(myAdapter);
         getoneinfo_B();
     }
@@ -257,7 +257,7 @@ public class ChatAddActivity extends AppCompatActivity{
         for(int i=1;i<20;i++){
             friendInfos2.add(new FriendModel(FriendModel.B_TYPE,i+"","1","name "+i,"des "+i,"email "+i,"birthday "+i));
         }
-        myAdapter = new MyAdapter_Friend(friendInfos2,ChatAddActivity.this,true);
+        myAdapter = new FriendAdapter(friendInfos2,ChatAddActivity.this,true);
         mRecyclerView.setAdapter(myAdapter);
     }
 }

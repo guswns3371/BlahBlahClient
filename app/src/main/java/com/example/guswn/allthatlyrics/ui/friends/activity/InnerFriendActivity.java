@@ -37,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Friend.AddedChatPeopleList;
+import static com.example.guswn.allthatlyrics.adapter.FriendAdapter.AddedChatPeopleList;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 

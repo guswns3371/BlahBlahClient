@@ -18,7 +18,7 @@ import android.widget.VideoView;
 
 import com.example.guswn.allthatlyrics.extension.CircleTransform;
 import com.example.guswn.allthatlyrics.ui.account.activity.OtherFollowAccountActivity;
-import com.example.guswn.allthatlyrics.extension.PhotoFilter;
+import com.example.guswn.allthatlyrics.extension.MyPhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.model.SocialInfoModel;
 import com.squareup.picasso.Picasso;
@@ -32,9 +32,9 @@ import butterknife.OnClick;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_DRAGGING;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_IDLE;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
-import static com.example.guswn.allthatlyrics.extension.PhotoFilter.getTypeFromString;
+import static com.example.guswn.allthatlyrics.extension.MyPhotoFilter.getTypeFromString;
 
-public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SlideAdapter.SlideClickListener {
+public class SocialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SlideImageAdapter.SlideClickListener {
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -111,8 +111,8 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private ArrayList<SocialInfoModel> socialInfoModels;
     private Context context;
-    PhotoFilter photoFilter;
-    public MyAdapter_Social(ArrayList<SocialInfoModel> socialInfoModels, Context context){
+    MyPhotoFilter myPhotoFilter;
+    public SocialAdapter(ArrayList<SocialInfoModel> socialInfoModels, Context context){
         this.socialInfoModels = socialInfoModels;
         this.context = context;
     }
@@ -121,7 +121,7 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.social_recycler_item,viewGroup,false);
-        return new MyAdapter_Social.MyViewHolder(v);
+        return new SocialAdapter.MyViewHolder(v);
     }
     /**SlideAdapter clicklistener interface*/
     int flag = 0;
@@ -234,10 +234,10 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
                 myViewHolder.social_content_img_cnt.setVisibility(View.INVISIBLE);
             }
             /**viewpager*/
-            final SlideAdapter slideAdapter = new SlideAdapter(context,object.getSocialImageModelList());
+            final SlideImageAdapter slideImageAdapter = new SlideImageAdapter(context,object.getSocialImageModelList());
 
-            slideAdapter.SetSlideClickListener(this);
-            myViewHolder.social_content_img_viewpager.setAdapter(slideAdapter);
+            slideImageAdapter.SetSlideClickListener(this);
+            myViewHolder.social_content_img_viewpager.setAdapter(slideImageAdapter);
             myViewHolder.social_content_img_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
                 @Override

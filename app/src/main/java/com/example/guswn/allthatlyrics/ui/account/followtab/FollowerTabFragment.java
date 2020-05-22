@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.adapter.FollowTabAdapter;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.response.FollowingResponse;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_FollowTab;
 import com.example.guswn.allthatlyrics.api.FriendAPI;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.api.EditAPI;
@@ -36,10 +36,10 @@ import static com.example.guswn.allthatlyrics.ui.account.followtab.FollowTab.Fol
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
 
-public class FollowerTabFragment extends Fragment implements MyAdapter_FollowTab.FollowTabRycyclerClickListner{
+public class FollowerTabFragment extends Fragment implements FollowTabAdapter.FollowTabRycyclerClickListner{
 
     LinearLayoutManager mLayoutManager;
-    MyAdapter_FollowTab myAdapter;
+    FollowTabAdapter myAdapter;
     ArrayList<FollowTabModel> followTabModels;
     @BindView(R.id.follower_RV)
     RecyclerView mRecyclerView;
@@ -65,7 +65,7 @@ public class FollowerTabFragment extends Fragment implements MyAdapter_FollowTab
         //리스트 역순 배열
         mRecyclerView.setLayoutManager(mLayoutManager);
         followTabModels = new ArrayList<>();
-        myAdapter = new MyAdapter_FollowTab(followTabModels,getActivity());
+        myAdapter = new FollowTabAdapter(followTabModels,getActivity());
         myAdapter.setOnClickListener_Friend(this);
         mRecyclerView.setAdapter(myAdapter);
         loadFollowinfo();

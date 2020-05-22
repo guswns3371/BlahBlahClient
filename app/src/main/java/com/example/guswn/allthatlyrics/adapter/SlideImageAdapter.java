@@ -14,15 +14,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.VideoView;
 
-import com.example.guswn.allthatlyrics.extension.PhotoFilter;
+import com.example.guswn.allthatlyrics.extension.MyPhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.model.SocialImageModel;
 
 import java.util.ArrayList;
 
-import static com.example.guswn.allthatlyrics.extension.PhotoFilter.getTypeFromString;
+import static com.example.guswn.allthatlyrics.extension.MyPhotoFilter.getTypeFromString;
 
-public class SlideAdapter extends PagerAdapter {
+public class SlideImageAdapter extends PagerAdapter {
     Context context;
     LayoutInflater inflater;
     ArrayList<String>img_list = new ArrayList<>();
@@ -38,7 +38,7 @@ public class SlideAdapter extends PagerAdapter {
         this.slidelistener = s;
     }
 
-    public SlideAdapter(Context context, ArrayList<SocialImageModel> infoModels){
+    public SlideImageAdapter(Context context, ArrayList<SocialImageModel> infoModels){
         this.context = context;
         this.infoModels = infoModels;
 
@@ -58,7 +58,7 @@ public class SlideAdapter extends PagerAdapter {
         return (view == (LinearLayout)o);
     }
 
-    PhotoFilter photoFilter;
+    MyPhotoFilter myPhotoFilter;
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
@@ -80,8 +80,8 @@ public class SlideAdapter extends PagerAdapter {
             if (videoslide.isPlaying()){
                 videoslide.stopPlayback();
             }
-            photoFilter = new PhotoFilter(true, typeInfos.get(position),url,null,context,imgslide);
-            photoFilter.photoFilterByType();
+            myPhotoFilter = new MyPhotoFilter(true, typeInfos.get(position),url,null,context,imgslide);
+            myPhotoFilter.photoFilterByType();
         }else if (mime.contains("video")){
             imgslide.setVisibility(View.GONE);
             frameslide.setVisibility(View.VISIBLE);

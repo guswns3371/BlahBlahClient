@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class InnerChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
     public class MyViewHolder_InnerChat extends RecyclerView.ViewHolder{
@@ -121,7 +121,7 @@ public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewH
     private ArrayList<InnerChatModel> innerChatModels;
     private Context context;
     private Boolean isMine;
-    public MyAdapter_InnerChat(ArrayList<InnerChatModel> innerChatInfos2, Context context){
+    public InnerChatAdapter(ArrayList<InnerChatModel> innerChatInfos2, Context context){
         this.innerChatModels = innerChatInfos2;
         this.context = context;
     }
@@ -131,7 +131,7 @@ public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View  view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_inner_chat_item,viewGroup,false);
-        return new MyAdapter_InnerChat.MyViewHolder_InnerChat(view);
+        return new InnerChatAdapter.MyViewHolder_InnerChat(view);
     }
 
     public static String AllPeople; // 전체 사람수

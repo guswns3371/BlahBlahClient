@@ -26,12 +26,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.adapter.InnerChatAdapter;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.response.userResponse3;
 import com.example.guswn.allthatlyrics.ui.chat.ChatFragment;
 import com.example.guswn.allthatlyrics.ui.auth.LogoActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.adapter.MyAdapter_InnerChat;
 import com.example.guswn.allthatlyrics.api.ChatAPI;
 import com.example.guswn.allthatlyrics.model.InnerChatModel;
 import com.example.guswn.allthatlyrics.response.InnerChatResponse;
@@ -72,13 +72,13 @@ import retrofit2.Response;
 
 import static android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION;
 import static android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat.outidx;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat.outmessage;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat.outtime;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_Chat.unReadMessage;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_InnerChat.AllPeople;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_InnerChat.isRead;
-import static com.example.guswn.allthatlyrics.adapter.MyAdapter_InnerChat.isReadList;
+import static com.example.guswn.allthatlyrics.adapter.ChatAdapter.outidx;
+import static com.example.guswn.allthatlyrics.adapter.ChatAdapter.outmessage;
+import static com.example.guswn.allthatlyrics.adapter.ChatAdapter.outtime;
+import static com.example.guswn.allthatlyrics.adapter.ChatAdapter.unReadMessage;
+import static com.example.guswn.allthatlyrics.adapter.InnerChatAdapter.AllPeople;
+import static com.example.guswn.allthatlyrics.adapter.InnerChatAdapter.isRead;
+import static com.example.guswn.allthatlyrics.adapter.InnerChatAdapter.isReadList;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_EMAIL_2;
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
@@ -342,7 +342,7 @@ public class InnerChatActivity extends AppCompatActivity {
         }
     }
 
-    MyAdapter_InnerChat myAdapter;
+    InnerChatAdapter myAdapter;
     LinearLayoutManager mLayoutManager;
     ArrayList<InnerChatModel> innerChatInfosList;
 
@@ -411,7 +411,7 @@ public class InnerChatActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         innerChatInfosList = new ArrayList<>();
-        myAdapter = new MyAdapter_InnerChat(innerChatInfosList, InnerChatActivity.this);
+        myAdapter = new InnerChatAdapter(innerChatInfosList, InnerChatActivity.this);
         mRecyclerView.setAdapter(myAdapter);
         mLayoutManager.setStackFromEnd(true);//목록의 마지막 요소로 recyclerview 포커스 이동
 //        loadChatHistory();
