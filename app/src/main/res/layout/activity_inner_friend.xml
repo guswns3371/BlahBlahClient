@@ -52,16 +52,18 @@
                     android:layout_marginTop="40dp"
                     android:gravity="center_horizontal"
                     android:text="Name"
+                    android:textStyle="bold"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/innerf_email"
+                    android:id="@+id/innerf_intro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal"
                     android:text="Email"
+                    android:maxLines="1"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -90,7 +92,7 @@
                             android:cropToPadding="false"
                             android:padding="3dp"
                             android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/chat_bubble_ios_w" />
+                            app:srcCompat="@drawable/ic_comment_black_24dp" />
 
                         <TextView
                             android:id="@+id/textView4"
@@ -98,7 +100,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Chat"
+                            android:text="채팅하기"
                             android:textSize="13sp" />
                     </LinearLayout>
 
@@ -120,14 +122,14 @@
                             android:background="#00000000"
                             android:padding="3dp"
                             android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/edit_ios" />
+                            app:srcCompat="@drawable/ic_edit_black_24dp" />
 
                         <TextView
                             android:id="@+id/textView4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Edit Profile"
+                            android:text="프로필 편집"
                             android:textSize="13sp" />
                     </LinearLayout>
 
@@ -149,14 +151,14 @@
                             android:background="#00000000"
                             android:padding="3dp"
                             android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/call_ios" />
+                            app:srcCompat="@drawable/ic_call_black_24dp" />
 
                         <TextView
                             android:id="@+id/textView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Call"
+                            android:text="전화걸기"
                             android:textSize="13sp" />
                     </LinearLayout>
 
@@ -179,22 +181,24 @@
                 app:srcCompat="@drawable/account" />
 
             <TextView
-                android:id="@+id/innerf_intro"
+                android:id="@+id/innerf_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="192dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="192dp"
                 android:text="Introduction"
+                android:padding="3dp"
+                android:background="@color/transparent_10"
                 android:textColor="#ffffff"
-                android:textSize="21sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/innerf_img"
                 app:layout_constraintEnd_toEndOf="@+id/innerf_backimg"
-                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="@+id/innerf_backimg"
                 app:layout_constraintTop_toTopOf="@+id/innerf_backimg"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.033" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline2"
@@ -209,8 +213,8 @@
                 android:id="@+id/innerf_follow_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="#00000000"
                 android:padding="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"

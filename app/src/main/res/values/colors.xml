@@ -7,41 +7,13 @@
     <color name="unselected">#919191</color>
 
 
-    <!--reds-->
-
-    <!-- pinks -->
-
-    <!-- purples -->
-
-    <!-- deep purples -->
-
-    <!-- indigo -->
-
-    <!--blue-->
-
-    <!-- light blue-->
-
-    <!-- cyan -->
-
-    <!-- teal -->
-
-    <!-- green -->
-
-    <!--light green-->
-
-    <!-- lime-->
-
-    <!--yellow -->
-
-    <!--amber-->
-
-    <!--orange-->
-
-    <!--deep orange-->
-
-    <!--brown -->
-
-    <!--grey-->
-
-    <!--blue grey-->
+    <color name="transparent_00">#00000000</color>
+    <color name="transparent_10">#1A000000</color>
+    <color name="transparent_20">#33000000</color>
+    <color name="transparent_30">#4D000000</color>
+    <color name="transparent_40">#66000000</color>
+    <color name="transparent_50">#80000000</color>
+    <color name="transparent_60">#99000000</color>
+    <color name="grey">#8F8F8F</color>
+    <color name="black">#000000</color>
 </resources>
