@@ -21,7 +21,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 
-import com.example.guswn.allthatlyrics.home.Frag4_chat.Home_fragment4;
+import com.example.guswn.allthatlyrics.ui.chat.ChatFragment;
 import com.example.guswn.allthatlyrics.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
@@ -55,7 +55,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 
     private void sendNotification(String messageBody,String title) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent intent = new Intent(this, Home_fragment4.class);
+        Intent intent = new Intent(this, ChatFragment.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 

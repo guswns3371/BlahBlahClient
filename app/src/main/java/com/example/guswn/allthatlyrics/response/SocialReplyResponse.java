@@ -21,7 +21,7 @@ public class SocialReplyResponse {
     String Social_Reply_time;
 
     @SerializedName("UserIdx_Info")
-    List<UserResponse_3> UserIdx_Info;
+    List<userResponse3> UserIdx_Info;
     /**ㅁㅊ놈ㅋㅋㅋㅋ*/
     @SerializedName("ReReply_info")
     List<SocialReReplyReponse> ReReply_info;
@@ -60,7 +60,7 @@ public class SocialReplyResponse {
         return Social_Reply_time;
     }
 
-    public List<UserResponse_3> getUserIdx_Info() {
+    public List<userResponse3> getUserIdx_Info() {
         return UserIdx_Info;
     }
 

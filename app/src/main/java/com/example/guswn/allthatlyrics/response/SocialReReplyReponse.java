@@ -16,7 +16,7 @@ public class SocialReReplyReponse {
     @SerializedName("Rere_time")
     String Rere_time;
     @SerializedName("Rere_UserIdx_Info")
-    UserResponse_3 Rere_UserIdx_Info;
+    userResponse3 Rere_UserIdx_Info;
 
     public String getIdx() {
         return idx;
@@ -42,7 +42,7 @@ public class SocialReReplyReponse {
         return Rere_time;
     }
 
-    public UserResponse_3 getRere_UserIdx_Info() {
+    public userResponse3 getRere_UserIdx_Info() {
         return Rere_UserIdx_Info;
     }
 }

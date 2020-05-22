@@ -1,8 +1,8 @@
 package com.example.guswn.allthatlyrics.api;
 
 import com.example.guswn.allthatlyrics.response.ServerResponse;
-import com.example.guswn.allthatlyrics.response.UserResponse_2;
-import com.example.guswn.allthatlyrics.response.UserResponse_3;
+import com.example.guswn.allthatlyrics.response.UserResponse2;
+import com.example.guswn.allthatlyrics.response.userResponse3;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ import retrofit2.http.Query;
 public interface EditAPI {
     @FormUrlEncoded
     @POST("UserInfo/edit_userinfo.php")
-    Call<UserResponse_2> editUserInfo(
+    Call<UserResponse2> editUserInfo(
             @FieldMap Map<String,String> fields
     );
 
@@ -35,7 +35,7 @@ public interface EditAPI {
 
     @Multipart
     @POST("UserInfo/img_info_userinfo.php")
-    Call<UserResponse_2> uploadPhoto_Info(
+    Call<UserResponse2> uploadPhoto_Info(
             @Part("Email") RequestBody email,
             @Part("Username") RequestBody Username,
             @Part("Birthday") RequestBody Birthday,
@@ -44,10 +44,10 @@ public interface EditAPI {
     );
 
     @GET("Register_Login/getjson_one.php")
-    Call<UserResponse_3> getOneInfo (@Query("Email") String email);
+    Call<userResponse3> getOneInfo (@Query("Email") String email);
 
     @GET("Register_Login/getjson_userinfo.php")
-    Call<UserResponse_3> getallInfo ();
+    Call<userResponse3> getallInfo ();
 
 //    @GET("Register_Login/getjson_one.php")
 //    Call<ResponseBody> getOneInfo (@Query("Email") String email);

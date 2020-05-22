@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_home"
-        android:icon="@drawable/home_ios_w"
-        android:title="Home"
+        android:id="@+id/menu_friends"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Friends"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_chat"
-        android:icon="@drawable/communication_ios_w"
+        android:icon="@drawable/ic_comment_black_24dp"
         android:title="Chat"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_social"
-        android:icon="@drawable/social_ios_w"
+        android:icon="@drawable/ic_people_black_24dp"
         android:title="Social"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_account"
-        android:icon="@drawable/account_ios_w"
+        android:icon="@drawable/ic_person_black_24dp"
         android:title="Account"
         app:showAsAction="ifRoom" />
 

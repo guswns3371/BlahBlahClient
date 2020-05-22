@@ -16,10 +16,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.guswn.allthatlyrics.extension.CircleTransform;
-import com.example.guswn.allthatlyrics.home.Frag1_friends.InnerFriendActivity;
-import com.example.guswn.allthatlyrics.home.Frag4_chat.ShowImageActivity;
+import com.example.guswn.allthatlyrics.ui.friends.activity.InnerFriendActivity;
+import com.example.guswn.allthatlyrics.ui.chat.activity.ShowImageActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.model.InnerChatInfo;
+import com.example.guswn.allthatlyrics.model.InnerChatModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewH
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
-                        InnerChatInfo clickedInnerChat = innerChatInfos.get(pos);
+                        InnerChatModel clickedInnerChat = innerChatModels.get(pos);
                         Intent intent = new Intent(context, InnerFriendActivity.class);
                         intent.putExtra("idx",clickedInnerChat.getChat_useridx());
                         intent.putExtra("innerchat",true);
@@ -82,7 +82,7 @@ public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewH
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
-                        InnerChatInfo clickedInnerChat = innerChatInfos.get(pos);
+                        InnerChatModel clickedInnerChat = innerChatModels.get(pos);
                         Intent intent = new Intent(context, ShowImageActivity.class);
                         intent.putExtra("isLoaded",clickedInnerChat.getIsLoaded());
                         intent.putExtra("isMine","mine");
@@ -96,7 +96,7 @@ public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewH
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
-                        InnerChatInfo clickedInnerChat = innerChatInfos.get(pos);
+                        InnerChatModel clickedInnerChat = innerChatModels.get(pos);
                         Intent intent = new Intent(context, ShowImageActivity.class);
                         intent.putExtra("isLoaded",clickedInnerChat.getIsLoaded());
                         intent.putExtra("isMine","not_mine");
@@ -118,11 +118,11 @@ public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewH
     public void setOnClickListener_InnerChat(ChatRecyclerClickListner f){
         this.CClistner = f;
     }
-    private ArrayList<InnerChatInfo> innerChatInfos;
+    private ArrayList<InnerChatModel> innerChatModels;
     private Context context;
     private Boolean isMine;
-    public MyAdapter_InnerChat(ArrayList<InnerChatInfo> innerChatInfos2, Context context){
-        this.innerChatInfos = innerChatInfos2;
+    public MyAdapter_InnerChat(ArrayList<InnerChatModel> innerChatInfos2, Context context){
+        this.innerChatModels = innerChatInfos2;
         this.context = context;
     }
     //
@@ -140,7 +140,7 @@ public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         final MyViewHolder_InnerChat myViewHolder = (MyViewHolder_InnerChat) viewHolder;
-        final InnerChatInfo object = innerChatInfos.get(i);
+        final InnerChatModel object = innerChatModels.get(i);
         final int pos = i;
         if(object!=null){
 
@@ -445,6 +445,6 @@ public class MyAdapter_InnerChat extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return innerChatInfos.size();
+        return innerChatModels.size();
     }
 }

@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guswn.allthatlyrics.extension.CircleTransform;
-import com.example.guswn.allthatlyrics.home.Frag3_account.OtherFollowAccount;
+import com.example.guswn.allthatlyrics.ui.account.activity.OtherFollowAccountActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.model.FollowTabInfo;
+import com.example.guswn.allthatlyrics.model.FollowTabModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.guswn.allthatlyrics.main.Logo.MY_IDX;
+import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
 public class MyAdapter_FollowTab extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
@@ -45,8 +45,8 @@ public class MyAdapter_FollowTab extends RecyclerView.Adapter<RecyclerView.ViewH
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-                        FollowTabInfo clickedFollow = followTabInfos.get(pos);
-                        Intent intent = new Intent(context, OtherFollowAccount.class);
+                        FollowTabModel clickedFollow = followTabModels.get(pos);
+                        Intent intent = new Intent(context, OtherFollowAccountActivity.class);
                         intent.putExtra("useridx",clickedFollow.getIdx());
                         intent.putExtra("username",clickedFollow.getFollow_username());
                         intent.putExtra("userimg",clickedFollow.getFollow_img());
@@ -65,13 +65,13 @@ public class MyAdapter_FollowTab extends RecyclerView.Adapter<RecyclerView.ViewH
         this.FTlistner = f;
     }
 
-    private ArrayList<FollowTabInfo> followTabInfos;
+    private ArrayList<FollowTabModel> followTabModels;
     private Context context;
 
 
-    public MyAdapter_FollowTab(ArrayList<FollowTabInfo> followTabInfos, Context context){
+    public MyAdapter_FollowTab(ArrayList<FollowTabModel> followTabModels, Context context){
         this.context = context;
-        this.followTabInfos = followTabInfos;
+        this.followTabModels = followTabModels;
     }
 
     @NonNull
@@ -83,7 +83,7 @@ public class MyAdapter_FollowTab extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        final FollowTabInfo object = followTabInfos.get(i);
+        final FollowTabModel object = followTabModels.get(i);
         final MyViewHolder myViewHolder = (MyViewHolder) viewHolder;
         final int[] flag = {0};
 //        final int position = i;
@@ -149,6 +149,6 @@ public class MyAdapter_FollowTab extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return followTabInfos.size();
+        return followTabModels.size();
     }
 }

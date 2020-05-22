@@ -1,7 +1,7 @@
 package com.example.guswn.allthatlyrics.api;
 
 import com.example.guswn.allthatlyrics.response.FollowingResponse;
-import com.example.guswn.allthatlyrics.response.UserResponse_3;
+import com.example.guswn.allthatlyrics.response.userResponse3;
 
 import java.util.Map;
 
@@ -14,10 +14,10 @@ import retrofit2.http.Query;
 
 public interface FriendAPI {
     @GET("Register_Login/getjson_userinfo.php")
-    Call<UserResponse_3> getOneInfo ();
+    Call<userResponse3> getOneInfo ();
 
     @GET("Register_Login/getjson_one.php")
-    Call<UserResponse_3> getOneInfo2_email (@Query("Email") String email);
+    Call<userResponse3> getOneInfo2_email (@Query("Email") String email);
 
     @FormUrlEncoded
     @POST("Chatting/make_follow_unfollow.php")
@@ -26,5 +26,5 @@ public interface FriendAPI {
     );
 
     @GET("Register_Login/getjson_follow_unfollow.php")
-    Call<UserResponse_3> get_follow_unfollow (@Query("er_idx") String follower_idx , @Query("ed_idx") String followed_idx);
+    Call<userResponse3> get_follow_unfollow (@Query("er_idx") String follower_idx , @Query("ed_idx") String followed_idx);
 }

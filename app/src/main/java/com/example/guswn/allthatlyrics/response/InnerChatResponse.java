@@ -31,7 +31,7 @@ public class InnerChatResponse {
     List<InnerChatResponse> chathistorylist;
 
     @SerializedName("UserIdx_Info")
-    List<UserResponse_3> innerchatuserinfolist;
+    List<userResponse3> innerchatuserinfolist;
 
     public String getChat_isfile() {
         return chat_isfile;
@@ -77,7 +77,7 @@ public class InnerChatResponse {
         return chat_time;
     }
 
-    public List<UserResponse_3> getInnerchatuserinfolist() {
+    public List<userResponse3> getInnerchatuserinfolist() {
         return innerchatuserinfolist;
     }
 }

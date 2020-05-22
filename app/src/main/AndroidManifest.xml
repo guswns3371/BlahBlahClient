@@ -31,21 +31,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".home.VideoChat.AgoraVideoChatOne"></activity>
-        <activity android:name=".home.Streaming.StreamingTest" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".main.Login" />
-        <activity android:name=".main.Register" />
-        <activity android:name=".home.Home" />
-        <activity android:name=".home.Frag3_account.Setting" />
-        <activity android:name=".main.Logo">
+        <activity android:name=".ui.videochat.AgoraVideoChatOneActivity"></activity>
+        <activity android:name=".ui.streaming.StreamingTest" />
+           <activity android:name=".ui.auth.LoginActivity" />
+        <activity android:name=".ui.auth.RegisterActivity" />
+        <activity android:name=".ui.HomeActivity" />
+        <activity android:name=".ui.account.activity.SettingActivity" />
+        <activity android:name=".ui.auth.LogoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.Frag3_account.Userinfo_Edit" /> <!-- 카메라로 사진찍을 때 필요 한 부분 FileProvider -->
+        <activity android:name=".ui.account.activity.UserinfoEditActivity" /> <!-- 카메라로 사진찍을 때 필요 한 부분 FileProvider -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.guswn.allthatlyrics"
@@ -55,10 +54,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider> <!-- 카메라로 사진찍을 때 필요 한 부분 FileProvider -->
-        <activity android:name=".home.Frag1_friends.InnerFriendActivity" />
-        <activity android:name=".home.Frag4_chat.InnerChatActivity" />
-        <activity android:name=".home.Frag4_chat.ChatAddActivity" />
-        <activity android:name=".home.Frag4_chat.ShowImageActivity" />
+        <activity android:name=".ui.friends.activity.InnerFriendActivity" />
+        <activity android:name=".ui.chat.activity.InnerChatActivity" />
+        <activity android:name=".ui.chat.activity.ChatAddActivity" />
+        <activity android:name=".ui.chat.activity.ShowImageActivity" />
 
         <service android:name=".firebase.FireBaseMessagingService">
             <intent-filter>
@@ -71,28 +70,28 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".home.Frag3_account.Follow_info_activity" />
-        <activity android:name=".home.Frag3_account.FollowTab" />
+        <activity android:name=".ui.account.activity.FollowInfoActivity" />
+        <activity android:name=".ui.account.followtab.FollowTab" />
         <activity
-            android:name=".home.Frag3_account.OtherFollowAccount"
+            android:name=".ui.account.activity.OtherFollowAccountActivity"
             android:label="@string/title_activity_othet_follow_account" />
         <activity
-            android:name=".home.Frag2_social.ShowGalleryActivity"
+            android:name=".ui.social.activity.ShowGalleryActivity"
             android:label="@string/title_activity_show_gallery" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" /> <!-- optional (needed if default theme has no action bar) -->
-        <activity android:name=".home.Frag2_social.AdvancedEditPhotoActivity" />
-        <activity android:name=".home.Frag2_social.MakeSocialContentActivity" />
-        <activity android:name=".home.Frag3_account.Home_frag3_history" />
-        <activity android:name=".home.Frag3_account.Home_frag3_bookmark" />
-        <activity android:name=".home.Frag2_social.InnerSocialActivity" />
-        <activity android:name=".home.Frag3_account.Home_frag3_like" />
+        <activity android:name=".ui.social.activity.AdvancedEditPhotoActivity" />
+        <activity android:name=".ui.social.activity.MakeSocialContentActivity" />
+        <activity android:name=".ui.account.inner.HistoryFragment" />
+        <activity android:name=".ui.account.inner.BookmarkFragment" />
+        <activity android:name=".ui.social.activity.InnerSocialActivity" />
+        <activity android:name=".ui.account.inner.LikeFragment" />
         <activity
-            android:name=".home.Frag2_social.Reply.SocialReplyActivity"
+            android:name=".ui.social.reply.SocialReplyActivity"
             android:windowSoftInputMode="adjustUnspecified|adjustResize|stateHidden" />
         <activity
-            android:name=".home.Streaming.VideoActivity"
+            android:name=".ui.streaming.VideoActivity"
             android:configChanges="orientation|screenSize" />
     </application>
 

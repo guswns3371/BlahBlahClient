@@ -17,7 +17,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.guswn.allthatlyrics.extension.CircleTransform;
-import com.example.guswn.allthatlyrics.home.Frag3_account.OtherFollowAccount;
+import com.example.guswn.allthatlyrics.ui.account.activity.OtherFollowAccountActivity;
 import com.example.guswn.allthatlyrics.extension.PhotoFilter;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.model.SocialInfoModel;
@@ -77,7 +77,7 @@ public class MyAdapter_Social extends RecyclerView.Adapter<RecyclerView.ViewHold
             int pos = getAdapterPosition();
             if(pos != RecyclerView.NO_POSITION){
                 SocialInfoModel model = socialInfoModels.get(pos);
-                Intent intent = new Intent(context, OtherFollowAccount.class);
+                Intent intent = new Intent(context, OtherFollowAccountActivity.class);
                 intent.putExtra("useridx",model.getSocial_useridx());
                 intent.putExtra("username",model.getSocial_username());
                 intent.putExtra("userimg",model.getSocial_userimg());

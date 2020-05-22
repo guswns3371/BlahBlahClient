@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.Space;
 import android.widget.TextView;
 
-import com.example.guswn.allthatlyrics.home.Frag3_account.OtherFollowAccount;
+import com.example.guswn.allthatlyrics.ui.account.activity.OtherFollowAccountActivity;
 import com.example.guswn.allthatlyrics.extension.MyGlide;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.model.SocialReplyModel;
@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.guswn.allthatlyrics.main.Logo.MY_IDX;
+import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
 public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -55,7 +55,7 @@ public class MyAdapter_Reply extends RecyclerView.Adapter<RecyclerView.ViewHolde
             int pos = getAdapterPosition();
             if(pos != RecyclerView.NO_POSITION){
                 SocialReplyModel model = socialReplyModels.get(pos);
-                Intent intent = new Intent(context, OtherFollowAccount.class);
+                Intent intent = new Intent(context, OtherFollowAccountActivity.class);
                 intent.putExtra("useridx",model.getUseridx());
                 intent.putExtra("username",model.getUsername());
                 String userimg = model.getUserimg();

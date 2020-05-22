@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
 
-    tools:context=".home.Frag3_account.Setting">
+    tools:context=".ui.account.activity.SettingActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/setting_tb"

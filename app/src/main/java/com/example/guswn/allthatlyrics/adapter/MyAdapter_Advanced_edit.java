@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guswn.allthatlyrics.extension.PhotoFilter;
-import com.example.guswn.allthatlyrics.home.Frag2_social.AdvancedEditPhotoActivity;
+import com.example.guswn.allthatlyrics.ui.social.activity.AdvancedEditPhotoActivity;
 import com.example.guswn.allthatlyrics.R;
 import com.example.guswn.allthatlyrics.model.AdvancedImgModel;
 

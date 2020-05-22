@@ -32,13 +32,13 @@ public class ChatResponse {
     List<ChatResponse> ChatList;
 
     @SerializedName("UserIdx_Info")
-    List<UserResponse_3> ChatUserInfoList;
+    List<userResponse3> ChatUserInfoList;
 
     public String getChatunreadlist() {
         return chatunreadlist;
     }
 
-    public List<UserResponse_3> getChatUserInfoList() {
+    public List<userResponse3> getChatUserInfoList() {
         return ChatUserInfoList;
     }
 

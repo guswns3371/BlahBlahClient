@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guswn.allthatlyrics.extension.CircleTransform;
-import com.example.guswn.allthatlyrics.home.Frag1_friends.InnerFriendActivity;
+import com.example.guswn.allthatlyrics.ui.friends.activity.InnerFriendActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.model.FriendInfo;
+import com.example.guswn.allthatlyrics.model.FriendModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,14 +48,14 @@ public class MyAdapter_Friend extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-                        FriendInfo clickedFriend = friendInfos.get(pos);
+                        FriendModel clickedFriend = friendModels.get(pos);
                         Intent intent = new Intent(context, InnerFriendActivity.class);
-                        intent.putExtra("idx",friendInfos.get(pos).getIdx());
-                        intent.putExtra("image",friendInfos.get(pos).getImg());
-                        intent.putExtra("name",friendInfos.get(pos).getName());
-                        intent.putExtra("email",friendInfos.get(pos).getEmail());
-                        intent.putExtra("birthday",friendInfos.get(pos).getBirthday());
-                        intent.putExtra("introduce",friendInfos.get(pos).getDescription());
+                        intent.putExtra("idx", friendModels.get(pos).getIdx());
+                        intent.putExtra("image", friendModels.get(pos).getImg());
+                        intent.putExtra("name", friendModels.get(pos).getName());
+                        intent.putExtra("email", friendModels.get(pos).getEmail());
+                        intent.putExtra("birthday", friendModels.get(pos).getBirthday());
+                        intent.putExtra("introduce", friendModels.get(pos).getDescription());
                         //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         //위코드처럼 플래그를 달면  밑에 startActivityForResult가 제대로 실행되지 않는다
                         //context.startActivity(intent);
@@ -87,14 +87,14 @@ public class MyAdapter_Friend extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-                        FriendInfo clickedFriend = friendInfos.get(pos);
+                        FriendModel clickedFriend = friendModels.get(pos);
                         Intent intent = new Intent(context,InnerFriendActivity.class);
-                        intent.putExtra("idx",friendInfos.get(pos).getIdx());
-                        intent.putExtra("image",friendInfos.get(pos).getImg());
-                        intent.putExtra("name",friendInfos.get(pos).getName());
-                        intent.putExtra("email",friendInfos.get(pos).getEmail());
-                        intent.putExtra("birthday",friendInfos.get(pos).getBirthday());
-                        intent.putExtra("introduce",friendInfos.get(pos).getDescription());
+                        intent.putExtra("idx", friendModels.get(pos).getIdx());
+                        intent.putExtra("image", friendModels.get(pos).getImg());
+                        intent.putExtra("name", friendModels.get(pos).getName());
+                        intent.putExtra("email", friendModels.get(pos).getEmail());
+                        intent.putExtra("birthday", friendModels.get(pos).getBirthday());
+                        intent.putExtra("introduce", friendModels.get(pos).getDescription());
                         //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         //위코드처럼 플래그를 달면  밑에 startActivityForResult가 제대로 실행되지 않는다
                         //context.startActivity(intent);
@@ -116,11 +116,11 @@ public class MyAdapter_Friend extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.FRlistner = f;
     }
 
-    private ArrayList<FriendInfo> friendInfos;
+    private ArrayList<FriendModel> friendModels;
     private Context context;
     private Boolean isChatAdd =false;
-    public MyAdapter_Friend(ArrayList<FriendInfo> friendInfos1, Context context, Boolean isChatAdd){
-        this.friendInfos = friendInfos1;
+    public MyAdapter_Friend(ArrayList<FriendModel> friendInfos1, Context context, Boolean isChatAdd){
+        this.friendModels = friendInfos1;
         this.context = context;
         this.isChatAdd = isChatAdd;
     }
@@ -148,7 +148,7 @@ public class MyAdapter_Friend extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
-       final FriendInfo object = friendInfos.get(i);
+       final FriendModel object = friendModels.get(i);
 
        final int position = i;
         if(object!=null){
@@ -195,7 +195,7 @@ public class MyAdapter_Friend extends RecyclerView.Adapter<RecyclerView.ViewHold
                     break;
                 case LAYOUT_TWO:
                     if(object.getImg()==null){
-                        ((MyViewHolderB)viewHolder).b_img.setImageResource(R.drawable.person);
+                        ((MyViewHolderB)viewHolder).b_img.setImageResource(R.drawable.account);
                     }else {
                         Picasso.with(context)
                                 .load(context.getString(R.string.URL)+object.getImg())
@@ -279,7 +279,7 @@ public class MyAdapter_Friend extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return friendInfos.size();
+        return friendModels.size();
     }
 
     @Override

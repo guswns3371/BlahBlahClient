@@ -1,6 +1,6 @@
 package com.example.guswn.allthatlyrics.response;
 
-import com.example.guswn.allthatlyrics.model.Person;
+import com.example.guswn.allthatlyrics.model.PersonModel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class UserResponse {
         return username;
     }
 
-    List<Person> result;
+    List<PersonModel> result;
 
     public String getValue() {
         return value;
@@ -54,7 +54,7 @@ public class UserResponse {
         return message;
     }
 
-    public List<Person> getResult() {
+    public List<PersonModel> getResult() {
         return result;
     }
 }

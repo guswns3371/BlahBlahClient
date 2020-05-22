@@ -36,7 +36,7 @@ public class SocialUploadResponse {
     @SerializedName("SocialHistory")
     List<SocialUploadResponse> SocialHistoryList;
     @SerializedName("UserInfo")
-    List<UserResponse_3> socialUserInfoList;
+    List<userResponse3> socialUserInfoList;
 
     /**로드 할때 필요한것 */
     @SerializedName("Social_Liked_List")
@@ -65,7 +65,7 @@ public class SocialUploadResponse {
         return Social_isBookMarked;
     }
 
-    public List<UserResponse_3> getSocialUserInfoList() {
+    public List<userResponse3> getSocialUserInfoList() {
         return socialUserInfoList;
     }
 

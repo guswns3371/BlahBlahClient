@@ -3,7 +3,7 @@ package com.example.guswn.allthatlyrics.firebase;
 import android.util.Log;
 
 import com.example.guswn.allthatlyrics.extension.App;
-import com.example.guswn.allthatlyrics.extension.SaveSharedPreference;
+import com.example.guswn.allthatlyrics.extension.MyPreference;
 import com.example.guswn.allthatlyrics.R;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -16,9 +16,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-import static com.example.guswn.allthatlyrics.main.Logo.MY_EMAIL_2;
-import static com.example.guswn.allthatlyrics.main.Logo.MY_IDX;
-import static com.example.guswn.allthatlyrics.MainActivity.isNullOrEmpty;
+import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_EMAIL_2;
+import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
+import static com.example.guswn.allthatlyrics.extension.Extensions.isNullOrEmpty;
 
 
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
@@ -31,10 +31,10 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
         Log.d(TAG, "Refreshed token : " + refreshedToken);
 
         if (!isNullOrEmpty(refreshedToken)){
-          if (!isNullOrEmpty(SaveSharedPreference.getFirebaseToken(FirebaseInstanceIDService.this,MY_EMAIL_2))){
+          if (!isNullOrEmpty(MyPreference.getFirebaseToken(FirebaseInstanceIDService.this,MY_EMAIL_2))){
               //토큰에 데이터가 없는 경우에만 저장
-              SaveSharedPreference.setFirebaseToken(FirebaseInstanceIDService.this,refreshedToken,MY_EMAIL_2);
-              Log.d(TAG, "Refreshed token _SaveSharedPreference : " + SaveSharedPreference.getFirebaseToken(FirebaseInstanceIDService.this,MY_EMAIL_2));
+              MyPreference.setFirebaseToken(FirebaseInstanceIDService.this,refreshedToken,MY_EMAIL_2);
+              Log.d(TAG, "Refreshed token _SaveSharedPreference : " + MyPreference.getFirebaseToken(FirebaseInstanceIDService.this,MY_EMAIL_2));
           }
 
           if (!isNullOrEmpty(MY_EMAIL_2)){

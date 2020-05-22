@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guswn.allthatlyrics.extension.CircleTransform;
-import com.example.guswn.allthatlyrics.home.Frag4_chat.InnerChatActivity;
+import com.example.guswn.allthatlyrics.ui.chat.activity.InnerChatActivity;
 import com.example.guswn.allthatlyrics.R;
-import com.example.guswn.allthatlyrics.model.ChatInfo;
+import com.example.guswn.allthatlyrics.model.ChatModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class MyAdapter_Chat extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-                        ChatInfo clickedChat = chatInfos.get(pos);
+                        ChatModel clickedChat = chatModels.get(pos);
                         Intent intent = new Intent(context, InnerChatActivity.class);
                         intent.putExtra("chatroom_idx",clickedChat.getIdx());
                         intent.putExtra("chatroomname",clickedChat.getTitle());
@@ -69,11 +69,11 @@ public class MyAdapter_Chat extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void setOnClickListener_Chat(ChatRycyclerClickListner f){
         this.CHlistner = f;
     }
-    private ArrayList<ChatInfo> chatInfos;
+    private ArrayList<ChatModel> chatModels;
     private Context context;
 
-    public MyAdapter_Chat(ArrayList<ChatInfo> chatInfos1, Context context){
-        this.chatInfos = chatInfos1;
+    public MyAdapter_Chat(ArrayList<ChatModel> chatInfos1, Context context){
+        this.chatModels = chatInfos1;
         this.context = context;
     }
     //
@@ -91,7 +91,7 @@ public class MyAdapter_Chat extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public static String unReadMessage;
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        final ChatInfo object = chatInfos.get(i);
+        final ChatModel object = chatModels.get(i);
         final MyViewHolder myViewHolder = (MyViewHolder) viewHolder;
         if(object!=null){
 
@@ -207,6 +207,6 @@ public class MyAdapter_Chat extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return chatInfos.size();
+        return chatModels.size();
     }
 }

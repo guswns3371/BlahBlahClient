@@ -1,6 +1,6 @@
 package com.example.guswn.allthatlyrics.api;
 
-import com.example.guswn.allthatlyrics.response.UserResponse_3;
+import com.example.guswn.allthatlyrics.response.userResponse3;
 import com.example.guswn.allthatlyrics.response.ChatResponse;
 import com.example.guswn.allthatlyrics.response.InnerChatResponse;
 import com.example.guswn.allthatlyrics.response.UnReadCountResponse;
@@ -30,7 +30,7 @@ public interface ChatAPI {
     Call<ChatResponse> getChatRoomList();
 
     @GET("Register_Login/getjson_one_idx.php")
-    Call<UserResponse_3> getOneInfo3_idx (@Query("idx") String user_idx);
+    Call<userResponse3> getOneInfo3_idx (@Query("idx") String user_idx);
 
     @FormUrlEncoded
     @POST("Chatting/getjson_chathistory_userinfo.php")
