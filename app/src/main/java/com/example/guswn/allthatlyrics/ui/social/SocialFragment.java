@@ -1,6 +1,7 @@
 package com.example.guswn.allthatlyrics.ui.social;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -174,12 +175,10 @@ public class SocialFragment extends Fragment implements SocialAdapter.SocialReyc
     public void loadSocialHistory(){
         Call<SocialUploadResponse> call = api.getSocialHistoryList();
 
-        final ProgressDialog progressDoalog;
-        progressDoalog = new ProgressDialog(getActivity());
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Please Wait");
-        progressDoalog.setTitle("Socia Information Loading...");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        final Dialog progressDoalog;
+        progressDoalog = new Dialog(getActivity());
+        progressDoalog.setContentView(R.layout.custom_loading_dialog);
+        progressDoalog.setCancelable(true);
         // show it
         progressDoalog.show();
         call.enqueue(new Callback<SocialUploadResponse>() {

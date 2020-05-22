@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="12"
                 android:orientation="vertical">
 
@@ -50,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="TextView"
+
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -100,7 +102,7 @@
 
             <ImageButton
                 android:id="@+id/social_like_btn"
-                android:layout_width="30dp"
+                android:layout_width="29dp"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
                 android:scaleType="fitCenter"

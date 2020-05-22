@@ -1,5 +1,6 @@
 package com.example.guswn.allthatlyrics.ui.friends;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -90,12 +91,10 @@ public class FriendsFragment extends Fragment{
         Log.e("MY_EMAIL","/"+MY_EMAIL_2);
         Call<userResponse3> call = api.getOneInfo();
 
-        final ProgressDialog progressDoalog;
-        progressDoalog = new ProgressDialog(getActivity());
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Please Wait");
-        progressDoalog.setTitle("Friends Information Loading...");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        final Dialog progressDoalog;
+        progressDoalog = new Dialog(getActivity());
+        progressDoalog.setContentView(R.layout.custom_loading_dialog);
+        progressDoalog.setCancelable(true);
         // show it
         progressDoalog.show();
 

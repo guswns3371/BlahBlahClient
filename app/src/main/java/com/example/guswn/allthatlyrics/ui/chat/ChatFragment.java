@@ -1,5 +1,6 @@
 package com.example.guswn.allthatlyrics.ui.chat;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -265,12 +266,10 @@ public class ChatFragment extends Fragment {
     }
     public void loadChatRoomList(){
         Call<ChatResponse> call = api.getChatRoomList();
-        final ProgressDialog progressDoalog;
-        progressDoalog = new ProgressDialog(getActivity());
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Please Wait");
-        progressDoalog.setTitle("Chatting Information Loading...");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        final Dialog progressDoalog;
+        progressDoalog = new Dialog(getActivity());
+        progressDoalog.setContentView(R.layout.custom_loading_dialog);
+        progressDoalog.setCancelable(true);
         // show it
         progressDoalog.show();
         call.enqueue(new Callback<ChatResponse>() {
