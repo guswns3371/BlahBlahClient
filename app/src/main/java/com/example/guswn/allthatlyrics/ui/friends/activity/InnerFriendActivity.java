@@ -1,5 +1,6 @@
 package com.example.guswn.allthatlyrics.ui.friends.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -129,12 +130,10 @@ public class InnerFriendActivity extends AppCompatActivity {
 
     public void loadInnerFriendinfo(){
         Call<userResponse3> call = api_chat.getOneInfo3_idx(friend_idx);
-        final ProgressDialog progressDoalog;
-        progressDoalog = new ProgressDialog(InnerFriendActivity.this);
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Please Wait");
-        progressDoalog.setTitle("Friends Information Loading...");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        final Dialog progressDoalog;
+        progressDoalog = new Dialog(InnerFriendActivity.this);
+        progressDoalog.setContentView(R.layout.custom_loading_dialog);
+        progressDoalog.setCancelable(true);
         // show it
         progressDoalog.show();
 

@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:titleTextColor="#000000"
-        app:title="Edit Profile" />
+        app:title="프로필 편집" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Edit Photo"
+                android:text="사진 편집"
                 android:textColor="#1b0000"
                 android:textSize="19sp" />
         </LinearLayout>
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="5dp"
-                    android:text="Username" />
+                    android:text="이름" />
 
                 <EditText
                     android:id="@+id/edit_username"
@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="5dp"
-                    android:text="Birthday (YYYYMMDD)" />
+                    android:text="생년월일 (YYYYMMDD)" />
 
                 <EditText
                     android:id="@+id/edit_birthday"
@@ -130,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="5dp"
-                    android:text="Introduce" />
+                    android:text="소개" />
 
                 <EditText
                     android:id="@+id/edit_introduce"
