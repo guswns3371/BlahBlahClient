@@ -1,25 +1,25 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:17:2-20:13
-INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:17:2-20:13
-INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:17:2-20:13
+ADDED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:17:2-20:13
+INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:17:2-20:13
+INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:17:2-20:13
 	package
-		ADDED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:18:5-40
-		INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
-		INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+		ADDED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:18:5-40
+		INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+		INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:17:12-70
+		ADDED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml:17:12-70
 uses-sdk
-INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
-INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
-INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
-INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
-		ADDED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
-		INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+		INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+		ADDED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+		INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
-		ADDED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
-		INJECTED from /home/guswns/AndroidStudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+		INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+		ADDED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml
+		INJECTED from /home/guswns/StudioProjects/AllThatLyrics/aFileChooser/src/main/AndroidManifest.xml

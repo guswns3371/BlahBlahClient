@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface FriendAPI {
     @GET("Register_Login/getjson_userinfo.php")
-    Call<userResponse3> getOneInfo ();
+    Call<userResponse3> getOneInfo(@Query("idx") String user_idx);
 
     @GET("Register_Login/getjson_one.php")
     Call<userResponse3> getOneInfo2_email (@Query("Email") String email);

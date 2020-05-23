@@ -89,7 +89,7 @@ public class FriendsFragment extends Fragment{
 
     public void getoneinfo_B(){
         Log.e("MY_EMAIL","/"+MY_EMAIL_2);
-        Call<userResponse3> call = api.getOneInfo();
+        Call<userResponse3> call = api.getOneInfo(MY_EMAIL_2);
 
         final Dialog progressDoalog;
         progressDoalog = new Dialog(getActivity());

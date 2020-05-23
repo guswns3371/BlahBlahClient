@@ -78,7 +78,7 @@ public class ChatAddActivity extends AppCompatActivity{
 
     public void getoneinfo_B(){
         Log.e("MY_EMAIL","/"+MY_EMAIL_2);
-        Call<userResponse3> call = api.getOneInfo();
+        Call<userResponse3> call = api.getOneInfo(MY_EMAIL_2);
 
         final ProgressDialog progressDoalog;
         progressDoalog = new ProgressDialog(this);
