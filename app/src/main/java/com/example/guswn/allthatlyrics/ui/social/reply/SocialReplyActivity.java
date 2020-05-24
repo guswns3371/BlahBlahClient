@@ -316,7 +316,7 @@ public class SocialReplyActivity extends AppCompatActivity implements SocialRepl
                 @Override
                 public void run() {
                     if(!isConnected){
-                        Toast.makeText(getApplicationContext(),"Connected reply",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"연결되었습니다",Toast.LENGTH_SHORT).show();
                         isConnected=true;
 
                     }
@@ -422,7 +422,7 @@ public class SocialReplyActivity extends AppCompatActivity implements SocialRepl
                 @Override
                 public void run() {
                     isConnected=false;
-                    Toast.makeText(getApplicationContext(),"DisConnected reply",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"연결이 불안정합니다",Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -434,7 +434,7 @@ public class SocialReplyActivity extends AppCompatActivity implements SocialRepl
                 @Override
                 public void run() {
 
-                    Toast.makeText(getApplicationContext(),"ConnetionError reply",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"연결이 불안정합니다",Toast.LENGTH_SHORT).show();
                 }
             });
         }

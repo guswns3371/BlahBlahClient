@@ -47,7 +47,7 @@ public interface EditAPI {
     Call<userResponse3> getOneInfo (@Query("Email") String email);
 
     @GET("Register_Login/getjson_userinfo.php")
-    Call<userResponse3> getallInfo ();
+    Call<userResponse3> getallInfo (@Query("idx") String user_idx);
 
 //    @GET("Register_Login/getjson_one.php")
 //    Call<ResponseBody> getOneInfo (@Query("Email") String email);

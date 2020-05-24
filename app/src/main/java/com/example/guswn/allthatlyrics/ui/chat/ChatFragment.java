@@ -266,12 +266,7 @@ public class ChatFragment extends Fragment {
     }
     public void loadChatRoomList(){
         Call<ChatResponse> call = api.getChatRoomList();
-        final Dialog progressDoalog;
-        progressDoalog = new Dialog(getActivity());
-        progressDoalog.setContentView(R.layout.custom_loading_dialog);
-        progressDoalog.setCancelable(true);
-        // show it
-        progressDoalog.show();
+
         call.enqueue(new Callback<ChatResponse>() {
             @Override
             public void onResponse(Call<ChatResponse> call, Response<ChatResponse> response) {
@@ -279,7 +274,6 @@ public class ChatFragment extends Fragment {
                     Log.e("loadChatRoomList_code",""+response.code());
                     return;
                 }
-                progressDoalog.dismiss();
 
                 ChatResponse res = response.body();
                 List<ChatResponse> list = res.getChatList();
@@ -334,6 +328,7 @@ public class ChatFragment extends Fragment {
                             photo_new= val.getPhoto();
                         }
                     }
+                    NAMES = NAMES.substring(0,NAMES.length()-1);
                     NAMES +=")";
                     /** 단톡방 이름*/
 
@@ -354,7 +349,6 @@ public class ChatFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ChatResponse> call, Throwable t) {
-                progressDoalog.dismiss();
                 Log.e("loadChatRoomList_fail","Error : "+t.getMessage());
             }
         });

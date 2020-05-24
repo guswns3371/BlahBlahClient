@@ -10,13 +10,14 @@
         android:id="@+id/custom_img"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/account" />
 
     <ImageView
         android:id="@+id/custom_img_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_margin="11dp"
         app:srcCompat="@drawable/layered_g" />
 

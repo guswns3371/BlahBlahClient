@@ -24,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
+
 public class FollowInfoActivity extends AppCompatActivity {
 
     @BindView(R.id.follow_tb)
@@ -67,7 +69,7 @@ public class FollowInfoActivity extends AppCompatActivity {
     }
 
     public void getAlluserInfo(){
-        Call<userResponse3> call = api.getallInfo();
+        Call<userResponse3> call = api.getallInfo(MY_IDX);
 
         call.enqueue(new Callback<userResponse3>() {
             @Override

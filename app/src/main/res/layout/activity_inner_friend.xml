@@ -30,6 +30,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:visibility="gone"
                     android:id="@+id/innerf_follow_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,35 +48,45 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:padding="5dp"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/account" />
 
 
                 <TextView
                     android:id="@+id/innerf_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/transparent_20"
+                    android:paddingStart="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="2dp"
                     android:text="Name"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/innerf_intro"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="Email"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/transparent_20"
                     android:maxLines="1"
+                    android:padding="5dp"
+                    android:text="Introduce"
+                    android:textColor="@android:color/white"
                     android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:padding="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="20dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -92,11 +103,13 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="10dp"
                             android:layout_weight="2"
                             android:background="#00000000"
                             android:cropToPadding="false"
                             android:padding="3dp"
                             android:scaleType="centerCrop"
+                            android:tint="@android:color/white"
                             app:srcCompat="@drawable/ic_comment_black_24dp" />
 
                         <TextView
@@ -106,7 +119,9 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="채팅하기"
-                            android:textSize="13sp" />
+                            android:textColor="@android:color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -124,9 +139,11 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="10dp"
                             android:background="#00000000"
                             android:padding="3dp"
                             android:scaleType="centerCrop"
+                            android:tint="@android:color/white"
                             app:srcCompat="@drawable/ic_edit_black_24dp" />
 
                         <TextView
@@ -135,7 +152,9 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="프로필 편집"
-                            android:textSize="13sp" />
+                            android:textColor="@android:color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -153,9 +172,11 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="10dp"
                             android:background="#00000000"
                             android:padding="3dp"
                             android:scaleType="centerCrop"
+                            android:tint="@android:color/white"
                             app:srcCompat="@drawable/ic_call_black_24dp" />
 
                         <TextView
@@ -164,7 +185,9 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="전화걸기"
-                            android:textSize="13sp" />
+                            android:textColor="@android:color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -174,14 +197,14 @@
             android:id="@+id/innerf_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="192dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Introduction"
+            android:background="@color/transparent_20"
             android:padding="3dp"
-            android:background="@color/transparent_10"
+            android:text="Introduction"
             android:textColor="#ffffff"
             android:textSize="14sp" />
 

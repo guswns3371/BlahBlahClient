@@ -261,7 +261,7 @@ public class HomeActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        Toast.makeText(HomeActivity.this,"Connected home",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HomeActivity.this,"연결되었습니다",Toast.LENGTH_SHORT).show();
                         isConnected=true;
 
                     }
@@ -276,7 +276,7 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     isConnected=false;
-                    Toast.makeText(HomeActivity.this,"DisConnected home",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this,"연결이 불안정합니다",Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -288,7 +288,7 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    Toast.makeText(HomeActivity.this,"ConnetionError home",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this,"연결이 불안정합니다",Toast.LENGTH_SHORT).show();
                 }
             });
         }

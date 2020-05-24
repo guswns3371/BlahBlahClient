@@ -56,13 +56,23 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                      <entry key="foregroundClipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="foregroundImage">
                                         <value>
                                           <PersistentState>
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="scalingPercent" value="69" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -72,8 +82,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundImage" value="D:\Dev\android\blah_blah.jpg" />
-                                      <entry key="outputName" value="ic_launcher_blah" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="000000" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/다운로드/blahblah.jpg" />
+                                      <entry key="outputName" value="ic_launcher_blah_2" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -146,7 +158,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/snap/android-studio/88/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_call_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/snap/android-studio/88/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_photo_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -156,7 +168,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_call_black_24dp" />
+                            <entry key="outputName" value="ic_photo_black_24dp" />
                             <entry key="sourceFile" value="$USER_HOME$/C:\Users\guswn" />
                           </map>
                         </option>

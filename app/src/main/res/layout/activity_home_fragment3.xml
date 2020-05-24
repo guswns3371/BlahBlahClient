@@ -145,9 +145,9 @@
                     android:id="@+id/account_edit_btn"
                     android:layout_width="246dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/mybtn_1"
                     android:gravity="center"
                     android:text="Edit"
@@ -207,7 +207,7 @@
                     android:background="#00000000"
                     android:padding="10dp"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/dash_board_ios_b" />
+                    app:srcCompat="@drawable/ic_photo_black_24dp" />
 
                 <ImageButton
                     android:id="@+id/account_liked_imgbtn"
@@ -218,7 +218,7 @@
                     android:cropToPadding="false"
                     android:padding="12dp"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/heart_filled_ios" />
+                    app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
                 <ImageButton
                     android:id="@+id/account_bookmark_imgbtn"
@@ -228,7 +228,7 @@
                     android:background="#00000000"
                     android:padding="12dp"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/book_ios_b" />
+                    app:srcCompat="@drawable/ic_bookmark_black_24dp" />
             </LinearLayout>
 
             <FrameLayout

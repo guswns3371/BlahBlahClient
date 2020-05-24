@@ -147,45 +147,45 @@ public class InnerFriendActivity extends AppCompatActivity {
                 progressDoalog.dismiss();
 
                 userResponse3 val = response.body();
-                    String idx = val.getIdx();
-                    String email = val.getEmail();
-                    String username = val.getUsername();
-                    String photo = val.getPhoto();
-                    photo = getString(R.string.URL)+photo;
-                    String birthday = val.getBirthday();
-                    String introduce = val.getIntroduce();
-                    List<FollowingResponse> UserFollow = val.getUserfollower();
+                String idx = val.getIdx();
+                String email = val.getEmail();
+                String username = val.getUsername();
+                String photo = val.getPhoto();
+                photo = getString(R.string.URL)+photo;
+                String birthday = val.getBirthday();
+                String introduce = val.getIntroduce();
+                List<FollowingResponse> UserFollow = val.getUserfollower();
 
-                    boolean isfollowed = false;
-                    for (FollowingResponse follow : UserFollow){
-                       String  er = follow.getFollower_idx();
+                boolean isfollowed = false;
+                for (FollowingResponse follow : UserFollow){
+                   String  er = follow.getFollower_idx();
 //                       String  ed = follow.getFollowed_idx();
-                           if (er.equals(MY_IDX)){
-                               isfollowed=true;
-                           }
-                    }
+                       if (er.equals(MY_IDX)){
+                           isfollowed=true;
+                       }
+                }
 
-                    if (isfollowed){
-                        flag++;
-                        innerf_follow_btn.setImageResource(R.drawable.following);
+                if (isfollowed){
+                    flag++;
+                    innerf_follow_btn.setImageResource(R.drawable.following);
+                }
+                    if(!email.equals(MY_EMAIL_2)){
+                        edit_linear.setVisibility(View.GONE);
+                    }else {
+                        call_linear.setVisibility(View.GONE);
                     }
-                        if(!email.equals(MY_EMAIL_2)){
-                            edit_linear.setVisibility(View.GONE);
-                        }else {
-                            call_linear.setVisibility(View.GONE);
-                        }
-                        Picasso.with(InnerFriendActivity.this)
-                                .load(photo)
-                                .transform(new CircleTransform())
-                                .placeholder(R.drawable.account)
-                                .into(innerf_img);
-                        Picasso.with(InnerFriendActivity.this)
-                                .load(photo)
-                                .placeholder(R.drawable.load)
-                                .into(innerf_backimg);
-                        innerf_name.setText(username);
-                        innerf_email.setText(email);
-                        innerf_intro.setText(introduce);
+                    Picasso.with(InnerFriendActivity.this)
+                            .load(photo)
+                            .transform(new CircleTransform())
+                            .placeholder(R.drawable.account)
+                            .into(innerf_img);
+                    Picasso.with(InnerFriendActivity.this)
+                            .load(photo)
+                            .placeholder(R.drawable.load)
+                            .into(innerf_backimg);
+                    innerf_name.setText(username);
+                    innerf_email.setText(email);
+                    innerf_intro.setText(introduce);
 
 
             }
@@ -223,13 +223,13 @@ public class InnerFriendActivity extends AppCompatActivity {
                 Log.e("follow_or_unfollow ",value+"/"+message+"/"+isfollow+"/"+er+"/"+ed);
                 if (value.equals("1")){
                     if (isfollow.equals("follow")){
-                        Toast toast = Toast.makeText(InnerFriendActivity.this,"팔로우 하셨습니다",Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP,0,200);
-                        toast.show();
+//                        Toast toast = Toast.makeText(InnerFriendActivity.this,"팔로우 하셨습니다",Toast.LENGTH_SHORT);
+//                        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP,0,200);
+//                        toast.show();
                     }else if (isfollow.equals("unfollow")){
-                        Toast toast = Toast.makeText(InnerFriendActivity.this,"언팔로우 하셨습니다",Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP,0,200);
-                        toast.show();
+//                        Toast toast = Toast.makeText(InnerFriendActivity.this,"언팔로우 하셨습니다",Toast.LENGTH_SHORT);
+//                        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP,0,200);
+//                        toast.show();
                     }
                 }else {
                     Toast toast = Toast.makeText(InnerFriendActivity.this,message,Toast.LENGTH_SHORT);

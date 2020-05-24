@@ -74,7 +74,7 @@ public class FollowerTabFragment extends Fragment implements FollowTabAdapter.Fo
 
 
     public void loadFollowinfo(){
-        Call<userResponse3> call = api.getallInfo();
+        Call<userResponse3> call = api.getallInfo(MY_IDX);
         call.enqueue(new Callback<userResponse3>() {
             @Override
             public void onResponse(Call<userResponse3> call, Response<userResponse3> response) {

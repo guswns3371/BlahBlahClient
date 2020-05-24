@@ -87,12 +87,6 @@ public class HistoryFragment extends Fragment {
     public void loadSocialHistory_oneidx(final String USER_IDX){
         Call<SocialUploadResponse> call = api.getSocialHistoryList_oneidx(USER_IDX);
 
-        final Dialog progressDoalog;
-        progressDoalog = new Dialog(getActivity());
-        progressDoalog.setContentView(R.layout.custom_loading_dialog);
-        progressDoalog.setCancelable(true);
-        // show it
-        progressDoalog.show();
         call.enqueue(new Callback<SocialUploadResponse>() {
             @Override
             public void onResponse(Call<SocialUploadResponse> call, Response<SocialUploadResponse> response) {
@@ -100,7 +94,6 @@ public class HistoryFragment extends Fragment {
                     Log.e("loadSocialHistory_oneidx_code",""+response.code());
                     return;
                 }
-                progressDoalog.dismiss();
 
                 SocialUploadResponse res2 = response.body();
                 List<SocialUploadResponse> list = res2.getSocialHistoryList();
@@ -199,7 +192,6 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onFailure(Call<SocialUploadResponse> call, Throwable t) {
                 Log.e("loadSocialHistory_oneidx_fail","Error : "+t.getMessage());
-                progressDoalog.dismiss();
             }
         });
     }

@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +20,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.guswn.allthatlyrics.api.FriendAPI;
 import com.example.guswn.allthatlyrics.extension.CircleTransform;
 import com.example.guswn.allthatlyrics.extension.MyRetrofit;
 import com.example.guswn.allthatlyrics.response.FollowingResponse;
@@ -35,10 +38,13 @@ import com.example.guswn.allthatlyrics.ui.account.followtab.FollowTab;
 import com.example.guswn.allthatlyrics.ui.account.inner.BookmarkFragment;
 import com.example.guswn.allthatlyrics.ui.account.inner.HistoryFragment;
 import com.example.guswn.allthatlyrics.ui.account.inner.LikeFragment;
+import com.example.guswn.allthatlyrics.ui.friends.activity.InnerFriendActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -279,6 +285,7 @@ public class AccountFragment extends Fragment {
             }
         });
     }
+
 
     public void getoneinfo(){
         Log.e("MY_EMAIL","/"+MY_EMAIL);

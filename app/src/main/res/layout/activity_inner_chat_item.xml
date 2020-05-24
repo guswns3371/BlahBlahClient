@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -24,8 +25,8 @@
 
         <ImageView
             android:id="@+id/not_mine_img"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/account" />
 

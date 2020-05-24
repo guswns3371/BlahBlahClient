@@ -86,12 +86,12 @@ public class BookmarkFragment extends Fragment {
     public void loadSocialHistory_ike_or_bookmark(final String USER_IDX){
         Call<SocialUploadResponse> call = api.getSocialHistoryList_like_or_bookmark(USER_IDX,"bookmark");
 
-        final Dialog progressDoalog;
-        progressDoalog = new Dialog(getActivity());
-        progressDoalog.setContentView(R.layout.custom_loading_dialog);
-        progressDoalog.setCancelable(true);
+//        final Dialog progressDoalog;
+//        progressDoalog = new Dialog(getActivity());
+//        progressDoalog.setContentView(R.layout.custom_loading_dialog);
+//        progressDoalog.setCancelable(true);
         // show it
-        progressDoalog.show();
+//        progressDoalog.show();
         call.enqueue(new Callback<SocialUploadResponse>() {
             @Override
             public void onResponse(Call<SocialUploadResponse> call, Response<SocialUploadResponse> response) {
@@ -99,7 +99,7 @@ public class BookmarkFragment extends Fragment {
                     Log.e("loadSocialHistory_oneidx_code",""+response.code());
                     return;
                 }
-                progressDoalog.dismiss();
+//                progressDoalog.dismiss();
 
                 SocialUploadResponse res2 = response.body();
                 List<SocialUploadResponse> list = res2.getSocialHistoryList();
@@ -198,7 +198,7 @@ public class BookmarkFragment extends Fragment {
             @Override
             public void onFailure(Call<SocialUploadResponse> call, Throwable t) {
                 Log.e("loadSocialHistory_oneidx_fail","Error : "+t.getMessage());
-                progressDoalog.dismiss();
+//                progressDoalog.dismiss();
             }
         });
     }

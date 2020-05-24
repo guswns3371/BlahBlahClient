@@ -837,9 +837,9 @@ public class InnerChatActivity extends AppCompatActivity {
 //                                    }
                             myAdapter.notifyDataSetChanged();
                         }else {
-                            Toast toast =  Toast.makeText(InnerChatActivity.this,message,Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
-                            toast.show();
+                            //Toast toast =  Toast.makeText(InnerChatActivity.this,message,Toast.LENGTH_SHORT);
+                            //toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
+                            //toast.show();
                             //Log.e("loadChatHistory_history",message);
                         }
                     }
@@ -985,7 +985,7 @@ public class InnerChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.inner_chat_menu, menu);
+        //getMenuInflater().inflate(R.menu.inner_chat_menu, menu);
         return  true;
     }
 
@@ -1008,7 +1008,7 @@ public class InnerChatActivity extends AppCompatActivity {
                 return true;
             }
             case R.id.menu_toolbar_inner_chat_info:
-                Toast.makeText(InnerChatActivity.this,"fuck",Toast.LENGTH_SHORT).show();
+                Toast.makeText(InnerChatActivity.this,"drawer",Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

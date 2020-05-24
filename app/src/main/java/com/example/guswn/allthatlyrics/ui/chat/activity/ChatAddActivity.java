@@ -78,16 +78,8 @@ public class ChatAddActivity extends AppCompatActivity{
 
     public void getoneinfo_B(){
         Log.e("MY_EMAIL","/"+MY_EMAIL_2);
-        Call<userResponse3> call = api.getOneInfo(MY_EMAIL_2);
+        Call<userResponse3> call = api.getOneInfo(MY_IDX);
 
-        final ProgressDialog progressDoalog;
-        progressDoalog = new ProgressDialog(this);
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Please Wait");
-        progressDoalog.setTitle("Friends Information Loading...");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        // show it
-        progressDoalog.show();
         Log.e("doesitstartnow? :","yes3");
         call.enqueue(new Callback<userResponse3>() {
             @Override
@@ -96,7 +88,6 @@ public class ChatAddActivity extends AppCompatActivity{
                     Log.e("getoneinfo_B_code",""+response.code());
                     return;
                 }
-                progressDoalog.dismiss();
 
                 userResponse3 val3 = response.body();
                 List<userResponse3> value = val3.getUserinfolist();
@@ -140,7 +131,6 @@ public class ChatAddActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<userResponse3> call, Throwable t) {
-                progressDoalog.dismiss();
                 Log.e("getoneinfo_B_fail","Error : "+t.getMessage());
             }
         });

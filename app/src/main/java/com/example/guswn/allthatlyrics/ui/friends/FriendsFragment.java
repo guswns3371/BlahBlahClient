@@ -30,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_EMAIL_2;
+import static com.example.guswn.allthatlyrics.ui.auth.LogoActivity.MY_IDX;
 
 public class FriendsFragment extends Fragment{
     private boolean shouldRefreshOnResume = false;
@@ -89,14 +90,8 @@ public class FriendsFragment extends Fragment{
 
     public void getoneinfo_B(){
         Log.e("MY_EMAIL","/"+MY_EMAIL_2);
-        Call<userResponse3> call = api.getOneInfo(MY_EMAIL_2);
+        Call<userResponse3> call = api.getOneInfo(MY_IDX);
 
-        final Dialog progressDoalog;
-        progressDoalog = new Dialog(getActivity());
-        progressDoalog.setContentView(R.layout.custom_loading_dialog);
-        progressDoalog.setCancelable(true);
-        // show it
-        progressDoalog.show();
 
         call.enqueue(new Callback<userResponse3>() {
             @Override
@@ -105,7 +100,6 @@ public class FriendsFragment extends Fragment{
                     Log.e("getoneinfo_B_code",""+response.code());
                     return;
                 }
-                progressDoalog.dismiss();
 
                 userResponse3 val3 = response.body();
                 List<userResponse3> value = val3.getUserinfolist();
@@ -162,7 +156,6 @@ public class FriendsFragment extends Fragment{
 
             @Override
             public void onFailure(Call<userResponse3> call, Throwable t) {
-                progressDoalog.dismiss();
                 Log.e("getoneinfo_B_fail","Error : "+t.getMessage());
             }
         });

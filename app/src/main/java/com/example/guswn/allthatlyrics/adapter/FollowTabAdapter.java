@@ -95,7 +95,7 @@ public class FollowTabAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Picasso.with(context)
                     .load(context.getString(R.string.URL)+object.getFollow_img())
                     .transform(new CircleTransform())
-                    .placeholder(R.drawable.load)
+                    .placeholder(R.drawable.account)
                     .into(myViewHolder.follow_userimg);
 
             if (object.getAmIFollowHim().equals("no")) {

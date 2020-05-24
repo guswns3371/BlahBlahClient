@@ -175,12 +175,6 @@ public class SocialFragment extends Fragment implements SocialAdapter.SocialReyc
     public void loadSocialHistory(){
         Call<SocialUploadResponse> call = api.getSocialHistoryList();
 
-        final Dialog progressDoalog;
-        progressDoalog = new Dialog(getActivity());
-        progressDoalog.setContentView(R.layout.custom_loading_dialog);
-        progressDoalog.setCancelable(true);
-        // show it
-        progressDoalog.show();
         call.enqueue(new Callback<SocialUploadResponse>() {
             @Override
             public void onResponse(Call<SocialUploadResponse> call, Response<SocialUploadResponse> response) {
@@ -188,7 +182,6 @@ public class SocialFragment extends Fragment implements SocialAdapter.SocialReyc
                     Log.e("loadSocialHistory_code",""+response.code());
                     return;
                 }
-                progressDoalog.dismiss();
 
                 SocialUploadResponse res2 = response.body();
                 List<SocialUploadResponse> list = res2.getSocialHistoryList();
@@ -283,7 +276,6 @@ public class SocialFragment extends Fragment implements SocialAdapter.SocialReyc
             @Override
             public void onFailure(Call<SocialUploadResponse> call, Throwable t) {
                 Log.e("loadSocialHistory_fail","Error : "+t.getMessage());
-                progressDoalog.dismiss();
             }
         });
     }
