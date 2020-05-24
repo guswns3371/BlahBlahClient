@@ -431,14 +431,6 @@ public class InnerSocialActivity extends AppCompatActivity implements SlideImage
     public void loadSocialHistory(String social_idx){
         Call<SocialUploadResponse> call = api.getSocialHistoryList_onesocialidx(social_idx);
 
-        final ProgressDialog progressDoalog;
-        progressDoalog = new ProgressDialog(InnerSocialActivity.this);
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Please Wait");
-        progressDoalog.setTitle("Socia Information Loading...");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        // show it
-        progressDoalog.show();
         call.enqueue(new Callback<SocialUploadResponse>() {
             @Override
             public void onResponse(Call<SocialUploadResponse> call, Response<SocialUploadResponse> response) {
@@ -446,7 +438,6 @@ public class InnerSocialActivity extends AppCompatActivity implements SlideImage
                     Log.e("loadSocialHistory_code",""+response.code());
                     return;
                 }
-                progressDoalog.dismiss();
 
                 SocialUploadResponse res2 = response.body();
                 List<SocialUploadResponse> list = res2.getSocialHistoryList();
@@ -614,7 +605,6 @@ public class InnerSocialActivity extends AppCompatActivity implements SlideImage
             @Override
             public void onFailure(Call<SocialUploadResponse> call, Throwable t) {
                 Log.e("loadSocialHistory_fail","Error : "+t.getMessage());
-                progressDoalog.dismiss();
             }
         });
     }
