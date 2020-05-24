@@ -416,16 +416,13 @@ public class InnerChatActivity extends AppCompatActivity {
         mLayoutManager.setStackFromEnd(true);//목록의 마지막 요소로 recyclerview 포커스 이동
 //        loadChatHistory();
         t = new java.util.Timer();
-        t.schedule(
-                new java.util.TimerTask() {
+        t.schedule(new java.util.TimerTask() {
                     @Override
                     public void run() {
                         // your code here
                         loadChatHistory();
                     }
-                },
-                200
-        );
+                    }, 200);
     }
 
     @Override
