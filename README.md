@@ -1,6 +1,8 @@
 # BlahBlah
 
-[Youtube : 시연 영상](https://youtu.be/1aEfryppHv4)
+### 모든 기능에 대한 시연은 모두 [`발표 영상`](https://youtu.be/1aEfryppHv4)에서 확인해보실 수 있습니다.
+
+<br/>
 
 ![image](https://user-images.githubusercontent.com/44316546/159028178-cb074b97-e259-4681-aa23-e626763bf6a7.png)
 
