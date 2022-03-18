@@ -1,6 +1,6 @@
 # BlahBlah
 
-### 모든 기능에 대한 시연은 [`발표 영상`](https://youtu.be/1aEfryppHv4?t=194)에서 확인해보실 수 있습니다.
+### 모든 기능에 대한 시연은 [`발표 영상`](https://youtu.be/1aEfryppHv4?t=194)에서 확인 해보실 수 있습니다.
 
 <br/>
 
