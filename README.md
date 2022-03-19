@@ -7,9 +7,10 @@
 ## 시스템 구성
 ![image](https://user-images.githubusercontent.com/44316546/159028178-cb074b97-e259-4681-aa23-e626763bf6a7.png)
 
-클라이언트로는 블라블라 어플리케이션이 있으며 MVC패턴으로 설계되었습니다.  
-서버는 AWS를 사용하였고, nodejs를 통해 실시간 채팅을 구현하였습니다.  
-앱에 푸쉬 메시지를 보내기 위해 FCM을 시스템구성에 추가하였습니다  
+클라이언트(Front-End) : [`Android`](https://github.com/guswns3371/AllThatLyrics) 
+
+서버(Back-End) : [`PHP, Nodejs`](https://github.com/guswns3371/talky)  
+
 <br/>
 
 ![image](https://user-images.githubusercontent.com/44316546/159028205-674665a6-087f-47fb-8246-28479fd1c5e6.png)
